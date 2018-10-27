@@ -1,7 +1,8 @@
-package rmnvich.apps.familybudget
+package rmnvich.apps.familybudget.presentation.activity.dashboard
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import rmnvich.apps.familybudget.R
 
 class DashboardActivity : AppCompatActivity() {
 

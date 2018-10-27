@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_action_search_inverted"
+        android:drawablePadding="@dimen/dialog_with_search_et_padding"
+        android:hint="@string/search_hint"
+        android:inputType="text"
+        android:paddingStart="@dimen/dialog_with_search_et_padding"
+        android:paddingEnd="@dimen/dialog_with_search_et_padding"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/colorTextHint" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/bottom_sheet_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_category" />
+</LinearLayout>

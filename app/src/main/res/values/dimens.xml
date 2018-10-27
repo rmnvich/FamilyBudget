@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="card_view_corner_radius">10dp</dimen>
+
+    <dimen name="item_family_member_padding">15dp</dimen>
+    <dimen name="item_family_member_vertical_margin">5dp</dimen>
+    <dimen name="item_family_member_horizontal_margin">10dp</dimen>
+    <dimen name="item_family_member_photo_size">60dp</dimen>
+    <dimen name="item_family_member_text_margin_start">10dp</dimen>
+
+    <dimen name="item_category_padding">15dp</dimen>
+    <dimen name="item_category_size">40dp</dimen>
+    <dimen name="item_category_text_margin_start">10dp</dimen>
+
+    <dimen name="dialog_with_search_et_padding">15dp</dimen>
+
+    <dimen name="progress_layout_padding">15dp</dimen>
+    <dimen name="progress_layout_radius">5dp</dimen>
+    <dimen name="progress_layout_margin_top">5dp</dimen>
+
+</resources>

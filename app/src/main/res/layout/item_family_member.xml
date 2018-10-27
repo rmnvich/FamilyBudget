@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="rmnvich.apps.familybudget.data.entity.User" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_family_member_horizontal_margin"
+        android:layout_marginTop="@dimen/item_family_member_vertical_margin"
+        android:layout_marginRight="@dimen/item_family_member_horizontal_margin"
+        android:layout_marginBottom="@dimen/item_family_member_vertical_margin"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
+        app:contentPadding="@dimen/item_family_member_padding">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_user_photo"
+                android:layout_width="@dimen/item_family_member_photo_size"
+                android:layout_height="@dimen/item_family_member_photo_size"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_account_circle" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_family_member_text_margin_start"
+                android:text="@{user.name}"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_user_relationship"
+                app:layout_constraintStart_toEndOf="@id/iv_user_photo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tv_user_relationship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_family_member_text_margin_start"
+                android:text="@{user.relationshipTypes}"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_user_photo"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</layout>
