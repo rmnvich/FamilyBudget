@@ -89,8 +89,7 @@
                 android:textStyle="italic"
                 app:layout_constraintBottom_toTopOf="@id/tv_user_relationship"
                 app:layout_constraintStart_toEndOf="@id/iv_category_color"
-                app:layout_constraintTop_toBottomOf="@id/tv_category_name"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toBottomOf="@id/tv_category_name" />
 
             <TextView
                 android:id="@+id/tv_user_relationship"
@@ -101,22 +100,7 @@
                 android:textStyle="italic"
                 app:layout_constraintBottom_toTopOf="@id/tv_comment"
                 app:layout_constraintStart_toEndOf="@id/iv_category_color"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <TextView
-                android:id="@+id/tv_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_expense_divider_margin"
-                android:alpha="0.9"
-                android:text='"This is a comment"'
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:textStyle="italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_relationship" />
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
 
             <TextView
                 android:id="@+id/tv_value"
@@ -130,6 +114,65 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_comment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/top_divider" />
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:text='"This is a comment"'
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:alpha="0.9"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@id/bottom_divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_relationship" />
+
+            <View
+                android:id="@+id/bottom_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:background="@drawable/divider_recycler"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment" />
+
+            <ImageView
+                android:id="@+id/iv_time_until"
+                android:layout_width="@dimen/item_expense_iv_time_size"
+                android:layout_height="@dimen/item_expense_iv_time_size"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:contentDescription="@string/time"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintEnd_toStartOf="@id/tv_until"
+                app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
+
+            <TextView
+                android:id="@+id/tv_until"
+                style="@style/TextAppearance.Compat.Notification.Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_expense_tv_margin_start"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:alpha="0.75"
+                android:text="Planned until:"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@id/iv_time_until"
+                app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
+
+            <TextView
+                android:id="@+id/tv_timestamp_until"
+                style="@style/TextAppearance.Compat.Notification.Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_expense_tv_margin_start"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:alpha="0.75"
+                android:text="Monday, 26 November 2018, 15:00"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@id/tv_until"
+                app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
 
         </android.support.constraint.ConstraintLayout>
 

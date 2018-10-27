@@ -2,10 +2,11 @@
 <resources>
 
     <dimen name="card_view_corner_radius">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="item_family_member_padding">15dp</dimen>
-    <dimen name="item_family_member_vertical_margin">5dp</dimen>
-    <dimen name="item_family_member_horizontal_margin">10dp</dimen>
+    <dimen name="item_family_member_vertical_margin">3dp</dimen>
+    <dimen name="item_family_member_horizontal_margin">5dp</dimen>
     <dimen name="item_family_member_photo_size">60dp</dimen>
     <dimen name="item_family_member_text_margin_start">10dp</dimen>
 
@@ -18,5 +19,14 @@
     <dimen name="progress_layout_padding">15dp</dimen>
     <dimen name="progress_layout_radius">5dp</dimen>
     <dimen name="progress_layout_margin_top">5dp</dimen>
+
+    <dimen name="item_expense_vertical_margin">2dp</dimen>
+    <dimen name="item_expense_padding">10dp</dimen>
+    <dimen name="item_expense_iv_time_size">18dp</dimen>
+    <dimen name="item_expense_tv_margin_start">5dp</dimen>
+    <dimen name="item_expense_divider_margin">5dp</dimen>
+    <dimen name="item_expense_category_size">55dp</dimen>
+    <dimen name="item_expense_category_margin_end">10dp</dimen>
+    <dimen name="item_expense_value_margin_end">3dp</dimen>
 
 </resources>

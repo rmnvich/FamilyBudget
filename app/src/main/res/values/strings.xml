@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">FamilyBudget</string>
 
+    <string name="title_family_members">Family members</string>
+    <string name="title_actual_expenses">Actual expenses</string>
+    <string name="title_planned_expenses">Planned expenses</string>
+    <string name="title_all_transactions">Balance report</string>
+    <string name="title_incomes">Incomes</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_login">Login</string>
+    <string name="title_register">Register</string>
+    <string name="title_make_actual_expense">Make actual expense</string>
+    <string name="title_make_planned_expense">Make planned expense</string>
+    <string name="title_make_income">Make income</string>
+    <string name="title_make_category">Make category</string>
+    <string name="title_edit_profile">Edit profile</string>
+
     <string name="loading">Loading…</string>
     <string name="search_hint">Search…</string>
+    <string name="time">Time</string>
 </resources>
