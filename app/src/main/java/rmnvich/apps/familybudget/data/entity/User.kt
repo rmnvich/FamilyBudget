@@ -5,5 +5,5 @@ data class User(var userId: Int,
                 var lastname: String,
                 var password: String,
                 var photoPath: String,
-                var relationshipTypes: String,
+                var relationship: String,
                 var incomeTypes: MutableList<IncomeType>)

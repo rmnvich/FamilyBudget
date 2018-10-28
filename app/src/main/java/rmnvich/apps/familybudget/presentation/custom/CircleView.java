@@ -10,7 +10,7 @@ import android.view.View;
 public class CircleView extends View {
 
     // change if needed changed color theme
-    private static final int DEFAULT_CIRCLE_COLOR = Color.parseColor("#78909c");
+    private static final int DEFAULT_CIRCLE_COLOR = Color.parseColor("#3169a1");
 
     private int circleColor = DEFAULT_CIRCLE_COLOR;
     private Paint paint;
