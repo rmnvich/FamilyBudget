@@ -28,6 +28,12 @@
     <dimen name="activity_make_et_margin_top">10dp</dimen>
     <dimen name="activity_make_card_view_margin">10dp</dimen>
 
+    <dimen name="activity_edit_profile_appbar_margin_bottom">5dp</dimen>
+    <dimen name="activity_edit_profile_photo_size">120dp</dimen>
+    <dimen name="activity_edit_profile_photo_border_width">1dp</dimen>
+
+    <dimen name="item_income_type_padding">20dp</dimen>
+
     <dimen name="item_expense_vertical_margin">2dp</dimen>
     <dimen name="item_expense_padding">10dp</dimen>
     <dimen name="item_expense_iv_time_size">18dp</dimen>
