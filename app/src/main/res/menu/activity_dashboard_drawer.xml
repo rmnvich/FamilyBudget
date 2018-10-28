@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_family_members"
+            android:icon="@drawable/ic_family_members"
+            android:title="@string/title_family_members" />
+        <item
+            android:id="@+id/nav_planned_expenses"
+            android:icon="@drawable/ic_planned_expenses"
+            android:title="@string/title_planned_expenses" />
+        <item
+            android:id="@+id/nav_actual_expenses"
+            android:icon="@drawable/ic_actual_expenses"
+            android:title="@string/title_actual_expenses" />
+        <item
+            android:id="@+id/nav_incomes"
+            android:icon="@drawable/ic_incomes"
+            android:title="@string/title_incomes" />
+        <item
+            android:id="@+id/nav_total_balance"
+            android:icon="@drawable/ic_total_balance"
+            android:title="@string/title_total_balance" />
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/ic_categories"
+            android:title="@string/title_categories" />
+
+    </group>
+
+    <item android:title="Other">
+        <menu>
+            <item
+                android:id="@+id/nav_edit_profile"
+                android:icon="@drawable/ic_edit_profile"
+                android:title="@string/title_edit_profile" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>
