@@ -13,14 +13,14 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="@dimen/item_family_member_vertical_margin"
         android:layout_marginLeft="@dimen/item_family_member_horizontal_margin"
+        android:layout_marginTop="@dimen/item_family_member_vertical_margin"
         android:layout_marginRight="@dimen/item_family_member_horizontal_margin"
         android:layout_marginBottom="@dimen/item_family_member_vertical_margin"
-        app:cardCornerRadius="@dimen/card_view_corner_radius"
+        android:clickable="true"
+        android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
         app:contentPadding="@dimen/item_category_padding"
         tools:ignore="UseCompoundDrawables">
 
@@ -41,7 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_category_text_margin_start"
-                android:text="@{category.name}"
+                android:text="Food and drink"
+                android:textColor="@color/colorTextAlphaGray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_category_color"

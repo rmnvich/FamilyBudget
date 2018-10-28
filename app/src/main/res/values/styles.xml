@@ -11,4 +11,16 @@
         <item name="cardViewStyle">@style/CardView</item>
     </style>
 
+    <style name="custom_button" parent="@android:style/Widget.Button">
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:drawablePadding">@dimen/custom_button_padding</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:paddingLeft">@dimen/custom_button_padding</item>
+        <item name="android:paddingRight">@dimen/custom_button_padding</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/colorTextAlphaGray</item>
+        <item name="android:textSize">@dimen/custom_button_text_size</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>

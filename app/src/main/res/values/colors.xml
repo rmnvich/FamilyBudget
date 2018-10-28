@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0097a7</color>
-    <color name="colorPrimaryDark">#006978</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#f48fb1</color>
+    <color name="colorPrimaryDark">#bf5f82</color>
+    <color name="colorAccent">#f48fb1</color>
 
     <color name="colorBackground">#f5f5f5</color>
 
     <color name="colorTextHint">#afffffff</color>
+    <color name="colorStandardRipple">#c9c9c9</color>
     <color name="colorSearchTextHint">#36000000</color>
 
     <color name="colorDivider">#37919191</color>
     <color name="colorDarkGrayAlpha">#aa000000</color>
+    <color name="colorTextAlphaGray">#aa000000</color>
 
     <color name="colorIncomes">#3f9942</color>
-    <color name="colorCosts">#df362f</color>
+    <color name="colorActualExpense">#df362f</color>
+    <color name="colorPlannedExpense">#df962f</color>
 </resources>

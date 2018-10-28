@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll"
             app:navigationIcon="@drawable/ic_action_back_inverted"
-            app:title="@string/title_make_actual_expense"
+            app:title="@string/title_make_expense"
             app:titleTextColor="@android:color/white" />
     </android.support.design.widget.AppBarLayout>
 
@@ -26,20 +26,20 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                android:layout_marginTop="@dimen/activity_make_card_view_margin"
+                android:layout_marginBottom="@dimen/activity_make_button_margin_top"
                 android:focusableInTouchMode="true"
-                app:cardCornerRadius="@dimen/card_view_corner_radius"
-                app:contentPadding="25dp">
+                app:cardCornerRadius="@dimen/card_view_corner_radius">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -49,8 +49,12 @@
                         android:id="@+id/et_sum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/activity_make_item_margin"
+                        android:layout_marginTop="@dimen/activity_make_item_margin"
+                        android:layout_marginEnd="@dimen/activity_make_item_margin"
                         android:inputType="numberDecimal"
                         android:maxLength="17"
+                        app:layout_constraintTop_toTopOf="parent"
                         mstb:met_baseColor="@android:color/black"
                         mstb:met_floatingLabel="highlight"
                         mstb:met_floatingLabelAlwaysShown="true"
@@ -63,9 +67,13 @@
                         android:id="@+id/et_comment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="@dimen/activity_make_item_margin"
+                        android:layout_marginTop="@dimen/activity_make_et_margin_top"
+                        android:layout_marginEnd="@dimen/activity_make_item_margin"
+                        android:layout_marginBottom="@dimen/activity_make_item_margin"
                         android:inputType="textMultiLine|textCapSentences"
                         android:singleLine="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/et_sum"
                         mstb:met_baseColor="@android:color/black"
                         mstb:met_floatingLabel="highlight"
@@ -74,12 +82,101 @@
                         mstb:met_floatingLabelText="Comment"
                         mstb:met_floatingLabelTextColor="@android:color/black"
                         mstb:met_floatingLabelTextSize="12.5sp" />
-
-
-
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
-        </FrameLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_select_category"
+                    style="@style/custom_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                    android:layout_marginEnd="@dimen/activity_make_button_margin_top"
+                    android:background="@drawable/btn_radius_white"
+                    android:drawableStart="@drawable/ic_category"
+                    android:foreground="@drawable/btn_radius_ripple"
+                    android:text="@string/select_category"
+                    app:layout_constraintEnd_toStartOf="@id/btn_pick_date"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_pick_date"
+                    style="@style/custom_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                    android:background="@drawable/btn_radius_white"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:foreground="@drawable/btn_radius_ripple"
+                    android:text="@string/pick_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@string/select_category"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_view_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                    android:layout_marginTop="@dimen/activity_make_button_margin_top"
+                    android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                    app:cardCornerRadius="@dimen/card_view_corner_radius"
+                    app:contentPadding="@dimen/custom_button_padding"
+                    app:layout_constraintBottom_toTopOf="@id/item_category"
+                    app:layout_constraintTop_toBottomOf="@id/btn_select_category">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_calendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/time"
+                            android:src="@drawable/ic_calendar"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/custom_button_padding"
+                            android:text="25 October 2018"
+                            android:textColor="@color/colorTextAlphaGray"
+                            android:textSize="@dimen/custom_button_text_size"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_calendar"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+
+                <include
+                    android:id="@+id/item_category"
+                    layout="@layout/item_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                    android:layout_marginTop="@dimen/activity_make_button_margin_top"
+                    android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                    app:layout_constraintBottom_toTopOf="@id/divider"
+                    app:layout_constraintTop_toBottomOf="@id/card_view_date" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="@dimen/activity_make_item_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_category" />
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton

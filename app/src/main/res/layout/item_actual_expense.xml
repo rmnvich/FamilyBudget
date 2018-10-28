@@ -125,7 +125,7 @@
                 android:layout_marginTop="@dimen/item_expense_divider_margin"
                 android:layout_marginEnd="@dimen/item_expense_value_margin_end"
                 android:text="-100 BYN"
-                android:textColor="@color/colorCosts"
+                android:textColor="@color/colorActualExpense"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_comment"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -20,6 +20,14 @@
     <dimen name="progress_layout_radius">5dp</dimen>
     <dimen name="progress_layout_margin_top">5dp</dimen>
 
+    <dimen name="custom_button_padding">10dp</dimen>
+    <dimen name="custom_button_text_size">16sp</dimen>
+
+    <dimen name="activity_make_item_margin">25dp</dimen>
+    <dimen name="activity_make_button_margin_top">5dp</dimen>
+    <dimen name="activity_make_et_margin_top">10dp</dimen>
+    <dimen name="activity_make_card_view_margin">10dp</dimen>
+
     <dimen name="item_expense_vertical_margin">2dp</dimen>
     <dimen name="item_expense_padding">10dp</dimen>
     <dimen name="item_expense_iv_time_size">18dp</dimen>
