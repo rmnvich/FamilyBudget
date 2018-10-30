@@ -26,42 +26,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <ImageView
-                    android:id="@+id/iv_time"
-                    android:layout_width="@dimen/item_expense_iv_time_size"
-                    android:layout_height="@dimen/item_expense_iv_time_size"
-                    android:contentDescription="@string/time"
-                    android:src="@drawable/ic_time"
-                    app:layout_constraintEnd_toStartOf="@id/tv_timestamp"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                    android:id="@+id/tv_timestamp"
-                    style="@style/TextAppearance.Compat.Notification.Time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_expense_tv_margin_start"
-                    android:alpha="0.75"
-                    android:text="Tuesday, 21 October 2018, 14:30"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@id/iv_time"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-            <View
-                    android:id="@+id/top_divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:background="@drawable/divider_recycler"
-                    app:layout_constraintTop_toBottomOf="@id/tv_timestamp"/>
-
             <rmnvich.apps.familybudget.presentation.custom.CircleView
                     android:id="@+id/iv_category_color"
                     android:layout_width="@dimen/item_expense_category_size"
                     android:layout_height="@dimen/item_expense_category_size"
                     app:layout_constraintBottom_toTopOf="@id/tv_comment"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/top_divider"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="spread_inside"/>
 
             <TextView
@@ -75,7 +46,7 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@id/tv_user_name"
                     app:layout_constraintStart_toEndOf="@id/iv_category_color"
-                    app:layout_constraintTop_toBottomOf="@id/top_divider"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="spread_inside"/>
 
             <TextView
@@ -113,7 +84,7 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@id/tv_comment"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/top_divider"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                     android:id="@+id/tv_comment"
@@ -145,20 +116,7 @@
                     android:layout_marginTop="@dimen/item_expense_divider_margin"
                     android:contentDescription="@string/time"
                     android:src="@drawable/ic_calendar"
-                    app:layout_constraintEnd_toStartOf="@id/tv_until"
-                    app:layout_constraintTop_toBottomOf="@id/bottom_divider"/>
-
-            <TextView
-                    android:id="@+id/tv_until"
-                    style="@style/TextAppearance.Compat.Notification.Time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_expense_tv_margin_start"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:alpha="0.75"
-                    android:text="Planned until:"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@id/iv_time_until"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bottom_divider"/>
 
             <TextView
@@ -171,7 +129,7 @@
                     android:alpha="0.75"
                     android:text="Monday, 26 November 2018, 15:00"
                     android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_until"
+                    app:layout_constraintStart_toEndOf="@id/iv_time_until"
                     app:layout_constraintTop_toBottomOf="@id/bottom_divider"/>
 
         </android.support.constraint.ConstraintLayout>
