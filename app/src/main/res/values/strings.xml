@@ -51,4 +51,9 @@
     <string name="error">An error occurred. Try again</string>
     <string name="returned_empty">returned empty</string>
 
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="starting_balance">Starting balance</string>
+    <string name="init_your_balance">Init your balance</string>
+
 </resources>

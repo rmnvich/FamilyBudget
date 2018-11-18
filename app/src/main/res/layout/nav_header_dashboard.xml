@@ -59,7 +59,7 @@
             android:id="@+id/tv_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{balance == null ? @string/balance_is_unavailable : @string/balance + balance.balance + "BYN"}'
+            android:text='@{balance == null ? @string/balance_is_unavailable : @string/balance + balance.balance + " BYN"}'
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@android:color/white"
             android:textSize="14sp"

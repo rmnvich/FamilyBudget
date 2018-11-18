@@ -1,5 +1,6 @@
 package rmnvich.apps.familybudget.presentation.activity.dashboard.dagger
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -8,9 +9,10 @@ import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
 import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivityModel
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivityPresenter
+import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
 
 @Module
-class DashboardActivityModule : BaseModule {
+class DashboardActivityModule(private val context: Context) : BaseModule {
 
     @PerDashboardActivity
     @Provides
@@ -30,5 +32,11 @@ class DashboardActivityModule : BaseModule {
     fun provideModel(databaseRepositoryImpl: DatabaseRepositoryImpl,
                      preferencesRepositoryImpl: PreferencesRepositoryImpl): DashboardActivityModel {
         return DashboardActivityModel(databaseRepositoryImpl, preferencesRepositoryImpl)
+    }
+
+    @PerDashboardActivity
+    @Provides
+    fun provideInitBalanceDialog(): InitBalanceDialog {
+        return InitBalanceDialog(context)
     }
 }

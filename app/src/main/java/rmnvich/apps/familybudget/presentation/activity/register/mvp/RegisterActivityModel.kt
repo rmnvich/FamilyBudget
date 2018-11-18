@@ -17,7 +17,7 @@ class RegisterActivityModel(private val databaseRepository: DatabaseRepositoryIm
         RegisterActivityContract.Model {
 
     override fun checkIfExists(user: User): Single<User> {
-        return databaseRepository.getUserByNameAndLastname(user.name, user.lastname)
+        return databaseRepository.getUserByNameAndLastName(user.name, user.lastname)
     }
 
     override fun insertUser(user: User): Completable {

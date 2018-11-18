@@ -16,11 +16,15 @@ import kotlinx.android.synthetic.main.app_bar_main.view.*
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.app.App
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
+import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.databinding.ActivityDashboardBinding
 import rmnvich.apps.familybudget.databinding.NavHeaderDashboardBinding
+import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityModule
+import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
 import java.io.File
 import javax.inject.Inject
+import javax.inject.Provider
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
         DashboardActivityContract.View {
@@ -30,6 +34,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     @Inject
     lateinit var mPresenter: DashboardActivityPresenter
+
+    @Inject
+    lateinit var mInitBalanceDialog: Provider<InitBalanceDialog>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +48,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 R.layout.nav_header_dashboard, binding.navView, false)
         binding.navView.addHeaderView(navHeaderBinding.root)
 
-        App.getApp(this).componentsHolder
-                .getComponent(javaClass).inject(this)
+        App.getApp(this).componentsHolder.getComponent(javaClass,
+                DashboardActivityModule(this)).inject(this)
     }
 
     @Inject
@@ -68,6 +75,21 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     .load(File(user.photoPath))
                     .into(navHeaderBinding.imageView)
             navHeaderBinding.invalidateAll()
+        }
+    }
+
+    override fun setBalance(balance: Balance) {
+        navHeaderBinding.balance = balance
+        navHeaderBinding.invalidateAll()
+    }
+
+    override fun updateBalance() {
+        mPresenter.updateBalance()
+    }
+
+    override fun showInitialBalanceDialog() {
+        mInitBalanceDialog.get().show {
+            mPresenter.onApplyBalanceDialogClicked(it)
         }
     }
 

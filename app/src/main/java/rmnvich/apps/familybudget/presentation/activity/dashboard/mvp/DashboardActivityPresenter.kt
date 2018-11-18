@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Handler
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
+import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity
 import rmnvich.apps.familybudget.presentation.mvp.PresenterBase
+
 
 class DashboardActivityPresenter(private val model: DashboardActivityModel,
                                  private val compositeDisposable: CompositeDisposable) :
@@ -18,11 +20,45 @@ class DashboardActivityPresenter(private val model: DashboardActivityModel,
     }
 
     override fun viewIsReady() {
+        getUserById(userId)
+        updateBalance()
+    }
+
+    override fun getUserById(userId: Int) {
         view?.showProgress()
         val disposable = model.getUserById(userId)
                 .subscribe({
                     view?.hideProgress()
                     view?.setUser(it)
+                }, {
+                    view?.hideProgress()
+                    view?.showMessage(getString(R.string.error))
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun updateBalance() {
+        view?.showProgress()
+        val disposable = model.getBalance()
+                .subscribe({
+                    view?.hideProgress()
+                    view?.setBalance(it)
+                }, {
+                    view?.hideProgress()
+                    if (it.message!!.contains(getString(R.string.returned_empty))) {
+                        view?.showInitialBalanceDialog()
+                    } else view?.showMessage(getString(R.string.error))
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun onApplyBalanceDialogClicked(value: String) {
+        view?.showProgress()
+        val balance = Balance(value)
+        val disposable = model.insertBalance(balance)
+                .subscribe({
+                    view?.hideProgress()
+                    view?.setBalance(balance)
                 }, {
                     view?.hideProgress()
                     view?.showMessage(getString(R.string.error))

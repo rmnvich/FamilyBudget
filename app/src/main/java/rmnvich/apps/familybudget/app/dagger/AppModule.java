@@ -22,6 +22,8 @@ import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity;
 import rmnvich.apps.familybudget.presentation.activity.register.dagger.RegisterActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity;
 
+import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
+
 @Module(subcomponents = {DashboardActivityComponent.class, LoginActivityComponent.class,
         RegisterActivityComponent.class})
 public class AppModule {
@@ -59,7 +61,7 @@ public class AppModule {
     @Provides
     AppDatabase provideAppDatabase() {
         return Room.databaseBuilder(mContext, AppDatabase.class,
-                "testDatabase1").build();
+                DATABASE_NAME).build();
     }
 
     @Provides

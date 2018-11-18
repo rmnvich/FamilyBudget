@@ -20,9 +20,9 @@ class LoginActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
     override fun getUser(username: String): Single<User> {
         val name = username.trim().split(" ")
         return try {
-            databaseRepository.getUserByNameAndLastname(name[0], name[1])
+            databaseRepository.getUserByNameAndLastName(name[0], name[1])
         } catch (e: IndexOutOfBoundsException) {
-            databaseRepository.getUserByNameAndLastname(name[0], name[0])
+            databaseRepository.getUserByNameAndLastName(name[0], name[0])
         }
     }
 }
