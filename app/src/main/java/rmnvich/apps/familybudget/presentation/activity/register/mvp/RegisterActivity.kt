@@ -55,7 +55,6 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityContract.View {
         Glide.with(this)
                 .load(File(photoPath))
                 .into(binding.ivPhoto)
-        binding.invalidateAll()
     }
 
     override fun onClickImageView() {

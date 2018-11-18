@@ -19,6 +19,12 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
+    override fun getUserById(userId: Int): Single<User> {
+        return userDao.getUserById(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun getUserByNameAndLastname(name: String, lastname: String): Single<User> {
         return userDao.getUserByName(name, lastname)
                 .subscribeOn(Schedulers.io())

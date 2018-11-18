@@ -15,4 +15,10 @@ class PreferencesRepositoryImpl(private val preferences: SharedPreferences) :
     override fun getUserId(): Int {
         return preferences.getInt(EXTRA_USER_ID, -1)
     }
+
+    fun deleteUserIdFromPreferences() {
+        preferences.edit()
+                .putInt(EXTRA_USER_ID, -1)
+                .apply()
+    }
 }

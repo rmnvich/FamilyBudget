@@ -12,7 +12,10 @@ import rmnvich.apps.familybudget.data.entity.User
 interface UserDao {
 
     @Query("SELECT * FROM user ORDER BY userId DESC")
-    fun getAllUsers() : Flowable<List<User>>
+    fun getAllUsers(): Flowable<List<User>>
+
+    @Query("SELECT * FROM user WHERE userId = :userId")
+    fun getUserById(userId: Int): Single<User>
 
     @Query("SELECT * FROM user WHERE name = :name AND lastname = :lastname")
     fun getUserByName(name: String, lastname: String): Single<User>

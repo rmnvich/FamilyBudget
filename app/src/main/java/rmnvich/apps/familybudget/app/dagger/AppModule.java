@@ -15,7 +15,7 @@ import rmnvich.apps.familybudget.data.di.base.BaseComponentBuilder;
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.local.LocalRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl;
-import rmnvich.apps.familybudget.presentation.activity.dashboard.DashboardActivity;
+import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.login.dagger.LoginActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity;

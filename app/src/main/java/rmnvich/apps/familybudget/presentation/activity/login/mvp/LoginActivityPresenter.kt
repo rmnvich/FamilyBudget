@@ -5,7 +5,7 @@ import android.content.Intent
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
-import rmnvich.apps.familybudget.presentation.activity.dashboard.DashboardActivity
+import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity
 import rmnvich.apps.familybudget.presentation.mvp.PresenterBase
 
