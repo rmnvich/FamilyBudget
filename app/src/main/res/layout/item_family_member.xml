@@ -4,6 +4,10 @@
 
     <data>
 
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
         <variable
             name="user"
             type="rmnvich.apps.familybudget.data.entity.User" />
@@ -32,7 +36,7 @@
                 android:layout_width="@dimen/item_family_member_photo_size"
                 android:layout_height="@dimen/item_family_member_photo_size"
                 android:scaleType="centerCrop"
-                android:src="@drawable/mother" />
+                android:visibility="@{TextUtils.isEmpty(user.photoPath) ? View.GONE : View.VISIBLE}" />
 
             <TextView
                 android:id="@+id/tv_user_name"
@@ -40,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_family_member_text_margin_start"
-                android:text="Marry Joe"
+                android:text='@{user.name + " " + user.lastname}'
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_user_relationship"
                 app:layout_constraintStart_toEndOf="@id/iv_user_photo"
@@ -52,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_family_member_text_margin_start"
-                android:text="mother"
+                android:text="@{user.relationship}"
                 android:textSize="16sp"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"

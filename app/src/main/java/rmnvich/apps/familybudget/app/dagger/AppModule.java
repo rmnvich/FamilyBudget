@@ -21,11 +21,14 @@ import rmnvich.apps.familybudget.presentation.activity.login.dagger.LoginActivit
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity;
 import rmnvich.apps.familybudget.presentation.activity.register.dagger.RegisterActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity;
+import rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger.FragmentFamilyMembersComponent;
+import rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger.FragmentFamilyMembersModule;
+import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers;
 
 import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
 
 @Module(subcomponents = {DashboardActivityComponent.class, LoginActivityComponent.class,
-        RegisterActivityComponent.class})
+        RegisterActivityComponent.class, FragmentFamilyMembersComponent.class})
 public class AppModule {
 
     private final Context mContext;
@@ -87,6 +90,13 @@ public class AppModule {
     @IntoMap
     @ClassKey(RegisterActivity.class)
     BaseComponentBuilder provideRegisterActivity(RegisterActivityComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(FragmentFamilyMembers.class)
+    BaseComponentBuilder provideFragmentFamilyMembers(FragmentFamilyMembersComponent.Builder builder) {
         return builder;
     }
 }

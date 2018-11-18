@@ -66,6 +66,10 @@ class DashboardActivityPresenter(private val model: DashboardActivityModel,
         compositeDisposable.add(disposable)
     }
 
+    override fun onEditProfileClicked() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onLogoutClicked() {
         model.deleteUserFromPreferences()
 

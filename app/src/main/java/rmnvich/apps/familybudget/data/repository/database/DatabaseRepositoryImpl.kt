@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import rmnvich.apps.familybudget.data.database.AppDatabase
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.User
+import java.util.concurrent.TimeUnit
 
 class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
         IDatabaseRepository {
@@ -18,6 +19,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllUsers(): Flowable<List<User>> {
         return userDao.getAllUsers()
                 .subscribeOn(Schedulers.io())
+                .delay(150, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 

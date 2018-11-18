@@ -1,5 +1,6 @@
 package rmnvich.apps.familybudget.presentation.activity.dashboard.mvp
 
+import android.support.v4.app.Fragment
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -20,6 +21,8 @@ interface DashboardActivityContract {
         fun updateBalance()
 
         fun showInitialBalanceDialog()
+
+        fun showFragment(fragment: Fragment)
     }
 
     interface Presenter : MvpPresenter<View> {
@@ -31,6 +34,8 @@ interface DashboardActivityContract {
         fun updateBalance()
 
         fun onApplyBalanceDialogClicked(value: String)
+
+        fun onEditProfileClicked()
 
         fun onLogoutClicked()
     }

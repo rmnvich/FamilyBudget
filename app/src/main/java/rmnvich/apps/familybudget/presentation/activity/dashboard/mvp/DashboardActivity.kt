@@ -4,7 +4,9 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -22,6 +24,7 @@ import rmnvich.apps.familybudget.databinding.ActivityDashboardBinding
 import rmnvich.apps.familybudget.databinding.NavHeaderDashboardBinding
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityModule
 import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
+import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Provider
@@ -31,6 +34,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private lateinit var binding: ActivityDashboardBinding
     private lateinit var navHeaderBinding: NavHeaderDashboardBinding
+
+    private lateinit var mActiveFragment: Fragment
 
     @Inject
     lateinit var mPresenter: DashboardActivityPresenter
@@ -60,7 +65,21 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        mActiveFragment = FragmentFamilyMembers.newInstance()
+        showFragment(mActiveFragment)
+
+        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerStateChanged(newState: Int) {}
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+            override fun onDrawerOpened(drawerView: View) {}
+            override fun onDrawerClosed(drawerView: View) {
+                showFragment(mActiveFragment)
+            }
+        })
+
         nav_view.setNavigationItemSelectedListener(this)
+        nav_view.setCheckedItem(R.id.nav_family_members)
+        onNavigationItemSelected(nav_view.menu.getItem(0))
 
         mPresenter.attachView(this)
         mPresenter.setUserId(intent.extras.getInt(EXTRA_USER_ID))
@@ -95,39 +114,29 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_family_members -> {
-
-            }
+            R.id.nav_family_members -> mActiveFragment = FragmentFamilyMembers.newInstance()
             R.id.nav_planned_expenses -> {
-
             }
             R.id.nav_actual_expenses -> {
-
             }
             R.id.nav_incomes -> {
-
             }
             R.id.nav_total_balance -> {
-
             }
             R.id.nav_categories -> {
-
             }
-            R.id.nav_edit_profile -> {
-
-            }
-            R.id.nav_logout -> {
-                mPresenter.onLogoutClicked()
-            }
+            R.id.nav_edit_profile -> mPresenter.onEditProfileClicked()
+            R.id.nav_logout -> mPresenter.onLogoutClicked()
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else super.onBackPressed()
+    override fun showFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .replace(R.id.content, fragment)
+                .commit()
     }
 
     override fun showProgress() {
@@ -140,6 +149,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun showMessage(text: String) {
         Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else super.onBackPressed()
     }
 
     override fun onDestroy() {
