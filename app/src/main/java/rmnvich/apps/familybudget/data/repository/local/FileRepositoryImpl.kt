@@ -14,8 +14,8 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
-class LocalRepositoryImpl(private val context: Context) :
-        ILocalRepository {
+class FileRepositoryImpl(private val context: Context) :
+        IFileRepository {
 
     override fun getRealPathFromUri(uri: Uri): String {
         val projection = arrayOf(MediaStore.Images.Media.DATA)

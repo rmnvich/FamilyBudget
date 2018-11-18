@@ -3,7 +3,7 @@ package rmnvich.apps.familybudget.data.repository.local
 import android.graphics.Bitmap
 import android.net.Uri
 
-interface ILocalRepository {
+interface IFileRepository {
 
     fun getRealPathFromUri(uri: Uri): String
 

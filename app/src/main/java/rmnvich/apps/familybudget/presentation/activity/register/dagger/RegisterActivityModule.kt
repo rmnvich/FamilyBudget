@@ -5,7 +5,7 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.data.di.base.BaseModule
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
-import rmnvich.apps.familybudget.data.repository.local.LocalRepositoryImpl
+import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivityModel
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivityPresenter
 
@@ -28,7 +28,7 @@ class RegisterActivityModule: BaseModule {
     @PerRegisterActivity
     @Provides
     fun provideModel(databaseRepositoryImpl: DatabaseRepositoryImpl,
-                     localRepositoryImpl: LocalRepositoryImpl) : RegisterActivityModel {
+                     localRepositoryImpl: FileRepositoryImpl) : RegisterActivityModel {
         return RegisterActivityModel(databaseRepositoryImpl, localRepositoryImpl)
     }
 }

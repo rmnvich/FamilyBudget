@@ -9,11 +9,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
-import rmnvich.apps.familybudget.data.repository.local.LocalRepositoryImpl
+import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl
 import java.util.concurrent.Callable
 
 class RegisterActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
-                            private val localRepository: LocalRepositoryImpl) :
+                            private val localRepository: FileRepositoryImpl) :
         RegisterActivityContract.Model {
 
     override fun checkIfExists(user: User): Single<User> {

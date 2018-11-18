@@ -13,7 +13,7 @@ import rmnvich.apps.familybudget.data.common.Constants;
 import rmnvich.apps.familybudget.data.database.AppDatabase;
 import rmnvich.apps.familybudget.data.di.base.BaseComponentBuilder;
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl;
-import rmnvich.apps.familybudget.data.repository.local.LocalRepositoryImpl;
+import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityComponent;
@@ -52,8 +52,8 @@ public class AppModule {
 
     @PerApplication
     @Provides
-    LocalRepositoryImpl provideLocalRepository() {
-        return new LocalRepositoryImpl(mContext);
+    FileRepositoryImpl provideLocalRepository() {
+        return new FileRepositoryImpl(mContext);
     }
 
     @Provides
