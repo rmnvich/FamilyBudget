@@ -21,6 +21,10 @@ class RegisterActivityModel(private val databaseRepository: DatabaseRepositoryIm
     }
 
     override fun insertUser(user: User): Completable {
+        user.name = user.name.trim()
+        user.lastname = user.lastname.trim()
+        user.relationship = user.relationship.trim()
+        user.password = user.password.trim()
         return databaseRepository.insertUser(user)
     }
 

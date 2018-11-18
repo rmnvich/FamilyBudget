@@ -1,12 +1,9 @@
 package rmnvich.apps.familybudget.presentation.activity.login.mvp
 
-import android.arch.persistence.room.Index
 import io.reactivex.Single
-import rmnvich.apps.familybudget.R.string.name
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
 import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl
-import java.lang.IndexOutOfBoundsException
 
 class LoginActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
                          private val preferencesRepository: PreferencesRepositoryImpl) :
@@ -21,7 +18,7 @@ class LoginActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
     }
 
     override fun getUser(username: String): Single<User> {
-        val name = username.split(" ")
+        val name = username.trim().split(" ")
         return try {
             databaseRepository.getUserByNameAndLastname(name[0], name[1])
         } catch (e: IndexOutOfBoundsException) {
