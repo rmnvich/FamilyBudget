@@ -1,5 +1,10 @@
 package rmnvich.apps.familybudget.data.entity
 
-data class Category(var categoryId: Int,
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity
+data class Category(@PrimaryKey(autoGenerate = true)
+                    var categoryId: Int,
                     var name: String,
                     var color: Int)

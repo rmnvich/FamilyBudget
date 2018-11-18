@@ -1,99 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    android:focusableInTouchMode="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/activity_login_image_size"
-        android:layout_height="@dimen/activity_login_image_size"
-        android:src="@drawable/nav_background"
-        app:civ_border_color="@android:color/white"
-        app:civ_border_width="@dimen/activity_edit_profile_photo_border_width"
-        app:layout_constraintBottom_toTopOf="@id/et_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/et_login"
+        <variable
+            name="handler"
+            type="rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_login_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
-        android:hint="@string/full_name"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@id/et_password"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:met_baseColor="@android:color/white"
-        app:met_clearButton="true"
-        app:met_errorColor="@android:color/white"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelAnimating="true"
-        app:met_floatingLabelText="@string/full_name"
-        app:met_floatingLabelTextColor="@android:color/white"
-        app:met_iconLeft="@drawable/ic_action_person_inverted"
-        app:met_iconPadding="0dp"
-        app:met_primaryColor="@android:color/white"
-        app:met_textColor="@android:color/white"
-        app:met_underlineColor="@android:color/white" />
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_gradient"
+        android:focusableInTouchMode="true">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/et_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_login_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_login"
-        app:met_baseColor="@android:color/white"
-        app:met_clearButton="true"
-        app:met_errorColor="@android:color/white"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelAnimating="true"
-        app:met_floatingLabelText="@string/password"
-        app:met_floatingLabelTextColor="@android:color/white"
-        app:met_iconLeft="@drawable/ic_action_password_inverted"
-        app:met_iconPadding="0dp"
-        app:met_minCharacters="4"
-        app:met_primaryColor="@android:color/white"
-        app:met_textColor="@android:color/white"
-        app:met_underlineColor="@android:color/white" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/activity_login_image_size"
+            android:layout_height="@dimen/activity_login_image_size"
+            android:src="@drawable/nav_background"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="@dimen/activity_edit_profile_photo_border_width"
+            app:layout_constraintBottom_toTopOf="@id/et_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_login_btn_height"
-        android:layout_marginStart="@dimen/activity_login_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
-        android:background="@drawable/btn_login_bg"
-        android:fontFamily="sans-serif"
-        android:foreground="@drawable/btn_login_ripple"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/btn_register"
-        app:layout_constraintTop_toBottomOf="@id/et_password"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_login_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
+            android:hint="@string/full_name"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@id/et_password"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:met_baseColor="@android:color/white"
+            app:met_clearButton="true"
+            app:met_errorColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="@string/full_name"
+            app:met_floatingLabelTextColor="@android:color/white"
+            app:met_iconLeft="@drawable/ic_action_person_inverted"
+            app:met_iconPadding="0dp"
+            app:met_primaryColor="@android:color/white"
+            app:met_textColor="@android:color/white"
+            app:met_underlineColor="@android:color/white" />
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_login_btn_height"
-        android:layout_marginStart="@dimen/activity_login_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_login_btn_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
-        android:background="@drawable/btn_login_bg"
-        android:fontFamily="sans-serif"
-        android:foreground="@drawable/btn_login_ripple"
-        android:text="@string/register"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login" />
-</android.support.constraint.ConstraintLayout>
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_login_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_login"
+            app:met_baseColor="@android:color/white"
+            app:met_clearButton="true"
+            app:met_errorColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="@string/password"
+            app:met_floatingLabelTextColor="@android:color/white"
+            app:met_iconLeft="@drawable/ic_action_password_inverted"
+            app:met_iconPadding="0dp"
+            app:met_minCharacters="4"
+            app:met_primaryColor="@android:color/white"
+            app:met_textColor="@android:color/white"
+            app:met_underlineColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_login_btn_height"
+            android:layout_marginStart="@dimen/activity_login_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
+            android:background="@drawable/btn_login_bg"
+            android:fontFamily="sans-serif"
+            android:foreground="@drawable/btn_login_ripple"
+            android:onClick="@{(view) -> handler.onClickLogin()}"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/btn_register"
+            app:layout_constraintTop_toBottomOf="@id/et_password"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_login_btn_height"
+            android:layout_marginStart="@dimen/activity_login_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_login_btn_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
+            android:background="@drawable/btn_login_bg"
+            android:fontFamily="sans-serif"
+            android:foreground="@drawable/btn_login_ripple"
+            android:onClick="@{(view) -> handler.onClickRegister()}"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@android:color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
