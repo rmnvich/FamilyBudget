@@ -11,7 +11,7 @@ import rmnvich.apps.familybudget.data.entity.User
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM user ORDER BY userId DESC")
+    @Query("SELECT * FROM user ORDER BY userId ASC")
     fun getAllUsers(): Flowable<List<User>>
 
     @Query("SELECT * FROM user WHERE userId = :userId")

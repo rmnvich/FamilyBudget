@@ -79,7 +79,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.setCheckedItem(R.id.nav_family_members)
-        onNavigationItemSelected(nav_view.menu.getItem(0))
 
         mPresenter.attachView(this)
         mPresenter.setUserId(intent.extras.getInt(EXTRA_USER_ID))
