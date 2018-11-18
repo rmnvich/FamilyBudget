@@ -2,9 +2,12 @@ package rmnvich.apps.familybudget.presentation.activity.register.mvp
 
 import android.content.Intent
 import android.net.Uri
+import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
 import rmnvich.apps.familybudget.data.repository.local.LocalRepositoryImpl
 import java.util.concurrent.Callable
@@ -12,6 +15,14 @@ import java.util.concurrent.Callable
 class RegisterActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
                             private val localRepository: LocalRepositoryImpl) :
         RegisterActivityContract.Model {
+
+    override fun checkIfExists(user: User): Single<User> {
+        return databaseRepository.getUserByNameAndLastname(user.name, user.lastname)
+    }
+
+    override fun insertUser(user: User): Completable {
+        return databaseRepository.insertUser(user)
+    }
 
     override fun getFilePath(data: Intent?): Observable<String> {
         return Observable.fromCallable(CallableBitmapAction(data?.data!!, getRealPath(data)))

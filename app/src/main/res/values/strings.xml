@@ -42,6 +42,11 @@
     <string name="action_settings">Settings</string>
 
     <string name="select_a_file">Select a media file</string>
-    <string name="error">An error occurred</string>
+    <string name="empty_field_error">Please fill in all fields</string>
+    <string name="user_exists">User with the same name already exists</string>
+    <string name="user_not_exists">User with the same name does not exist</string>
+    <string name="wrong_data">Wrong login or password</string>
+    <string name="error">An error occurred. Try again</string>
+    <string name="returned_empty">returned empty</string>
 
 </resources>

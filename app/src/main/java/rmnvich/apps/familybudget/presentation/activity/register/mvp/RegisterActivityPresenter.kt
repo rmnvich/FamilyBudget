@@ -3,6 +3,8 @@ package rmnvich.apps.familybudget.presentation.activity.register.mvp
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
+import android.util.Log.d
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
@@ -43,8 +45,26 @@ class RegisterActivityPresenter(private val model: RegisterActivityModel,
 
     override fun onRegisterClicked(user: User) {
         if (isDataCorrect(user)) {
-            view?.showMessage("${user.name}, ${user.lastname}, ${user.relationship}, ${user.password}")
-        }
+            view?.showProgress()
+            val userExistsDisposable = model.checkIfExists(user)
+                    .subscribe({
+                        view?.hideProgress()
+                        view?.showMessage(getString(R.string.user_exists))
+                    }, {
+                        if (it.message!!.contains(getString(R.string.returned_empty))) {
+                            val insertDisposable = model.insertUser(user)
+                                    .subscribe({
+                                        view?.hideProgress()
+                                        (view as RegisterActivity).finish()
+                                    }, {
+                                        view?.hideProgress()
+                                        view?.showMessage(getString(R.string.error))
+                                    })
+                            compositeDisposable.add(insertDisposable)
+                        }
+                    })
+            compositeDisposable.add(userExistsDisposable)
+        } else view?.showMessage(getString(R.string.empty_field_error))
     }
 
     override fun isDataCorrect(user: User): Boolean {

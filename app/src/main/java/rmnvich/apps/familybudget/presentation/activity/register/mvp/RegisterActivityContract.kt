@@ -1,7 +1,9 @@
 package rmnvich.apps.familybudget.presentation.activity.register.mvp
 
 import android.content.Intent
+import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.presentation.mvp.MvpModel
 import rmnvich.apps.familybudget.presentation.mvp.MvpPresenter
@@ -9,7 +11,7 @@ import rmnvich.apps.familybudget.presentation.mvp.MvpView
 
 class RegisterActivityContract {
 
-    interface View: MvpView {
+    interface View : MvpView {
 
         fun setUser(user: User)
 
@@ -20,7 +22,7 @@ class RegisterActivityContract {
         fun onClickRegister()
     }
 
-    interface Presenter: MvpPresenter<View> {
+    interface Presenter : MvpPresenter<View> {
 
         fun showImageDialog()
 
@@ -35,7 +37,11 @@ class RegisterActivityContract {
         fun isDataCorrect(user: User): Boolean
     }
 
-    interface Model: MvpModel {
+    interface Model : MvpModel {
+
+        fun checkIfExists(user: User): Single<User>
+
+        fun insertUser(user: User): Completable
 
         fun getFilePath(data: Intent?): Observable<String>
 

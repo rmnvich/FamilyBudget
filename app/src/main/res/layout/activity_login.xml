@@ -33,7 +33,7 @@
             android:layout_marginStart="@dimen/activity_login_horizontal_margin"
             android:layout_marginEnd="@dimen/activity_login_horizontal_margin"
             android:hint="@string/full_name"
-            android:inputType="text"
+            android:inputType="textCapWords"
             app:layout_constraintBottom_toTopOf="@id/et_password"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
