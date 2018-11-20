@@ -33,7 +33,10 @@ public class DateHelper {
 
     public static long getTimeFromDatePicker(int year, int month, int date) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, date, 12, 0, 0);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, date);
+
         return calendar.getTimeInMillis();
     }
 

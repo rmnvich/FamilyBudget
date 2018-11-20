@@ -66,6 +66,8 @@
     <string name="confirm_dialog_positive">Yes</string>
     <string name="confirm_dialog_negative">No</string>
 
+    <string name="negative_balance">You can not add expense</string>
+
     <string-array name="income_types">
         <item>Salary</item>
         <item>Scholarship</item>

@@ -23,13 +23,12 @@ class MakeExpenseActivityModel(private val databaseRepositoryImpl: DatabaseRepos
     }
 
     override fun insertExpense(expense: Expense, oldValue: String): Completable {
+        val oldIsPlannedExpense = expense.isPlannedExpense
         if (expense.timestamp == 0L) {
             expense.timestamp = DateHelper.getCurrentTimeInMills()
         } else if (DateHelper.isDateMoreThatToday(expense.timestamp)) {
             expense.isPlannedExpense = true
         }
-
-        //TODO: fix this
 
         return databaseRepositoryImpl.getUserById(preferencesRepositoryImpl.getUserId())
                 .flatMapCompletable {
@@ -40,35 +39,65 @@ class MakeExpenseActivityModel(private val databaseRepositoryImpl: DatabaseRepos
                 .flatMapCompletable {
                     val newValue = BigDecimal(expense.value)
 
-                    if (expense.isPlannedExpense) {
-                        val totalPlannedExpense = BigDecimal(it.totalPlannedExpenses)
-                        if (oldValue == "0") {
-                            it.totalPlannedExpenses = totalPlannedExpense.add(newValue)
-                                    .setScale(2, ROUND_DOWN).toString()
-                        } else it.totalPlannedExpenses = newValue.subtract(BigDecimal(oldValue))
-                                .add(totalPlannedExpense).setScale(2, ROUND_DOWN).toString()
+                    //If not transferring from planned to actual
+                    if (oldIsPlannedExpense == expense.isPlannedExpense) {
+                        if (expense.isPlannedExpense) {
+                            val totalPlannedExpense = BigDecimal(it.totalPlannedExpenses)
 
-                    } else if (!expense.isPlannedExpense) {
-                        val totalActualExpense = BigDecimal(it.totalActualExpenses)
-                        if (oldValue == "0") {
-                            val totalBalance = BigDecimal(it.balance)
-                            it.balance = totalBalance.subtract(newValue)
-                                    .setScale(2, ROUND_DOWN).toString()
-                            it.totalActualExpenses = totalActualExpense.add(newValue)
-                                    .setScale(2, ROUND_DOWN).toString()
+                            //If adding expense, else if update
+                            if (oldValue == "0") {
+                                it.totalPlannedExpenses = totalPlannedExpense.add(newValue)
+                                        .setScale(2, ROUND_DOWN).toString()
+                            } else it.totalPlannedExpenses = newValue.subtract(BigDecimal(oldValue))
+                                    .add(totalPlannedExpense).setScale(2, ROUND_DOWN).toString()
                         } else {
-                            it.totalActualExpenses = newValue.subtract(BigDecimal(oldValue))
-                                    .add(totalActualExpense).setScale(2, ROUND_DOWN).toString()
-                            it.balance = BigDecimal(oldValue).subtract(newValue)
-                                    .add(BigDecimal(it.balance)).setScale(2, ROUND_DOWN).toString()
+                            val totalActualExpense = BigDecimal(it.totalActualExpenses)
+                            if (oldValue == "0") {
+                                it.balance = BigDecimal(it.balance).subtract(newValue)
+                                        .setScale(2, ROUND_DOWN).toString()
+                                it.totalActualExpenses = totalActualExpense.add(newValue)
+                                        .setScale(2, ROUND_DOWN).toString()
+                            } else {
+                                it.totalActualExpenses = newValue.subtract(BigDecimal(oldValue))
+                                        .add(totalActualExpense).setScale(2, ROUND_DOWN).toString()
+                                it.balance = BigDecimal(oldValue).subtract(newValue)
+                                        .add(BigDecimal(it.balance)).setScale(2, ROUND_DOWN).toString()
+                            }
                         }
+                    } else {
+                        it.balance = BigDecimal(it.balance).add(BigDecimal(oldValue))
+                                .setScale(2, ROUND_DOWN).toString()
+                        it.totalPlannedExpenses = BigDecimal(it.totalPlannedExpenses)
+                                .add(newValue).setScale(2, ROUND_DOWN).toString()
+                        it.totalActualExpenses = BigDecimal(it.totalActualExpenses)
+                                .subtract(BigDecimal(oldValue))
+                                .setScale(2, ROUND_DOWN).toString()
                     }
                     databaseRepositoryImpl.insertBalance(it)
                 }
     }
 
     override fun deleteExpense(id: Int): Completable {
+        var value = BigDecimal(0)
+        var isPlannedExpense = false
+
         return databaseRepositoryImpl.getExpenseById(id)
-                .flatMapCompletable { databaseRepositoryImpl.deleteExpense(it) }
+                .flatMapCompletable {
+                    value = BigDecimal(it.value)
+                    isPlannedExpense = it.isPlannedExpense
+                    databaseRepositoryImpl.deleteExpense(it)
+                }.andThen(databaseRepositoryImpl.getBalance())
+                .flatMapCompletable {
+                    if (isPlannedExpense) {
+                        it.totalPlannedExpenses = BigDecimal(it.totalPlannedExpenses)
+                                .subtract(value).setScale(2, ROUND_DOWN).toString()
+                    } else {
+                        it.totalActualExpenses = BigDecimal(it.totalActualExpenses)
+                                .subtract(value).setScale(2, ROUND_DOWN).toString()
+                        it.balance = BigDecimal(it.balance).add(value)
+                                .setScale(2, ROUND_DOWN).toString()
+                    }
+                    databaseRepositoryImpl.insertBalance(it)
+                }
     }
 }

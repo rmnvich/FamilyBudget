@@ -3,6 +3,7 @@ package rmnvich.apps.familybudget.presentation.fragment.actualexpenses.mvp
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -78,7 +79,7 @@ class FragmentActualExpenses: Fragment(), FragmentActualExpensesContract.View {
     }
 
     override fun showMessage(text: String) {
-        (activity as DashboardActivity).showMessage(text)
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onDetach() {

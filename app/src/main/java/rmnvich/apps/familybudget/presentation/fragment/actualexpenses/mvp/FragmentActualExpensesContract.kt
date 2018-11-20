@@ -1,6 +1,8 @@
 package rmnvich.apps.familybudget.presentation.fragment.actualexpenses.mvp
 
 import io.reactivex.Flowable
+import io.reactivex.Single
+import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.domain.interactor.mvp.MvpModel
 import rmnvich.apps.familybudget.domain.interactor.mvp.MvpPresenter
@@ -23,6 +25,8 @@ interface FragmentActualExpensesContract {
     }
 
     interface Model : MvpModel {
+
+        fun getBalance(): Single<Balance>
 
         fun getAllActualExpenses(): Flowable<List<Expense>>
     }
