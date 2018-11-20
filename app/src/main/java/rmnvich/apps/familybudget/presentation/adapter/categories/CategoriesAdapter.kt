@@ -14,6 +14,7 @@ import java.util.*
 
 class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
+    private lateinit var mListener: OnClickCategoryListener
     private var mCategoryList: List<Category> = LinkedList()
 
     fun setData(data: List<Category>) {
@@ -50,12 +51,38 @@ class CategoriesAdapter : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
         return mCategoryList.size
     }
 
+    interface OnClickCategoryListener {
+        fun onClick(categoryId: Int)
+    }
+
+    fun setListener(listener: OnClickCategoryListener) {
+        mListener = listener
+    }
+
+    inline fun setOnClickListener(
+            crossinline onClickCategory: (Int) -> Unit) {
+
+        setListener(object : OnClickCategoryListener {
+            override fun onClick(categoryId: Int) {
+                onClickCategory(categoryId)
+            }
+        })
+    }
+
     inner class ViewHolder(var binding: ItemCategoryBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+            RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            binding.root.setOnClickListener(this)
+        }
 
         fun bind(category: Category) {
             binding.category = category;
             binding.executePendingBindings()
+        }
+
+        override fun onClick(p0: View?) {
+            mListener.onClick(mCategoryList[adapterPosition].categoryId)
         }
     }
 }

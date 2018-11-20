@@ -1,4 +1,58 @@
 package rmnvich.apps.familybudget.presentation.activity.make.category.mvp
 
-class MakeCategoryActivityPresenter {
+import android.os.Handler
+import io.reactivex.disposables.CompositeDisposable
+import rmnvich.apps.familybudget.R
+import rmnvich.apps.familybudget.data.entity.Category
+import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+
+class MakeCategoryActivityPresenter(private val model: MakeCategoryActivityModel,
+                                    private val compositeDisposable: CompositeDisposable) :
+        PresenterBase<MakeCategoryActivityContract.View>(), MakeCategoryActivityContract.Presenter {
+
+    private var categoryId = -1
+
+    override fun viewIsReady() {
+        if (categoryId != -1) {
+            view?.showProgress()
+            val disposable = model.getCategoryById(categoryId)
+                    .subscribe({
+                        view?.hideProgress()
+                        view?.setCategory(it)
+                        view?.setToolbarColor(it.color)
+                    }, {
+                        view?.hideProgress()
+                        view?.showMessage(getString(R.string.error))
+                    })
+            compositeDisposable.add(disposable)
+        } else view?.setCategory(Category())
+    }
+
+    override fun onFabClicked(category: Category) {
+        view?.showProgress()
+        val disposable = model.insertCategory(category)
+                .subscribe({
+                    view?.hideProgress()
+                    (view as MakeCategoryActivity).finish()
+                }, {
+                    view?.hideProgress()
+                    view?.showMessage(getString(R.string.error))
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun onPickColorClicked() {
+        Handler().postDelayed({
+            view?.showColorPickerDialog()
+        }, 250)
+    }
+
+    override fun detachView() {
+        super.detachView()
+        compositeDisposable.dispose()
+    }
+
+    override fun setCategoryId(id: Int) {
+        categoryId = id
+    }
 }

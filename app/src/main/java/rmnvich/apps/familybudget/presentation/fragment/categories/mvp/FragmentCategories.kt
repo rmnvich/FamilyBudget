@@ -3,7 +3,6 @@ package rmnvich.apps.familybudget.presentation.fragment.categories.mvp
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -44,6 +43,7 @@ class FragmentCategories : Fragment(), FragmentCategoriesContract.View {
 
         binding.recyclerCategories.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
+        mAdapter.setOnClickListener { mPresenter.onCategoryClicked(it) }
         binding.recyclerCategories.adapter = mAdapter
 
         return binding.root

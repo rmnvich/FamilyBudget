@@ -20,6 +20,9 @@
             android:id="@+id/recycler_categories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/item_family_member_vertical_margin"
+            android:paddingBottom="@dimen/item_family_member_vertical_margin"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_category" />
 
@@ -27,10 +30,10 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> handler.onClickFab()}"
             android:layout_gravity="bottom|end"
-            app:layout_behavior="rmnvich.apps.familybudget.presentation.custom.FabBehaviour"
             android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{(view) -> handler.onClickFab()}"
+            app:layout_behavior="rmnvich.apps.familybudget.presentation.custom.FabBehaviour"
             app:srcCompat="@drawable/ic_action_add" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>

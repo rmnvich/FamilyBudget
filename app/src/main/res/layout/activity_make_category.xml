@@ -28,7 +28,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@{category.color == 0 ? @color/colorPrimary : category.color}"
+                android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll"
                 app:navigationIcon="@drawable/ic_action_back_inverted"
                 app:title="@string/title_make_category"
@@ -79,6 +79,7 @@
                 <Button
                     android:id="@+id/btn_pick_color"
                     style="@style/custom_button"
+                    android:onClick="@{(view) -> handler.onClickPickColor()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_make_card_view_margin"
@@ -91,10 +92,19 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:visibility="invisible" />
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{(view) -> handler.onClickApply()}"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@drawable/ic_apply_inverted" />
