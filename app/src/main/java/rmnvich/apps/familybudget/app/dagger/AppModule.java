@@ -23,6 +23,8 @@ import rmnvich.apps.familybudget.presentation.activity.make.category.dagger.Make
 import rmnvich.apps.familybudget.presentation.activity.make.category.mvp.MakeCategoryActivity;
 import rmnvich.apps.familybudget.presentation.activity.register.dagger.RegisterActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity;
+import rmnvich.apps.familybudget.presentation.fragment.actualexpenses.dagger.FragmentActualExpensesComponent;
+import rmnvich.apps.familybudget.presentation.fragment.actualexpenses.mvp.FragmentActualExpenses;
 import rmnvich.apps.familybudget.presentation.fragment.categories.dagger.FragmentCategoriesComponent;
 import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategories;
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger.FragmentFamilyMembersComponent;
@@ -32,7 +34,8 @@ import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
 
 @Module(subcomponents = {DashboardActivityComponent.class, LoginActivityComponent.class,
         RegisterActivityComponent.class, FragmentFamilyMembersComponent.class,
-        MakeCategoryActivityComponent.class, FragmentCategoriesComponent.class})
+        MakeCategoryActivityComponent.class, FragmentCategoriesComponent.class,
+        FragmentActualExpensesComponent.class})
 public class AppModule {
 
     private final Context mContext;
@@ -108,6 +111,13 @@ public class AppModule {
     @IntoMap
     @ClassKey(FragmentCategories.class)
     BaseComponentBuilder provideFragmentCategories(FragmentCategoriesComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(FragmentActualExpenses.class)
+    BaseComponentBuilder provideFragmentActualExpenses(FragmentActualExpensesComponent.Builder builder) {
         return builder;
     }
 

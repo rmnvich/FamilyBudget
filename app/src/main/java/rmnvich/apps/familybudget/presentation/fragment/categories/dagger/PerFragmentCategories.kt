@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger
+package rmnvich.apps.familybudget.presentation.fragment.categories.dagger
 
 import javax.inject.Scope
 

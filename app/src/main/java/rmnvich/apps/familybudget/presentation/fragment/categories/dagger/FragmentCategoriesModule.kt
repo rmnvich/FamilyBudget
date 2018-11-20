@@ -8,11 +8,9 @@ import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
 import rmnvich.apps.familybudget.presentation.adapter.categories.CategoriesAdapter
 import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategoriesModel
 import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategoriesPresenter
-import rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger.PerFragmentCategories
 
 @Module
 class FragmentCategoriesModule : BaseModule {
-
 
     @PerFragmentCategories
     @Provides

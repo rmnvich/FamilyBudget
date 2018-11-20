@@ -8,6 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import rmnvich.apps.familybudget.data.database.AppDatabase
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.Category
+import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.domain.interactor.database.IDatabaseRepository
 import java.util.concurrent.TimeUnit
@@ -18,6 +19,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     private val userDao = appDatabase.userDao()
     private val balanceDao = appDatabase.balanceDao()
     private val categoryDao = appDatabase.categoryDao()
+    private var expenseDao = appDatabase.expenseDao()
 
     override fun getAllUsers(): Flowable<List<User>> {
         return userDao.getAllUsers()
@@ -81,6 +83,40 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun deleteCategory(category: Category): Completable {
         return Completable.fromAction {
             categoryDao.deleteCategory(category)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getAllActualExpenses(): Flowable<List<Expense>> {
+        return expenseDao.getAllExpenses(false)
+                .subscribeOn(Schedulers.io())
+                .delay(150, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getAllPlannedExpenses(): Flowable<List<Expense>> {
+        return expenseDao.getAllExpenses(true)
+                .subscribeOn(Schedulers.io())
+                .delay(150, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getExpenseById(id: Int): Single<Expense> {
+        return expenseDao.getExpenseById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun inserExpense(expense: Expense): Completable {
+        return Completable.fromAction {
+            expenseDao.insertExpense(expense)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun deleteExpense(expense: Expense): Completable {
+        return Completable.fromAction {
+            expenseDao.deleteExpense(expense)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

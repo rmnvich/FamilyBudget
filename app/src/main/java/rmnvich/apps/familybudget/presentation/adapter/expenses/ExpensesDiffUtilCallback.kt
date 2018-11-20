@@ -23,8 +23,8 @@ class ExpensesDiffUtilCallback(private val oldList: List<Expense>,
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val oldExpense = oldList[oldItemPosition]
         val newExpense = newList[newItemPosition]
-        return oldExpense.category.name == newExpense.category.name &&
-                oldExpense.category.color == newExpense.category.color &&
+        return oldExpense.category?.name == newExpense.category?.name &&
+                oldExpense.category?.color == newExpense.category?.color &&
                 oldExpense.isPlannedExpense == newExpense.isPlannedExpense &&
                 oldExpense.comment == newExpense.comment &&
                 oldExpense.value == newExpense.value
