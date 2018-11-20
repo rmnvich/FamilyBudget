@@ -10,7 +10,7 @@ class Expense {
     @PrimaryKey(autoGenerate = true)
     var expenseId: Int = 0
 
-    var value: String = "0"
+    var value: String = ""
     var comment: String = ""
     var userName: String = ""
     var userRelationship: String = ""

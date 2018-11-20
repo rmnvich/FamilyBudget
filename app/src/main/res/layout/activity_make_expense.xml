@@ -1,190 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:mstb="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <data>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll"
-            app:navigationIcon="@drawable/ic_action_back_inverted"
-            app:title="@string/title_make_expense"
-            app:titleTextColor="@android:color/white" />
-    </android.support.design.widget.AppBarLayout>
+        <import type="android.text.TextUtils" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
+        <import type="android.view.View" />
+
+        <import type="rmnvich.apps.familybudget.domain.helper.DateHelper" />
+
+        <variable
+            name="handler"
+            type="rmnvich.apps.familybudget.presentation.activity.make.expense.mvp.MakeExpenseActivity" />
+
+        <variable
+            name="expense"
+            type="rmnvich.apps.familybudget.data.entity.Expense" />
+
+        <variable
+            name="category"
+            type="rmnvich.apps.familybudget.data.entity.Category" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:background="@color/colorBackground">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll"
+                app:navigationIcon="@drawable/ic_action_back_inverted"
+                app:title="@string/title_make_expense"
+                app:titleTextColor="@android:color/white" />
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/activity_make_card_view_margin"
-                android:layout_marginEnd="@dimen/activity_make_card_view_margin"
-                android:layout_marginTop="@dimen/activity_make_card_view_margin"
-                android:layout_marginBottom="@dimen/activity_make_button_margin_top"
-                android:focusableInTouchMode="true"
-                app:cardCornerRadius="@dimen/card_view_corner_radius">
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/et_sum"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/activity_make_item_margin"
-                        android:layout_marginTop="@dimen/activity_make_item_margin"
-                        android:layout_marginEnd="@dimen/activity_make_item_margin"
-                        android:inputType="numberDecimal"
-                        android:maxLength="17"
-                        app:layout_constraintTop_toTopOf="parent"
-                        mstb:met_baseColor="@android:color/black"
-                        mstb:met_floatingLabel="highlight"
-                        mstb:met_floatingLabelAlwaysShown="true"
-                        mstb:met_floatingLabelPadding="5dp"
-                        mstb:met_floatingLabelText="Value"
-                        mstb:met_floatingLabelTextColor="@android:color/black"
-                        mstb:met_floatingLabelTextSize="12.5sp" />
-
-                    <com.rengwuxian.materialedittext.MaterialEditText
-                        android:id="@+id/et_comment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/activity_make_item_margin"
-                        android:layout_marginTop="@dimen/activity_make_et_margin_top"
-                        android:layout_marginEnd="@dimen/activity_make_item_margin"
-                        android:layout_marginBottom="@dimen/activity_make_item_margin"
-                        android:inputType="textMultiLine|textCapSentences"
-                        android:singleLine="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/et_sum"
-                        mstb:met_baseColor="@android:color/black"
-                        mstb:met_floatingLabel="highlight"
-                        mstb:met_floatingLabelAlwaysShown="true"
-                        mstb:met_floatingLabelPadding="5dp"
-                        mstb:met_floatingLabelText="Comment"
-                        mstb:met_floatingLabelTextColor="@android:color/black"
-                        mstb:met_floatingLabelTextSize="12.5sp" />
-                </android.support.constraint.ConstraintLayout>
-            </android.support.v7.widget.CardView>
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/btn_select_category"
-                    style="@style/custom_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_make_card_view_margin"
-                    android:layout_marginEnd="@dimen/activity_make_button_margin_top"
-                    android:background="@drawable/btn_radius_white"
-                    android:drawableStart="@drawable/ic_category"
-                    android:foreground="@drawable/btn_radius_ripple"
-                    android:text="@string/select_category"
-                    app:layout_constraintEnd_toStartOf="@id/btn_pick_date"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/btn_pick_date"
-                    style="@style/custom_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/activity_make_card_view_margin"
-                    android:background="@drawable/btn_radius_white"
-                    android:drawableStart="@drawable/ic_calendar"
-                    android:foreground="@drawable/btn_radius_ripple"
-                    android:text="@string/pick_date"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/btn_select_category"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/card_view_date"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/activity_make_card_view_margin"
-                    android:layout_marginTop="@dimen/activity_make_button_margin_top"
+                    android:layout_marginTop="@dimen/activity_make_card_view_margin"
                     android:layout_marginEnd="@dimen/activity_make_card_view_margin"
-                    app:cardCornerRadius="@dimen/card_view_corner_radius"
-                    app:contentPadding="@dimen/custom_button_padding"
-                    app:layout_constraintBottom_toTopOf="@id/item_category"
-                    app:layout_constraintTop_toBottomOf="@id/btn_select_category">
+                    android:layout_marginBottom="@dimen/activity_make_button_margin_top"
+                    android:focusableInTouchMode="true"
+                    app:cardCornerRadius="@dimen/card_view_corner_radius">
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/iv_calendar"
-                            android:layout_width="wrap_content"
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/et_sum"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@string/time"
-                            android:src="@drawable/ic_calendar"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:layout_marginStart="@dimen/activity_make_item_margin"
+                            android:layout_marginTop="@dimen/activity_make_item_margin"
+                            android:layout_marginEnd="@dimen/activity_make_item_margin"
+                            android:inputType="numberDecimal"
+                            android:maxLength="17"
+                            android:text="@={expense.value}"
+                            app:layout_constraintTop_toTopOf="parent"
+                            mstb:met_baseColor="@android:color/black"
+                            mstb:met_floatingLabel="highlight"
+                            mstb:met_floatingLabelAlwaysShown="true"
+                            mstb:met_floatingLabelPadding="5dp"
+                            mstb:met_floatingLabelText="Value"
+                            mstb:met_floatingLabelTextColor="@android:color/black"
+                            mstb:met_floatingLabelTextSize="12.5sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/et_comment"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/custom_button_padding"
-                            android:text="25 October 2018"
-                            android:textColor="@color/colorTextAlphaGray"
-                            android:textSize="@dimen/custom_button_text_size"
+                            android:layout_marginStart="@dimen/activity_make_item_margin"
+                            android:layout_marginTop="@dimen/activity_make_et_margin_top"
+                            android:layout_marginEnd="@dimen/activity_make_item_margin"
+                            android:layout_marginBottom="@dimen/activity_make_item_margin"
+                            android:inputType="textMultiLine|textCapSentences"
+                            android:singleLine="false"
+                            android:text="@={expense.comment}"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/iv_calendar"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@id/et_sum"
+                            mstb:met_baseColor="@android:color/black"
+                            mstb:met_floatingLabel="highlight"
+                            mstb:met_floatingLabelAlwaysShown="true"
+                            mstb:met_floatingLabelPadding="5dp"
+                            mstb:met_floatingLabelText="Comment"
+                            mstb:met_floatingLabelTextColor="@android:color/black"
+                            mstb:met_floatingLabelTextSize="12.5sp" />
                     </android.support.constraint.ConstraintLayout>
                 </android.support.v7.widget.CardView>
 
-                <include
-                    android:id="@+id/item_category"
-                    layout="@layout/item_category"
+                <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_make_card_view_margin"
-                    android:layout_marginTop="@dimen/activity_make_button_margin_top"
-                    android:layout_marginEnd="@dimen/activity_make_card_view_margin"
-                    app:layout_constraintBottom_toTopOf="@id/divider"
-                    app:layout_constraintTop_toBottomOf="@id/card_view_date" />
+                    android:layout_height="match_parent"
+                    tools:layout_editor_absoluteY="191dp">
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/activity_make_item_margin"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/item_category" />
-            </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                    <Button
+                        android:id="@+id/btn_select_category"
+                        style="@style/custom_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                        android:layout_marginEnd="@dimen/activity_make_button_margin_top"
+                        android:background="@drawable/btn_radius_white"
+                        android:drawableStart="@drawable/ic_category"
+                        android:foreground="@drawable/btn_radius_ripple"
+                        android:onClick="@{(view) -> handler.onClickSelectCategory()}"
+                        android:text="@string/select_category"
+                        app:layout_constraintEnd_toStartOf="@id/btn_pick_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_apply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_apply_inverted" />
+                    <Button
+                        android:id="@+id/btn_pick_date"
+                        style="@style/custom_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                        android:background="@drawable/btn_radius_white"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:foreground="@drawable/btn_radius_ripple"
+                        android:onClick="@{(view) -> handler.onClickPickDate()}"
+                        android:text="@string/pick_date"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/btn_select_category"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.design.widget.CoordinatorLayout>
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_view_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                        android:layout_marginTop="@dimen/activity_make_button_margin_top"
+                        android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                        android:visibility="@{expense.timestamp == 0 ? View.GONE : View.VISIBLE}"
+                        app:cardCornerRadius="@dimen/card_view_corner_radius"
+                        app:contentPadding="@dimen/custom_button_padding"
+                        app:layout_constraintBottom_toTopOf="@id/item_category"
+                        app:layout_constraintTop_toBottomOf="@id/btn_select_category">
+
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/iv_calendar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/time"
+                                android:src="@drawable/ic_calendar"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/custom_button_padding"
+                                android:text="@{DateHelper.getShortTimeInStringFromLong(expense.timestamp)}"
+                                android:textColor="@color/colorTextAlphaGray"
+                                android:textSize="@dimen/custom_button_text_size"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/iv_calendar"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </android.support.constraint.ConstraintLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <include
+                        android:id="@+id/item_category"
+                        layout="@layout/item_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/activity_make_card_view_margin"
+                        android:layout_marginTop="@dimen/activity_make_button_margin_top"
+                        android:layout_marginEnd="@dimen/activity_make_card_view_margin"
+                        android:visibility="@{expense.category == null ? View.GONE : View.VISIBLE}"
+                        app:category="@{category}"
+                        app:layout_constraintBottom_toTopOf="@id/divider"
+                        app:layout_constraintTop_toBottomOf="@id/card_view_date" />
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/activity_make_item_margin"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_category" />
+                </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{(view) -> handler.onClickApply()}"
+            app:srcCompat="@drawable/ic_apply_inverted" />
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

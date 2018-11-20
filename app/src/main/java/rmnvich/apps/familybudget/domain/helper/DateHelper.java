@@ -24,4 +24,16 @@ public class DateHelper {
         DateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy, HH:mm");
         return dateFormat.format(time);
     }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getShortTimeInStringFromLong(long time) {
+        DateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+        return dateFormat.format(time);
+    }
+
+    public static long getTimeFromDatePicker(int year, int month, int date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date, 12, 0, 0);
+        return calendar.getTimeInMillis();
+    }
 }

@@ -37,5 +37,10 @@
             android:name=".presentation.activity.make.category.mvp.MakeCategoryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".presentation.activity.make.expense.mvp.MakeExpenseActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
+
 </manifest>

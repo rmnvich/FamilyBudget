@@ -48,7 +48,7 @@ class MakeCategoryActivityPresenter(private val model: MakeCategoryActivityModel
     override fun onClickDelete() {
         Handler().postDelayed({
             view?.showConfirmDialog()
-        }, 250)
+        }, 200)
     }
 
     override fun onDialogConfirm() {
