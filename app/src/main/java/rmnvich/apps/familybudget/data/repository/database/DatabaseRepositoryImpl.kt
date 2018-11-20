@@ -6,10 +6,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import rmnvich.apps.familybudget.data.database.AppDatabase
-import rmnvich.apps.familybudget.data.entity.Balance
-import rmnvich.apps.familybudget.data.entity.Category
-import rmnvich.apps.familybudget.data.entity.Expense
-import rmnvich.apps.familybudget.data.entity.User
+import rmnvich.apps.familybudget.data.entity.*
 import rmnvich.apps.familybudget.domain.interactor.database.IDatabaseRepository
 import java.util.concurrent.TimeUnit
 
@@ -19,7 +16,8 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     private val userDao = appDatabase.userDao()
     private val balanceDao = appDatabase.balanceDao()
     private val categoryDao = appDatabase.categoryDao()
-    private var expenseDao = appDatabase.expenseDao()
+    private val expenseDao = appDatabase.expenseDao()
+    private val incomeDao = appDatabase.incomeDao()
 
     override fun getAllUsers(): Flowable<List<User>> {
         return userDao.getAllUsers()
@@ -117,6 +115,33 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun deleteExpense(expense: Expense): Completable {
         return Completable.fromAction {
             expenseDao.deleteExpense(expense)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getAllIncomes(): Flowable<List<Income>> {
+        return incomeDao.getAllIncomes()
+                .subscribeOn(Schedulers.io())
+                .delay(100, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getIncomeById(id: Int): Single<Income> {
+        return incomeDao.getIncomeById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun insertIncome(income: Income): Completable {
+        return Completable.fromAction {
+            incomeDao.insertIncome(income)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun deleteIncome(income: Income): Completable {
+        return Completable.fromAction {
+            incomeDao.deleteIncome(income)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

@@ -1,9 +1,7 @@
 package rmnvich.apps.familybudget.data.entity
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+class IncomeType {
 
-@Entity
-data class IncomeType(@PrimaryKey(autoGenerate = true)
-                      var id: Int,
-                      var name: String)
+    var name: String = ""
+    var isChecked: Boolean = false
+}
