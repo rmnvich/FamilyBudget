@@ -1,7 +1,6 @@
 package rmnvich.apps.familybudget.presentation.adapter.categories
 
 import android.support.v7.util.DiffUtil
-import android.util.Log.d
 import rmnvich.apps.familybudget.data.entity.Category
 
 class CategoriesDiffUtilCallback(private val oldList: List<Category>,
