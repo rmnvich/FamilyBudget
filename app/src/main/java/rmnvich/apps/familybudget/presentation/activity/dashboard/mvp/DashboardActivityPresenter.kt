@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity
-import rmnvich.apps.familybudget.presentation.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
 
 
 class DashboardActivityPresenter(private val model: DashboardActivityModel,

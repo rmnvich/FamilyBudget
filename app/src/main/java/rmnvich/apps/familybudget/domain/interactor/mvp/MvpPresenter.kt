@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.presentation.mvp
+package rmnvich.apps.familybudget.domain.interactor.mvp
 
 interface MvpPresenter<V : MvpView> {
 

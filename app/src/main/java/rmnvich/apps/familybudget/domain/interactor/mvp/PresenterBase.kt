@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.presentation.mvp
+package rmnvich.apps.familybudget.domain.interactor.mvp
 
 import android.app.Activity
 import android.support.v4.app.Fragment

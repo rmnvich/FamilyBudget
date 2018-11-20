@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_category_text_margin_start"
-                android:text="Food and drink"
+                android:text="@{category.name}"
                 android:textColor="@color/colorTextAlphaGray"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

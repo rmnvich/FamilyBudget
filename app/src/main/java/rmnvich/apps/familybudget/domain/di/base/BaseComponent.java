@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.data.di.base;
+package rmnvich.apps.familybudget.domain.di.base;
 
 
 public interface BaseComponent<V> {

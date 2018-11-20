@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.data.repository.local
+package rmnvich.apps.familybudget.domain.interactor.local
 
 import android.graphics.Bitmap
 import android.net.Uri

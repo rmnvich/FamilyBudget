@@ -20,8 +20,7 @@ class FamilyMembersAdapter : RecyclerView.Adapter<FamilyMembersAdapter.ViewHolde
 
     fun setData(data: List<User>) {
         val diffUtilCallback = FamilyMembersDiffUtilCallback(mUserList, data)
-        val diffResult = DiffUtil.calculateDiff(
-                diffUtilCallback, true)
+        val diffResult = DiffUtil.calculateDiff(diffUtilCallback, true)
 
         mUserList = data
         diffResult.dispatchUpdatesTo(this)

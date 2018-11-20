@@ -11,24 +11,28 @@ import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
 import rmnvich.apps.familybudget.data.common.Constants;
 import rmnvich.apps.familybudget.data.database.AppDatabase;
-import rmnvich.apps.familybudget.data.di.base.BaseComponentBuilder;
+import rmnvich.apps.familybudget.domain.di.base.BaseComponentBuilder;
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl;
-import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl;
-import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity;
+import rmnvich.apps.familybudget.data.repository.preferences.PreferencesRepositoryImpl;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityComponent;
+import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity;
 import rmnvich.apps.familybudget.presentation.activity.login.dagger.LoginActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity;
+import rmnvich.apps.familybudget.presentation.activity.make.category.dagger.MakeCategoryActivityComponent;
+import rmnvich.apps.familybudget.presentation.activity.make.category.mvp.MakeCategoryActivity;
 import rmnvich.apps.familybudget.presentation.activity.register.dagger.RegisterActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity;
+import rmnvich.apps.familybudget.presentation.fragment.categories.dagger.FragmentCategoriesComponent;
+import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategories;
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger.FragmentFamilyMembersComponent;
-import rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger.FragmentFamilyMembersModule;
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers;
 
 import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
 
 @Module(subcomponents = {DashboardActivityComponent.class, LoginActivityComponent.class,
-        RegisterActivityComponent.class, FragmentFamilyMembersComponent.class})
+        RegisterActivityComponent.class, FragmentFamilyMembersComponent.class,
+        MakeCategoryActivityComponent.class, FragmentCategoriesComponent.class})
 public class AppModule {
 
     private final Context mContext;
@@ -97,6 +101,20 @@ public class AppModule {
     @IntoMap
     @ClassKey(FragmentFamilyMembers.class)
     BaseComponentBuilder provideFragmentFamilyMembers(FragmentFamilyMembersComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(FragmentCategories.class)
+    BaseComponentBuilder provideFragmentCategories(FragmentCategoriesComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(MakeCategoryActivity.class)
+    BaseComponentBuilder provideMakeCategoryActivity(MakeCategoryActivityComponent.Builder builder) {
         return builder;
     }
 }

@@ -1,8 +1,8 @@
 package rmnvich.apps.familybudget.presentation.fragment.familymembers.dagger
 
 import dagger.Subcomponent
-import rmnvich.apps.familybudget.data.di.base.BaseComponent
-import rmnvich.apps.familybudget.data.di.base.BaseComponentBuilder
+import rmnvich.apps.familybudget.domain.di.base.BaseComponent
+import rmnvich.apps.familybudget.domain.di.base.BaseComponentBuilder
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers
 
 @PerFragmentFamilyMembers

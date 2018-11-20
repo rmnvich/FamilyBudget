@@ -21,11 +21,11 @@ class FamilyMembersDiffUtilCallback(private val oldList: List<User>,
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldMovie = oldList[oldItemPosition]
-        val newMovie = newList[newItemPosition]
-        return oldMovie.name == newMovie.name &&
-                oldMovie.lastname == newMovie.lastname &&
-                oldMovie.relationship == newMovie.relationship &&
-                oldMovie.photoPath == newMovie.photoPath
+        val oldUser = oldList[oldItemPosition]
+        val newUser = newList[newItemPosition]
+        return oldUser.name == newUser.name &&
+                oldUser.lastname == newUser.lastname &&
+                oldUser.relationship == newUser.relationship &&
+                oldUser.photoPath == newUser.photoPath
     }
 }

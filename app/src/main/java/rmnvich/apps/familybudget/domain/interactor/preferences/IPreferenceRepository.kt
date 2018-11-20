@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.data.repository.preference
+package rmnvich.apps.familybudget.domain.interactor.preferences
 
 interface IPreferenceRepository {
 

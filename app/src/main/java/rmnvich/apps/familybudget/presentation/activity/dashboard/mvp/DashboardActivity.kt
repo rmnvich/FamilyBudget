@@ -24,6 +24,7 @@ import rmnvich.apps.familybudget.databinding.ActivityDashboardBinding
 import rmnvich.apps.familybudget.databinding.NavHeaderDashboardBinding
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityModule
 import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
+import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategories
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers
 import java.io.File
 import javax.inject.Inject
@@ -122,8 +123,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.nav_total_balance -> {
             }
-            R.id.nav_categories -> {
-            }
+            R.id.nav_categories -> mActiveFragment = FragmentCategories.newInstance()
             R.id.nav_edit_profile -> mPresenter.onEditProfileClicked()
             R.id.nav_logout -> mPresenter.onLogoutClicked()
         }

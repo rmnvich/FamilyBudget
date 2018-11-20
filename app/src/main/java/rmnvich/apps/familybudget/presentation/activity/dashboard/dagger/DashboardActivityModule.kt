@@ -4,9 +4,9 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
-import rmnvich.apps.familybudget.data.di.base.BaseModule
+import rmnvich.apps.familybudget.domain.di.base.BaseModule
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
-import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl
+import rmnvich.apps.familybudget.data.repository.preferences.PreferencesRepositoryImpl
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivityModel
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivityPresenter
 import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog

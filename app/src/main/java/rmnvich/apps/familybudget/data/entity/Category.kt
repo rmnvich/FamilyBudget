@@ -4,7 +4,11 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity
-data class Category(@PrimaryKey(autoGenerate = true)
-                    var categoryId: Int,
-                    var name: String,
-                    var color: Int)
+class Category {
+
+    @PrimaryKey(autoGenerate = true)
+    var categoryId: Int = 0
+
+    var name: String = ""
+    var color: Int = 0
+}

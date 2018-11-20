@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.data.di;
+package rmnvich.apps.familybudget.domain.di;
 
 
 import android.content.Context;
@@ -12,9 +12,9 @@ import javax.inject.Provider;
 import rmnvich.apps.familybudget.app.dagger.AppComponent;
 import rmnvich.apps.familybudget.app.dagger.AppModule;
 import rmnvich.apps.familybudget.app.dagger.DaggerAppComponent;
-import rmnvich.apps.familybudget.data.di.base.BaseComponent;
-import rmnvich.apps.familybudget.data.di.base.BaseComponentBuilder;
-import rmnvich.apps.familybudget.data.di.base.BaseModule;
+import rmnvich.apps.familybudget.domain.di.base.BaseComponent;
+import rmnvich.apps.familybudget.domain.di.base.BaseComponentBuilder;
+import rmnvich.apps.familybudget.domain.di.base.BaseModule;
 
 public class ComponentHolder {
 

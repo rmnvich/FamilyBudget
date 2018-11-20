@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="rmnvich.apps.familybudget.domain.DateHelper" />
+        <import type="rmnvich.apps.familybudget.domain.helper.DateHelper" />
 
         <variable
             name="user"

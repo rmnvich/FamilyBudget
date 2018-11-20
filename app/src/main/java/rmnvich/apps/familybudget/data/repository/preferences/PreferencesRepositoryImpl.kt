@@ -1,7 +1,8 @@
-package rmnvich.apps.familybudget.data.repository.preference
+package rmnvich.apps.familybudget.data.repository.preferences
 
 import android.content.SharedPreferences
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
+import rmnvich.apps.familybudget.domain.interactor.preferences.IPreferenceRepository
 
 class PreferencesRepositoryImpl(private val preferences: SharedPreferences) :
         IPreferenceRepository {

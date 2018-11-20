@@ -3,7 +3,7 @@ package rmnvich.apps.familybudget.app;
 import android.app.Application;
 import android.content.Context;
 
-import rmnvich.apps.familybudget.data.di.ComponentHolder;
+import rmnvich.apps.familybudget.domain.di.ComponentHolder;
 
 
 public class App extends Application {

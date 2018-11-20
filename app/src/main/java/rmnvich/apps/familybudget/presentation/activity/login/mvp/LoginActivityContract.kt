@@ -2,9 +2,9 @@ package rmnvich.apps.familybudget.presentation.activity.login.mvp
 
 import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.User
-import rmnvich.apps.familybudget.presentation.mvp.MvpModel
-import rmnvich.apps.familybudget.presentation.mvp.MvpPresenter
-import rmnvich.apps.familybudget.presentation.mvp.MvpView
+import rmnvich.apps.familybudget.domain.interactor.mvp.MvpModel
+import rmnvich.apps.familybudget.domain.interactor.mvp.MvpPresenter
+import rmnvich.apps.familybudget.domain.interactor.mvp.MvpView
 
 interface LoginActivityContract {
 

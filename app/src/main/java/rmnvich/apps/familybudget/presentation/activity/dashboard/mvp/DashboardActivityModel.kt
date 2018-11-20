@@ -1,12 +1,11 @@
 package rmnvich.apps.familybudget.presentation.activity.dashboard.mvp
 
 import io.reactivex.Completable
-import io.reactivex.Flowable
 import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
-import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl
+import rmnvich.apps.familybudget.data.repository.preferences.PreferencesRepositoryImpl
 
 class DashboardActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
                              private val preferencesRepository: PreferencesRepositoryImpl) :

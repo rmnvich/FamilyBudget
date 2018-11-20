@@ -3,7 +3,7 @@ package rmnvich.apps.familybudget.presentation.activity.login.mvp
 import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
-import rmnvich.apps.familybudget.data.repository.preference.PreferencesRepositoryImpl
+import rmnvich.apps.familybudget.data.repository.preferences.PreferencesRepositoryImpl
 
 class LoginActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
                          private val preferencesRepository: PreferencesRepositoryImpl) :
