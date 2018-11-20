@@ -4,8 +4,12 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log.d
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import com.afollestad.materialdialogs.MaterialDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 import rmnvich.apps.familybudget.R
@@ -36,10 +40,29 @@ class MakeCategoryActivity : AppCompatActivity(), MakeCategoryActivityContract.V
 
     @Inject
     fun init() {
+        val categoryId = intent.getIntExtra(EXTRA_CATEGORY_ID, -1)
+        if (categoryId != -1)
+            setSupportActionBar(binding.toolbar)
+
         mPresenter.attachView(this)
-        mPresenter.setCategoryId(intent.getIntExtra(
-                EXTRA_CATEGORY_ID, -1))
+        mPresenter.setCategoryId(categoryId)
         mPresenter.viewIsReady()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.delete_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.delete -> {
+                mPresenter.onClickDelete()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun setToolbarColor(color: Int) {
@@ -60,6 +83,17 @@ class MakeCategoryActivity : AppCompatActivity(), MakeCategoryActivityContract.V
 
     override fun onClickPickColor() {
         mPresenter.onPickColorClicked()
+    }
+
+    override fun showConfirmDialog() {
+        MaterialDialog.Builder(this)
+                .title(getString(R.string.confirm_dialog_title))
+                .content(getString(R.string.confirm_dialog_message))
+                .positiveText(getString(R.string.confirm_dialog_positive))
+                .negativeText(getString(R.string.confirm_dialog_negative))
+                .onNegative { dialog, _ -> dialog.dismiss() }
+                .onPositive { _, _ -> mPresenter.onDialogConfirm() }
+                .show()
     }
 
     override fun showColorPickerDialog() {

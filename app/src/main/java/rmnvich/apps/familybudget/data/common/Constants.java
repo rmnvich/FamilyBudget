@@ -9,5 +9,7 @@ public class Constants {
     public static String EXTRA_USER_ID = "user_id";
     public static String EXTRA_CATEGORY_ID = "category_id";
 
+    public static int DEFAULT_COLOR = -13538911;
+
     public static int REQUEST_CODE_PHOTO = 0;
 }

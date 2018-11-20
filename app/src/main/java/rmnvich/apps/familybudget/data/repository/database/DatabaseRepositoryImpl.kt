@@ -77,4 +77,11 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    override fun deleteCategory(category: Category): Completable {
+        return Completable.fromAction {
+            categoryDao.deleteCategory(category)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }

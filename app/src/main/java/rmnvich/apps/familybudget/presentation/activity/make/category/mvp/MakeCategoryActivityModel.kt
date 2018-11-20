@@ -15,4 +15,11 @@ class MakeCategoryActivityModel(private val databaseRepositoryImpl: DatabaseRepo
     override fun insertCategory(category: Category): Completable {
         return databaseRepositoryImpl.insertCategory(category)
     }
+
+    override fun deleteCategory(id: Int): Completable {
+        return databaseRepositoryImpl.getCategoryById(id)
+                .flatMapCompletable {
+                    databaseRepositoryImpl.deleteCategory(it)
+                }
+    }
 }

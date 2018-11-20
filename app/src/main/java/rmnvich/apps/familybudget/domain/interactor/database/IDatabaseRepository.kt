@@ -25,6 +25,8 @@ interface IDatabaseRepository {
 
     fun insertCategory(category: Category): Completable
 
+    fun deleteCategory(category: Category): Completable
+
     fun getCategoryById(id: Int): Single<Category>
 
     fun getAllCategories(): Flowable<List<Category>>

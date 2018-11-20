@@ -17,6 +17,8 @@ interface MakeCategoryActivityContract {
 
         fun showColorPickerDialog()
 
+        fun showConfirmDialog()
+
         fun onClickApply()
 
         fun onClickPickColor()
@@ -28,7 +30,13 @@ interface MakeCategoryActivityContract {
 
         fun onFabClicked(category: Category)
 
+        fun onDialogConfirm()
+
+        fun onClickDelete()
+
         fun onPickColorClicked()
+
+        fun isDataCorrect(category: Category): Boolean
     }
 
     interface Model : MvpModel {
@@ -36,5 +44,7 @@ interface MakeCategoryActivityContract {
         fun getCategoryById(id: Int): Single<Category>
 
         fun insertCategory(category: Category): Completable
+
+        fun deleteCategory(id: Int): Completable
     }
 }

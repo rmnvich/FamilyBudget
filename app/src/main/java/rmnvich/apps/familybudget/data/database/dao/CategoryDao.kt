@@ -1,9 +1,6 @@
 package rmnvich.apps.familybudget.data.database.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import io.reactivex.Flowable
 import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.Category
@@ -19,4 +16,7 @@ interface CategoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategory(category: Category)
+
+    @Delete
+    fun deleteCategory(category: Category)
 }

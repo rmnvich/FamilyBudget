@@ -56,4 +56,10 @@
     <string name="starting_balance">Starting balance</string>
     <string name="init_your_balance">Init your balance</string>
 
+    <string name="delete">Delete</string>
+
+    <string name="confirm_dialog_title">Confirm deletion?</string>
+    <string name="confirm_dialog_message">Undo this action will be impossible</string>
+    <string name="confirm_dialog_positive">Yes</string>
+    <string name="confirm_dialog_negative">No</string>
 </resources>
