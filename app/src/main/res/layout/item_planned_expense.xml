@@ -98,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/item_expense_divider_margin"
                 android:alpha="0.9"
+                android:text="@{expense.comment}"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="italic"
