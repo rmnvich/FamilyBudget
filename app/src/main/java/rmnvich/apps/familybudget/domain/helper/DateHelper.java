@@ -18,4 +18,10 @@ public class DateHelper {
         DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy");
         return dateFormat.format(getCurrentTimeInMills());
     }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String getFullTimeInStringFromLong(long time) {
+        DateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy, HH:mm");
+        return dateFormat.format(time);
+    }
 }

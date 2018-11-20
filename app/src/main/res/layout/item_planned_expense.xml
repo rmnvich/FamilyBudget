@@ -1,138 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
+        <import type="rmnvich.apps.familybudget.domain.helper.DateHelper" />
+
         <variable
-                name="expense"
-                type="rmnvich.apps.familybudget.data.entity.Expense"/>
+            name="expense"
+            type="rmnvich.apps.familybudget.data.entity.Expense" />
     </data>
 
     <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/item_family_member_vertical_margin"
-            android:layout_marginLeft="@dimen/item_family_member_horizontal_margin"
-            android:layout_marginRight="@dimen/item_family_member_horizontal_margin"
-            android:layout_marginBottom="@dimen/item_family_member_vertical_margin"
-            app:cardCornerRadius="@dimen/card_view_corner_radius"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            app:contentPadding="@dimen/item_expense_padding">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_family_member_horizontal_margin"
+        android:layout_marginTop="@dimen/item_family_member_vertical_margin"
+        android:layout_marginRight="@dimen/item_family_member_horizontal_margin"
+        android:layout_marginBottom="@dimen/item_family_member_vertical_margin"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
+        app:contentPadding="@dimen/item_expense_padding">
 
         <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <rmnvich.apps.familybudget.presentation.custom.CircleView
-                    android:id="@+id/iv_category_color"
-                    android:layout_width="@dimen/item_expense_category_size"
-                    android:layout_height="@dimen/item_expense_category_size"
-                    app:layout_constraintBottom_toTopOf="@id/tv_comment"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="spread_inside"/>
+                android:id="@+id/iv_category_color"
+                android:layout_width="@dimen/item_expense_category_size"
+                android:layout_height="@dimen/item_expense_category_size"
+                app:layout_constraintBottom_toTopOf="@id/tv_comment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <TextView
-                    android:id="@+id/tv_category_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_expense_category_margin_end"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:text="Food and drink"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@id/tv_user_name"
-                    app:layout_constraintStart_toEndOf="@id/iv_category_color"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="spread_inside"/>
+                android:id="@+id/tv_category_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_expense_category_margin_end"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:text="@{expense.category.name}"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_user_name"
+                app:layout_constraintStart_toEndOf="@id/iv_category_color"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <TextView
-                    android:id="@+id/tv_user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_expense_category_margin_end"
-                    android:text="Marry Joe"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toTopOf="@id/tv_user_relationship"
-                    app:layout_constraintStart_toEndOf="@id/iv_category_color"
-                    app:layout_constraintTop_toBottomOf="@id/tv_category_name"/>
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_expense_category_margin_end"
+                android:text="@{expense.userName}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@id/tv_user_relationship"
+                app:layout_constraintStart_toEndOf="@id/iv_category_color"
+                app:layout_constraintTop_toBottomOf="@id/tv_category_name" />
 
             <TextView
-                    android:id="@+id/tv_user_relationship"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_expense_category_margin_end"
-                    android:text="mother"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toTopOf="@id/tv_comment"
-                    app:layout_constraintStart_toEndOf="@id/iv_category_color"
-                    app:layout_constraintTop_toBottomOf="@id/tv_user_name"/>
+                android:id="@+id/tv_user_relationship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_expense_category_margin_end"
+                android:text="@{expense.userRelationship}"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@id/tv_comment"
+                app:layout_constraintStart_toEndOf="@id/iv_category_color"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
 
             <TextView
-                    android:id="@+id/tv_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:layout_marginEnd="@dimen/item_expense_value_margin_end"
-                    android:text="-100 BYN"
-                    android:textColor="@color/colorPlannedExpense"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@id/tv_comment"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                android:id="@+id/tv_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:layout_marginEnd="@dimen/item_expense_value_margin_end"
+                android:text='@{"-" + expense.value + " BYN"}'
+                android:textColor="@color/colorPlannedExpense"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_comment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                    android:id="@+id/tv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:text='"This is a comment"'
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:alpha="0.9"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toTopOf="@id/bottom_divider"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_user_relationship"/>
+                android:id="@+id/tv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:alpha="0.9"
+                android:text="@{expense.comment}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@id/bottom_divider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_relationship" />
 
             <View
-                    android:id="@+id/bottom_divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:background="@drawable/divider_recycler"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_comment"/>
+                android:id="@+id/bottom_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:background="@drawable/divider_recycler"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment" />
 
             <ImageView
-                    android:id="@+id/iv_time_until"
-                    android:layout_width="@dimen/item_expense_iv_time_size"
-                    android:layout_height="@dimen/item_expense_iv_time_size"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:contentDescription="@string/time"
-                    android:src="@drawable/ic_calendar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bottom_divider"/>
+                android:id="@+id/iv_time_until"
+                android:layout_width="@dimen/item_expense_iv_time_size"
+                android:layout_height="@dimen/item_expense_iv_time_size"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:contentDescription="@string/time"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
 
             <TextView
-                    android:id="@+id/tv_timestamp_until"
-                    style="@style/TextAppearance.Compat.Notification.Time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_expense_tv_margin_start"
-                    android:layout_marginTop="@dimen/item_expense_divider_margin"
-                    android:alpha="0.75"
-                    android:text="Monday, 26 November 2018, 15:00"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@id/iv_time_until"
-                    app:layout_constraintTop_toBottomOf="@id/bottom_divider"/>
-
+                android:id="@+id/tv_timestamp_until"
+                style="@style/TextAppearance.Compat.Notification.Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_expense_tv_margin_start"
+                android:layout_marginTop="@dimen/item_expense_divider_margin"
+                android:alpha="0.75"
+                android:text="@{DateHelper.getFullTimeInStringFromLong(expense.timestamp)}"
+                android:textSize="13sp"
+                app:layout_constraintStart_toEndOf="@id/iv_time_until"
+                app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
         </android.support.constraint.ConstraintLayout>
-
     </android.support.v7.widget.CardView>
 </layout>

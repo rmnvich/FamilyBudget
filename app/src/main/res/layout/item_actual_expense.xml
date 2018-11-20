@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="rmnvich.apps.familybudget.domain.helper.DateHelper" />
+
         <variable
             name="expense"
             type="rmnvich.apps.familybudget.data.entity.Expense" />
@@ -12,14 +14,14 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/item_family_member_vertical_margin"
         android:layout_marginLeft="@dimen/item_family_member_horizontal_margin"
+        android:layout_marginTop="@dimen/item_family_member_vertical_margin"
         android:layout_marginRight="@dimen/item_family_member_horizontal_margin"
         android:layout_marginBottom="@dimen/item_family_member_vertical_margin"
-        app:cardCornerRadius="@dimen/card_view_corner_radius"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/card_view_corner_radius"
         app:contentPadding="@dimen/item_expense_padding">
 
         <android.support.constraint.ConstraintLayout
@@ -42,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_expense_tv_margin_start"
                 android:alpha="0.75"
-                android:text="Tuesday, 21 October 2018, 14:30"
+                android:text="@{DateHelper.getFullTimeInStringFromLong(expense.timestamp)}"
                 android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@id/iv_time"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_expense_category_margin_end"
                 android:layout_marginTop="@dimen/item_expense_divider_margin"
-                android:text="Food and drink"
+                android:text="@{expense.category.name}"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_user_name"
@@ -83,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_expense_category_margin_end"
-                android:text="Marry Joe"
+                android:text="@{expense.userName}"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="italic"
@@ -97,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_expense_category_margin_end"
-                android:text="mother"
+                android:text="@{expense.userRelationship}"
                 android:textStyle="italic"
                 app:layout_constraintBottom_toTopOf="@id/tv_comment"
                 app:layout_constraintStart_toEndOf="@id/iv_category_color"
@@ -110,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/item_expense_divider_margin"
                 android:alpha="0.9"
-                android:text='"This is a comment"'
+                android:text="@{expense.comment}"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="italic"
@@ -124,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/item_expense_divider_margin"
                 android:layout_marginEnd="@dimen/item_expense_value_margin_end"
-                android:text="-100 BYN"
+                android:text='@{"-" + expense.value + " BYN"}'
                 android:textColor="@color/colorActualExpense"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_comment"
