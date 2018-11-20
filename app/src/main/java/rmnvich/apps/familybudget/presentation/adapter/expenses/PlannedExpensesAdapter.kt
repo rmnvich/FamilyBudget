@@ -54,7 +54,7 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
 
     interface OnClickExpenseListener {
         fun onClick(expenseId: Int)
-        fun onClickApply(expenseId: Int)
+        fun onClickApply(expense: Expense)
     }
 
     fun setListener(listener: OnClickExpenseListener) {
@@ -62,12 +62,12 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
     }
 
     inline fun setOnClickListener(
-            crossinline onClickApply: (Int) -> Unit,
+            crossinline onClickApply: (Expense) -> Unit,
             crossinline onClickExpense: (Int) -> Unit) {
 
         setListener(object : OnClickExpenseListener {
-            override fun onClickApply(expenseId: Int) {
-                onClickApply(expenseId)
+            override fun onClickApply(expense: Expense) {
+                onClickApply(expense)
             }
 
             override fun onClick(expenseId: Int) {
@@ -91,7 +91,7 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
 
         override fun onClick(view: View?) {
             if (view?.id == R.id.btn_apply_expense) {
-                mListener.onClickApply(mExpenseList[adapterPosition].expenseId)
+                mListener.onClickApply(mExpenseList[adapterPosition])
             } else mListener.onClick(mExpenseList[adapterPosition].expenseId)
         }
     }

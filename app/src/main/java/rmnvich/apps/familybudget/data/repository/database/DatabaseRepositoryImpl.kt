@@ -108,7 +108,6 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     }
 
     override fun insertExpense(expense: Expense): Completable {
-        //TODO: balance
         return Completable.fromAction {
             expenseDao.insertExpense(expense)
         }.subscribeOn(Schedulers.io())

@@ -14,6 +14,7 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
         PresenterBase<MakeExpenseActivityContract.View>(), MakeExpenseActivityContract.Presenter {
 
     private var mExpenseId: Int = -1
+    private var mExpenseValue: String = "0"
 
     override fun viewIsReady() {
         if (mExpenseId != -1) {
@@ -21,6 +22,8 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
                     .subscribe({
                         view?.hideProgress()
                         view?.setExpense(it)
+
+                        mExpenseValue = it.value
                     }, {
                         view?.hideProgress()
                         view?.showMessage(getString(R.string.error))
@@ -40,7 +43,7 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
 
     override fun onFabClicked(expense: Expense) {
         if (isDataCorrect(expense)) {
-            val disposable = model.insertExpense(expense, mExpenseId)
+            val disposable = model.insertExpense(expense, mExpenseValue)
                     .subscribe({
                         view?.hideProgress()
                         (view as MakeExpenseActivity).finish()

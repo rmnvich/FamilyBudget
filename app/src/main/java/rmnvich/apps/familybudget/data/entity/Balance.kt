@@ -11,4 +11,5 @@ data class Balance(var balance: String) {
 
     var totalActualExpenses: String = "0"
     var totalPlannedExpenses: String = "0"
+    var totalIncomes: String = "0"
 }

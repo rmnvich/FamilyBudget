@@ -5,6 +5,8 @@ import io.reactivex.Flowable
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
 import rmnvich.apps.familybudget.domain.helper.DateHelper
+import java.math.BigDecimal
+import java.math.BigDecimal.ROUND_DOWN
 
 class FragmentPlannedExpensesModel(private val databaseRepositoryImpl: DatabaseRepositoryImpl) :
         FragmentPlannedExpensesContract.Model {
@@ -13,12 +15,23 @@ class FragmentPlannedExpensesModel(private val databaseRepositoryImpl: DatabaseR
         return databaseRepositoryImpl.getAllPlannedExpenses()
     }
 
-    override fun updateExpense(id: Int): Completable {
-        return databaseRepositoryImpl.getExpenseById(id)
+    override fun updateExpense(expense: Expense): Completable {
+        expense.isPlannedExpense = false
+        expense.timestamp = DateHelper.getCurrentTimeInMills()
+        return databaseRepositoryImpl.insertExpense(expense)
+                .andThen(databaseRepositoryImpl.getBalance())
                 .flatMapCompletable {
-                    it.isPlannedExpense = false
-                    it.timestamp = DateHelper.getCurrentTimeInMills()
-                    databaseRepositoryImpl.insertExpense(it)
+                    it.totalPlannedExpenses = BigDecimal(it.totalPlannedExpenses)
+                            .subtract(BigDecimal(expense.value))
+                            .setScale(2, ROUND_DOWN).toString()
+                    it.balance = BigDecimal(it.balance)
+                            .subtract(BigDecimal(expense.value))
+                            .setScale(2, ROUND_DOWN).toString()
+                    it.totalActualExpenses = BigDecimal(it.totalActualExpenses)
+                            .add(BigDecimal(expense.value))
+                            .setScale(2, ROUND_DOWN).toString()
+
+                    databaseRepositoryImpl.insertBalance(it)
                 }
     }
 }

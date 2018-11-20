@@ -22,12 +22,12 @@ interface FragmentPlannedExpensesContract {
 
         fun onExpenseClicked(id: Int)
 
-        fun onApplyExpenseClicked(id: Int)
+        fun onApplyExpenseClicked(expense: Expense)
     }
 
     interface Model : MvpModel {
 
-        fun updateExpense(id: Int): Completable
+        fun updateExpense(expense: Expense): Completable
 
         fun getAllPlannedExpenses(): Flowable<List<Expense>>
     }

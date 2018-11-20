@@ -4,7 +4,9 @@ import android.content.Intent
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants
+import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity
 import rmnvich.apps.familybudget.presentation.activity.make.expense.mvp.MakeExpenseActivity
 
 class FragmentPlannedExpensesPresenter(private val model: FragmentPlannedExpensesModel,
@@ -24,11 +26,13 @@ class FragmentPlannedExpensesPresenter(private val model: FragmentPlannedExpense
         compositeDisposable.add(disposable)
     }
 
-    override fun onApplyExpenseClicked(id: Int) {
+    override fun onApplyExpenseClicked(expense: Expense) {
         view?.showProgress()
-        val disposable = model.updateExpense(id)
+        val disposable = model.updateExpense(expense)
                 .subscribe({
                     view?.hideProgress()
+                    (((view as FragmentPlannedExpenses).activity)
+                            as DashboardActivity).updateBalance()
                 }, {
                     view?.hideProgress()
                     view?.showMessage(getString(R.string.error))

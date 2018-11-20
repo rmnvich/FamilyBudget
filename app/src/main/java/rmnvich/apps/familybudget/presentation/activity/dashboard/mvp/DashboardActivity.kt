@@ -61,6 +61,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 DashboardActivityModule(this)).inject(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateBalance()
+    }
+
     @Inject
     fun init() {
         setSupportActionBar(toolbar)

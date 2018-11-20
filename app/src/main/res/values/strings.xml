@@ -41,6 +41,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="balance_is_unavailable">Your balance is unavailable</string>
     <string name="balance">Balance:&#160;</string>
+    <string name="total_actual_expenses">Total actual expenses:&#160;</string>
+    <string name="total_planned_expenses">Total planned expenses:&#160;</string>
+    <string name="total_incomes">Total incomes:&#160;</string>
     <string name="action_settings">Settings</string>
 
     <string name="select_a_file">Select a media file</string>

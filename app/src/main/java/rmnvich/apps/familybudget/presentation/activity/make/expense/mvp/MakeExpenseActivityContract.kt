@@ -58,7 +58,7 @@ interface MakeExpenseActivityContract {
 
         fun getCategoryById(id: Int): Single<Category>
 
-        fun insertExpense(expense: Expense, expenseId: Int): Completable
+        fun insertExpense(expense: Expense, oldValue: String): Completable
 
         fun deleteExpense(id: Int): Completable
     }

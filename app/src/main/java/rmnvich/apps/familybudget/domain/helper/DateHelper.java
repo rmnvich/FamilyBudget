@@ -39,9 +39,9 @@ public class DateHelper {
 
     public static boolean isDateMoreThatToday(long date) {
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 12);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.HOUR_OF_DAY, 23);
+        today.set(Calendar.MINUTE, 59);
+        today.set(Calendar.SECOND, 59);
 
         return date > today.getTimeInMillis();
     }
