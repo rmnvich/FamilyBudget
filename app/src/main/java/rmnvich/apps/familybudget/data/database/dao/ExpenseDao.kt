@@ -8,7 +8,7 @@ import rmnvich.apps.familybudget.data.entity.Expense
 @Dao
 interface ExpenseDao {
 
-    @Query("SELECT * FROM expense WHERE isPlannedExpense = :isPlanned ORDER BY categoryId DESC")
+    @Query("SELECT * FROM expense WHERE isPlannedExpense = :isPlanned ORDER BY timestamp DESC")
     fun getAllExpenses(isPlanned: Boolean): Flowable<List<Expense>>
 
     @Query("SELECT * FROM expense WHERE expenseId = :id")

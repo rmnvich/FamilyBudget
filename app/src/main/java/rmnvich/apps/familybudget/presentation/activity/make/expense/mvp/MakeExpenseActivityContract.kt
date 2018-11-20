@@ -2,6 +2,7 @@ package rmnvich.apps.familybudget.presentation.activity.make.expense.mvp
 
 import io.reactivex.Completable
 import io.reactivex.Single
+import rmnvich.apps.familybudget.data.entity.Category
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.domain.interactor.mvp.MvpModel
 import rmnvich.apps.familybudget.domain.interactor.mvp.MvpPresenter
@@ -14,6 +15,8 @@ interface MakeExpenseActivityContract {
         fun setExpense(expense: Expense)
 
         fun setTimestamp(timestamp: Long)
+
+        fun setCategory(category: Category)
 
         fun showConfirmDialog()
 
@@ -42,6 +45,8 @@ interface MakeExpenseActivityContract {
 
         fun onPickDateClicked()
 
+        fun onCategorySelected(categoryId: Int)
+
         fun onDatePickerDialogClicked(year: Int, month: Int, day: Int)
 
         fun isDataCorrect(expense: Expense): Boolean
@@ -51,7 +56,9 @@ interface MakeExpenseActivityContract {
 
         fun getExpenseById(id: Int): Single<Expense>
 
-        fun insertExpense(expense: Expense): Completable
+        fun getCategoryById(id: Int): Single<Category>
+
+        fun insertExpense(expense: Expense, expenseId: Int): Completable
 
         fun deleteExpense(id: Int): Completable
     }

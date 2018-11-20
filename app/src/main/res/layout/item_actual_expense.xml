@@ -6,6 +6,10 @@
 
         <import type="rmnvich.apps.familybudget.domain.helper.DateHelper" />
 
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
         <variable
             name="expense"
             type="rmnvich.apps.familybudget.data.entity.Expense" />
@@ -116,6 +120,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="italic"
+                android:visibility="@{TextUtils.isEmpty(expense.comment) ? View.GONE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_relationship" />

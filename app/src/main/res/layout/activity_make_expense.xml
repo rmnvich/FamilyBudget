@@ -19,11 +19,6 @@
         <variable
             name="expense"
             type="rmnvich.apps.familybudget.data.entity.Expense" />
-
-        <variable
-            name="category"
-            type="rmnvich.apps.familybudget.data.entity.Category" />
-
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -197,7 +192,7 @@
                         android:layout_marginTop="@dimen/activity_make_button_margin_top"
                         android:layout_marginEnd="@dimen/activity_make_card_view_margin"
                         android:visibility="@{expense.category == null ? View.GONE : View.VISIBLE}"
-                        app:category="@{category}"
+                        app:category="@{expense.category}"
                         app:layout_constraintBottom_toTopOf="@id/divider"
                         app:layout_constraintTop_toBottomOf="@id/card_view_date" />
 

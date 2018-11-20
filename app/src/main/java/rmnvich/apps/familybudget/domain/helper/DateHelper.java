@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 public class DateHelper {
 
-    private static long getCurrentTimeInMills() {
+    public static long getCurrentTimeInMills() {
         Calendar calendar = Calendar.getInstance();
         return calendar.getTimeInMillis();
     }
@@ -35,5 +35,14 @@ public class DateHelper {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, date, 12, 0, 0);
         return calendar.getTimeInMillis();
+    }
+
+    public static boolean isDateMoreThatToday(long date) {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 12);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+
+        return date > today.getTimeInMillis();
     }
 }

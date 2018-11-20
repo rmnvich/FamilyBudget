@@ -40,7 +40,7 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
 
     override fun onFabClicked(expense: Expense) {
         if (isDataCorrect(expense)) {
-            val disposable = model.insertExpense(expense)
+            val disposable = model.insertExpense(expense, mExpenseId)
                     .subscribe({
                         view?.hideProgress()
                         (view as MakeExpenseActivity).finish()
@@ -65,6 +65,23 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
         compositeDisposable.add(disposable)
     }
 
+    override fun onCategorySelected(categoryId: Int) {
+        view?.showProgress()
+        val disposable = model.getCategoryById(categoryId)
+                .subscribe({
+                    view?.hideProgress()
+                    view?.setCategory(it)
+                }, {
+                    view?.hideProgress()
+                    view?.showMessage(getString(R.string.error))
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun onDatePickerDialogClicked(year: Int, month: Int, day: Int) {
+        view?.setTimestamp(DateHelper.getTimeFromDatePicker(year, month, day))
+    }
+
     override fun onSelectCategoryClicked() {
         Handler().postDelayed({
             view?.showCategoryDialog()
@@ -81,10 +98,6 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
         Handler().postDelayed({
             view?.showDatePickerDialog()
         }, 200)
-    }
-
-    override fun onDatePickerDialogClicked(year: Int, month: Int, day: Int) {
-        view?.setTimestamp(DateHelper.getTimeFromDatePicker(year, month, day))
     }
 
     override fun isDataCorrect(expense: Expense): Boolean {

@@ -26,6 +26,7 @@ class ExpensesDiffUtilCallback(private val oldList: List<Expense>,
         return oldExpense.category?.name == newExpense.category?.name &&
                 oldExpense.category?.color == newExpense.category?.color &&
                 oldExpense.isPlannedExpense == newExpense.isPlannedExpense &&
+                oldExpense.timestamp == newExpense.timestamp &&
                 oldExpense.comment == newExpense.comment &&
                 oldExpense.value == newExpense.value
     }
