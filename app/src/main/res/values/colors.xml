@@ -17,4 +17,6 @@
     <color name="colorIncomes">#3f9942</color>
     <color name="colorActualExpense">#df362f</color>
     <color name="colorPlannedExpense">#df962f</color>
+
+    <color name="colorApplyPlannedExpense">#df362f</color>
 </resources>

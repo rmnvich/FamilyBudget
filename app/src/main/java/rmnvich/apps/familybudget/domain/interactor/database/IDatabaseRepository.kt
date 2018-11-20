@@ -39,7 +39,7 @@ interface IDatabaseRepository {
 
     fun getExpenseById(id: Int): Single<Expense>
 
-    fun inserExpense(expense: Expense): Completable
+    fun insertExpense(expense: Expense): Completable
 
     fun deleteExpense(expense: Expense): Completable
 }

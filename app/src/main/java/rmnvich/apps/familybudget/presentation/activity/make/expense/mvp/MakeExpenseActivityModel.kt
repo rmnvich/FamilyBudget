@@ -32,9 +32,9 @@ class MakeExpenseActivityModel(private val databaseRepositoryImpl: DatabaseRepos
                     .flatMapCompletable {
                         expense.userName = "${it.name} ${it.lastname}"
                         expense.userRelationship = it.relationship
-                        databaseRepositoryImpl.inserExpense(expense)
+                        databaseRepositoryImpl.insertExpense(expense)
                     }
-        } else databaseRepositoryImpl.inserExpense(expense)
+        } else databaseRepositoryImpl.insertExpense(expense)
     }
 
     override fun deleteExpense(id: Int): Completable {

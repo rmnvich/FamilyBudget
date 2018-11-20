@@ -11,6 +11,7 @@ import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.databinding.ItemPlannedExpenseBinding
 import java.util.*
+import kotlin.math.exp
 
 class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewHolder>() {
 
@@ -53,6 +54,7 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
 
     interface OnClickExpenseListener {
         fun onClick(expenseId: Int)
+        fun onClickApply(expenseId: Int)
     }
 
     fun setListener(listener: OnClickExpenseListener) {
@@ -60,9 +62,14 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
     }
 
     inline fun setOnClickListener(
+            crossinline onClickApply: (Int) -> Unit,
             crossinline onClickExpense: (Int) -> Unit) {
 
         setListener(object : OnClickExpenseListener {
+            override fun onClickApply(expenseId: Int) {
+                onClickApply(expenseId)
+            }
+
             override fun onClick(expenseId: Int) {
                 onClickExpense(expenseId)
             }
@@ -74,6 +81,7 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
 
         init {
             binding.root.setOnClickListener(this)
+            binding.btnApplyExpense.setOnClickListener(this)
         }
 
         fun bind(expense: Expense) {
@@ -81,8 +89,10 @@ class PlannedExpensesAdapter : RecyclerView.Adapter<PlannedExpensesAdapter.ViewH
             binding.executePendingBindings()
         }
 
-        override fun onClick(p0: View?) {
-            mListener.onClick(mExpenseList[adapterPosition].expenseId)
+        override fun onClick(view: View?) {
+            if (view?.id == R.id.btn_apply_expense) {
+                mListener.onClickApply(mExpenseList[adapterPosition].expenseId)
+            } else mListener.onClick(mExpenseList[adapterPosition].expenseId)
         }
     }
 }

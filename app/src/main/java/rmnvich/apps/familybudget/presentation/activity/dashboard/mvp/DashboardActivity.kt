@@ -21,12 +21,14 @@ import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.databinding.ActivityDashboardBinding
+import rmnvich.apps.familybudget.databinding.FragmentPlannedExpensesBinding
 import rmnvich.apps.familybudget.databinding.NavHeaderDashboardBinding
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityModule
 import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
 import rmnvich.apps.familybudget.presentation.fragment.actualexpenses.mvp.FragmentActualExpenses
 import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategories
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers
+import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp.FragmentPlannedExpenses
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Provider
@@ -116,8 +118,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_family_members -> mActiveFragment = FragmentFamilyMembers.newInstance()
-            R.id.nav_planned_expenses -> {
-            }
+            R.id.nav_planned_expenses -> mActiveFragment = FragmentPlannedExpenses.newInstance()
             R.id.nav_actual_expenses -> mActiveFragment = FragmentActualExpenses.newInstance()
             R.id.nav_incomes -> {
             }

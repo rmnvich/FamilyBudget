@@ -24,7 +24,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllUsers(): Flowable<List<User>> {
         return userDao.getAllUsers()
                 .subscribeOn(Schedulers.io())
-                .delay(150, TimeUnit.MILLISECONDS)
+                .delay(100, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -63,7 +63,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllCategories(): Flowable<List<Category>> {
         return categoryDao.getAllCategories()
                 .subscribeOn(Schedulers.io())
-                .delay(150, TimeUnit.MILLISECONDS)
+                .delay(100, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -90,14 +90,14 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllActualExpenses(): Flowable<List<Expense>> {
         return expenseDao.getAllExpenses(false)
                 .subscribeOn(Schedulers.io())
-                .delay(150, TimeUnit.MILLISECONDS)
+                .delay(100, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getAllPlannedExpenses(): Flowable<List<Expense>> {
         return expenseDao.getAllExpenses(true)
                 .subscribeOn(Schedulers.io())
-                .delay(150, TimeUnit.MILLISECONDS)
+                .delay(100, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -107,7 +107,8 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun inserExpense(expense: Expense): Completable {
+    override fun insertExpense(expense: Expense): Completable {
+        //TODO: balance
         return Completable.fromAction {
             expenseDao.insertExpense(expense)
         }.subscribeOn(Schedulers.io())

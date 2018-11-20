@@ -57,5 +57,6 @@
     <dimen name="nav_header_height">206dp</dimen>
     <dimen name="photo_header_size">65dp</dimen>
     <dimen name="photo_header_width">1dp</dimen>
+    <dimen name="btn_apply_size">40dp</dimen>
 
 </resources>
