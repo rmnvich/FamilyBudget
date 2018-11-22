@@ -63,6 +63,16 @@ class IncomesAdapter : RecyclerView.Adapter<IncomesAdapter.ViewHolder>() {
         mListener = listener
     }
 
+    inline fun setOnClickListener(
+            crossinline onClickIncome: (Int) -> Unit) {
+
+        setListener(object : OnClickIncomeListener {
+            override fun onClick(incomeId: Int) {
+                onClickIncome(incomeId)
+            }
+        })
+    }
+
     inner class ViewHolder(val binding: ItemIncomeBinding) :
             RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 

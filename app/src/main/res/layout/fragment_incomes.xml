@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_incomes"
+    <data>
+
+        <variable
+            name="handler"
+            type="rmnvich.apps.familybudget.presentation.fragment.incomes.mvp.FragmentIncomes" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/item_family_member_vertical_margin"
-        android:paddingBottom="@dimen/item_family_member_vertical_margin"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_income" />
+        android:background="@color/colorBackground">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:onClick="@{(view) -> handler.onClickFab()}"
-        app:layout_behavior="rmnvich.apps.familybudget.presentation.custom.FabBehaviour"
-        app:srcCompat="@drawable/ic_action_add" />
-</android.support.design.widget.CoordinatorLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_incomes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/item_family_member_vertical_margin"
+            android:paddingBottom="@dimen/item_family_member_vertical_margin"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_income" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{(view) -> handler.onClickFab()}"
+            app:layout_behavior="rmnvich.apps.familybudget.presentation.custom.FabBehaviour"
+            app:srcCompat="@drawable/ic_action_add" />
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

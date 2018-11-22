@@ -46,8 +46,8 @@
                 android:layout_height="@dimen/activity_edit_profile_photo_size"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/activity_edit_profile_appbar_margin_bottom"
+                android:src="@drawable/nav_background"
                 android:onClick="@{(view) -> handler.onClickImageView()}"
-                android:visibility="@{TextUtils.isEmpty(user.photoPath) ? View.GONE : View.VISIBLE}"
                 app:civ_border_color="@android:color/white"
                 app:civ_border_width="@dimen/activity_edit_profile_photo_border_width" />
 

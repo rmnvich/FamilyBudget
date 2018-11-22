@@ -77,9 +77,14 @@ class EditProfileActivity : AppCompatActivity(), EditProfileActivityContract.Vie
     override fun setImageView(photoPath: String) {
         binding.user?.photoPath = photoPath
 
-        Glide.with(this)
-                .load(File(photoPath))
+        if (!photoPath.isEmpty()) {
+            Glide.with(this)
+                    .load(File(photoPath))
+                    .into(binding.ivPhoto)
+        } else Glide.with(this)
+                .load(getDrawable(R.drawable.nav_background))
                 .into(binding.ivPhoto)
+
         binding.invalidateAll()
     }
 

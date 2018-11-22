@@ -24,7 +24,6 @@ class DashboardActivityPresenter(private val model: DashboardActivityModel,
 
     override fun viewIsReady() {
         getUserById(userId)
-        updateBalance()
     }
 
     override fun getUserById(userId: Int) {

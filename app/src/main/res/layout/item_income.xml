@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_expense_tv_margin_start"
                 android:alpha="0.75"
-                android:text="@{DateHelper.getFullTimeInStringFromLong(expense.timestamp)}"
+                android:text="@{DateHelper.getFullTimeInStringFromLong(income.timestamp)}"
                 android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@id/iv_time"
                 app:layout_constraintTop_toTopOf="parent" />

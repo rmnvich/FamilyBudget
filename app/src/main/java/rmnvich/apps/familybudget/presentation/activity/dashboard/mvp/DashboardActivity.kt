@@ -28,6 +28,7 @@ import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
 import rmnvich.apps.familybudget.presentation.fragment.actualexpenses.mvp.FragmentActualExpenses
 import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCategories
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers
+import rmnvich.apps.familybudget.presentation.fragment.incomes.mvp.FragmentIncomes
 import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp.FragmentPlannedExpenses
 import java.io.File
 import javax.inject.Inject
@@ -128,8 +129,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.nav_family_members -> mActiveFragment = FragmentFamilyMembers.newInstance()
             R.id.nav_planned_expenses -> mActiveFragment = FragmentPlannedExpenses.newInstance()
             R.id.nav_actual_expenses -> mActiveFragment = FragmentActualExpenses.newInstance()
-            R.id.nav_incomes -> {
-            }
+            R.id.nav_incomes -> mActiveFragment = FragmentIncomes.newInstance()
             R.id.nav_total_balance -> {
             }
             R.id.nav_categories -> mActiveFragment = FragmentCategories.newInstance()
