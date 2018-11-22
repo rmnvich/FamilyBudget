@@ -4,16 +4,16 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.Expense
-import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
+import rmnvich.apps.familybudget.domain.interactor.database.IDatabaseRepository
 
-class FragmentActualExpensesModel(private val databaseRepositoryImpl: DatabaseRepositoryImpl) :
+class FragmentActualExpensesModel(private val databaseRepository: IDatabaseRepository) :
         FragmentActualExpensesContract.Model {
 
     override fun getBalance(): Single<Balance> {
-        return databaseRepositoryImpl.getBalance()
+        return databaseRepository.getBalance()
     }
 
     override fun getAllActualExpenses(): Flowable<List<Expense>> {
-        return databaseRepositoryImpl.getAllActualExpenses()
+        return databaseRepository.getAllActualExpenses()
     }
 }

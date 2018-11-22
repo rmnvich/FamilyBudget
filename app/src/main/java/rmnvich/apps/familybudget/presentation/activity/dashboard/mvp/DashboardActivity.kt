@@ -77,15 +77,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         mActiveFragment = FragmentFamilyMembers.newInstance()
         showFragment(mActiveFragment)
 
-        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
-            override fun onDrawerStateChanged(newState: Int) {}
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-            override fun onDrawerOpened(drawerView: View) {}
-            override fun onDrawerClosed(drawerView: View) {
-                showFragment(mActiveFragment)
-            }
-        })
-
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.setCheckedItem(R.id.nav_family_members)
 
@@ -133,6 +124,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.nav_edit_profile -> mPresenter.onEditProfileClicked()
             R.id.nav_logout -> mPresenter.onLogoutClicked()
         }
+        showFragment(mActiveFragment)
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

@@ -8,12 +8,12 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import rmnvich.apps.familybudget.data.entity.User
-import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
-import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl
+import rmnvich.apps.familybudget.domain.interactor.database.IDatabaseRepository
+import rmnvich.apps.familybudget.domain.interactor.local.IFileRepository
 import java.util.concurrent.Callable
 
-class RegisterActivityModel(private val databaseRepository: DatabaseRepositoryImpl,
-                            private val localRepository: FileRepositoryImpl) :
+class RegisterActivityModel(private val databaseRepository: IDatabaseRepository,
+                            private val fileRepository: IFileRepository) :
         RegisterActivityContract.Model {
 
     override fun checkIfExists(user: User): Single<User> {
@@ -35,13 +35,13 @@ class RegisterActivityModel(private val databaseRepository: DatabaseRepositoryIm
     }
 
     override fun getRealPath(data: Intent?): String {
-        return localRepository.getRealPathFromUri(data?.data!!)
+        return fileRepository.getRealPathFromUri(data?.data!!)
     }
 
     inner class CallableBitmapAction(private var uri: Uri,
                                      private var realPath: String) : Callable<String> {
         override fun call(): String {
-            return localRepository.saveToInternalStorage(uri, realPath)
+            return fileRepository.saveToInternalStorage(uri, realPath)
         }
     }
 }

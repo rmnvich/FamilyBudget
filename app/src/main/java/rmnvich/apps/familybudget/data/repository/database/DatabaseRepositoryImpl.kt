@@ -5,6 +5,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import rmnvich.apps.familybudget.data.common.Constants.LOAD_DATA_DELAY
 import rmnvich.apps.familybudget.data.database.AppDatabase
 import rmnvich.apps.familybudget.data.entity.*
 import rmnvich.apps.familybudget.domain.interactor.database.IDatabaseRepository
@@ -22,7 +23,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllUsers(): Flowable<List<User>> {
         return userDao.getAllUsers()
                 .subscribeOn(Schedulers.io())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -61,7 +62,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllCategories(): Flowable<List<Category>> {
         return categoryDao.getAllCategories()
                 .subscribeOn(Schedulers.io())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -88,14 +89,14 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllActualExpenses(): Flowable<List<Expense>> {
         return expenseDao.getAllExpenses(false)
                 .subscribeOn(Schedulers.io())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getAllPlannedExpenses(): Flowable<List<Expense>> {
         return expenseDao.getAllExpenses(true)
                 .subscribeOn(Schedulers.io())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
@@ -122,7 +123,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getAllIncomes(): Flowable<List<Income>> {
         return incomeDao.getAllIncomes()
                 .subscribeOn(Schedulers.io())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 

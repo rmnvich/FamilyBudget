@@ -2,26 +2,25 @@ package rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Single
-import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
 import rmnvich.apps.familybudget.domain.helper.DateHelper
+import rmnvich.apps.familybudget.domain.interactor.database.IDatabaseRepository
 import java.math.BigDecimal
 import java.math.BigDecimal.ROUND_DOWN
 
-class FragmentPlannedExpensesModel(private val databaseRepositoryImpl: DatabaseRepositoryImpl) :
+class FragmentPlannedExpensesModel(private val databaseRepository: IDatabaseRepository) :
         FragmentPlannedExpensesContract.Model {
 
     override fun getAllPlannedExpenses(): Flowable<List<Expense>> {
-        return databaseRepositoryImpl.getAllPlannedExpenses()
+        return databaseRepository.getAllPlannedExpenses()
     }
 
     override fun updateExpense(expense: Expense): Completable {
         expense.isPlannedExpense = false
         expense.timestamp = DateHelper.getCurrentTimeInMills()
-        return databaseRepositoryImpl.insertExpense(expense)
-                .andThen(databaseRepositoryImpl.getBalance())
+        return databaseRepository.insertExpense(expense)
+                .andThen(databaseRepository.getBalance())
                 .flatMapCompletable {
                     it.totalPlannedExpenses = BigDecimal(it.totalPlannedExpenses)
                             .subtract(BigDecimal(expense.value))
@@ -33,7 +32,7 @@ class FragmentPlannedExpensesModel(private val databaseRepositoryImpl: DatabaseR
                             .add(BigDecimal(expense.value))
                             .setScale(2, ROUND_DOWN).toString()
 
-                    databaseRepositoryImpl.insertBalance(it)
+                    databaseRepository.insertBalance(it)
                 }
     }
 }

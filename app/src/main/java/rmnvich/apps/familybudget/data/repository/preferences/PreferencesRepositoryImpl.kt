@@ -2,10 +2,10 @@ package rmnvich.apps.familybudget.data.repository.preferences
 
 import android.content.SharedPreferences
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
-import rmnvich.apps.familybudget.domain.interactor.preferences.IPreferenceRepository
+import rmnvich.apps.familybudget.domain.interactor.preferences.IPreferencesRepository
 
 class PreferencesRepositoryImpl(private val preferences: SharedPreferences) :
-        IPreferenceRepository {
+        IPreferencesRepository {
 
     override fun saveUserIdToPreferences(userId: Int) {
         preferences.edit()
@@ -17,7 +17,7 @@ class PreferencesRepositoryImpl(private val preferences: SharedPreferences) :
         return preferences.getInt(EXTRA_USER_ID, -1)
     }
 
-    fun deleteUserIdFromPreferences() {
+    override fun deleteUserIdFromPreferences() {
         preferences.edit()
                 .putInt(EXTRA_USER_ID, -1)
                 .apply()

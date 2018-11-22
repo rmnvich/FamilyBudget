@@ -9,7 +9,7 @@ import rmnvich.apps.familybudget.domain.interactor.mvp.MvpModel
 import rmnvich.apps.familybudget.domain.interactor.mvp.MvpPresenter
 import rmnvich.apps.familybudget.domain.interactor.mvp.MvpView
 
-class RegisterActivityContract {
+interface RegisterActivityContract {
 
     interface View : MvpView {
 
