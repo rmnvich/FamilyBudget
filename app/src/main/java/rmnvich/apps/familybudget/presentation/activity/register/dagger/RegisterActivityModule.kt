@@ -28,7 +28,7 @@ class RegisterActivityModule: BaseModule {
     @PerRegisterActivity
     @Provides
     fun provideModel(databaseRepositoryImpl: DatabaseRepositoryImpl,
-                     localRepositoryImpl: FileRepositoryImpl) : RegisterActivityModel {
-        return RegisterActivityModel(databaseRepositoryImpl, localRepositoryImpl)
+                     fileRepositoryImpl: FileRepositoryImpl) : RegisterActivityModel {
+        return RegisterActivityModel(databaseRepositoryImpl, fileRepositoryImpl)
     }
 }

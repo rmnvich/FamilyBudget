@@ -1,14 +1,17 @@
 package rmnvich.apps.familybudget.presentation.activity.editprofile.mvp
 
+import android.app.Activity
+import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.Glide
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.app.App
+import rmnvich.apps.familybudget.data.common.Constants
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.databinding.ActivityEditProfileBinding
@@ -52,14 +55,30 @@ class EditProfileActivity : AppCompatActivity(), EditProfileActivityContract.Vie
 
     override fun setUser(user: User) {
         binding.user = user
+        setImageView(user.photoPath)
 
         if (!user.incomeTypeIds.isEmpty()) {
             mAdapter.checkedPosition = user.incomeTypeIds as MutableList<Int>
             mAdapter.notifyDataSetChanged()
         }
+    }
+
+    override fun onClickImageView() {
+        mPresenter.onImageViewClicked()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.REQUEST_CODE_PHOTO && resultCode ==
+                Activity.RESULT_OK && data != null)
+            mPresenter.onActivityResult(data)
+    }
+
+    override fun setImageView(photoPath: String) {
+        binding.user?.photoPath = photoPath
 
         Glide.with(this)
-                .load(File(user.photoPath))
+                .load(File(photoPath))
                 .into(binding.ivPhoto)
         binding.invalidateAll()
     }

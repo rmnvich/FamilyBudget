@@ -6,6 +6,7 @@ import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl
+import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl
 import rmnvich.apps.familybudget.domain.di.base.BaseModule
 import rmnvich.apps.familybudget.presentation.activity.editprofile.mvp.EditProfileActivityModel
 import rmnvich.apps.familybudget.presentation.activity.editprofile.mvp.EditProfileActivityPresenter
@@ -29,8 +30,9 @@ class EditProfileActivityModule(private val context: Context) : BaseModule {
 
     @PerEditProfileActivity
     @Provides
-    fun provideModel(databaseRepository: DatabaseRepositoryImpl): EditProfileActivityModel {
-        return EditProfileActivityModel(databaseRepository)
+    fun provideModel(databaseRepository: DatabaseRepositoryImpl,
+                     fileRepository: FileRepositoryImpl): EditProfileActivityModel {
+        return EditProfileActivityModel(databaseRepository, fileRepository)
     }
 
     @PerEditProfileActivity

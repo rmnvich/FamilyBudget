@@ -28,11 +28,11 @@ interface RegisterActivityContract {
 
         fun onImageViewClicked()
 
-        fun onRegisterClicked(user: User)
-
         fun onActivityResult(data: Intent?)
 
         fun requestPermissions()
+
+        fun onRegisterClicked(user: User)
 
         fun isDataCorrect(user: User): Boolean
     }

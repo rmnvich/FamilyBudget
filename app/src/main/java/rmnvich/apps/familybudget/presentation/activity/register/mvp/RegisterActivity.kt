@@ -65,9 +65,7 @@ class RegisterActivity : AppCompatActivity(), RegisterActivityContract.View {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_PHOTO && resultCode ==
                 Activity.RESULT_OK && data != null
-        ) {
-            mPresenter.onActivityResult(data)
-        }
+        ) mPresenter.onActivityResult(data)
     }
 
     override fun onClickRegister() {

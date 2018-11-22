@@ -5,6 +5,7 @@ import android.os.Handler
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
+import rmnvich.apps.familybudget.data.common.Constants.REQUEST_CODE_PHOTO
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity
 import rmnvich.apps.familybudget.domain.mvp.PresenterBase
@@ -70,9 +71,9 @@ class DashboardActivityPresenter(private val model: DashboardActivityModel,
 
     override fun onEditProfileClicked() {
         Handler().postDelayed({
-            (view as DashboardActivity).startActivity(Intent((view as DashboardActivity),
-                    EditProfileActivity::class.java)
-                    .putExtra(EXTRA_USER_ID, userId))
+            (view as DashboardActivity).startActivityForResult(Intent((view as DashboardActivity),
+                    EditProfileActivity::class.java).putExtra(EXTRA_USER_ID, userId),
+                    REQUEST_CODE_PHOTO)
         }, 250)
     }
 

@@ -1,12 +1,12 @@
 package rmnvich.apps.familybudget.presentation.activity.dashboard.mvp
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -17,11 +17,11 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.app_bar_main.view.*
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.app.App
+import rmnvich.apps.familybudget.data.common.Constants
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.databinding.ActivityDashboardBinding
-import rmnvich.apps.familybudget.databinding.FragmentPlannedExpensesBinding
 import rmnvich.apps.familybudget.databinding.NavHeaderDashboardBinding
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityModule
 import rmnvich.apps.familybudget.presentation.dialog.InitBalanceDialog
@@ -85,15 +85,27 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         mPresenter.viewIsReady()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.REQUEST_CODE_PHOTO) {
+            mPresenter.getUserById(intent.extras.getInt(EXTRA_USER_ID))
+        }
+    }
+
     override fun setUser(user: User) {
         navHeaderBinding.user = user
 
         if (!user.photoPath.isEmpty()) {
-            Glide.with(this)
-                    .load(File(user.photoPath))
-                    .into(navHeaderBinding.imageView)
-            navHeaderBinding.invalidateAll()
+            setImageView(user.photoPath)
         }
+        navHeaderBinding.invalidateAll()
+    }
+
+    override fun setImageView(photoPath: String) {
+        Glide.with(this)
+                .load(File(photoPath))
+                .into(navHeaderBinding.imageView)
+        navHeaderBinding.invalidateAll()
     }
 
     override fun setBalance(balance: Balance) {

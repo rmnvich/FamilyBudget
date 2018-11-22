@@ -18,6 +18,8 @@ interface DashboardActivityContract {
 
         fun setBalance(balance: Balance)
 
+        fun setImageView(photoPath: String)
+
         fun updateBalance()
 
         fun showInitialBalanceDialog()
