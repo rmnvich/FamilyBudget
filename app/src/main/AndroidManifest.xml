@@ -43,7 +43,11 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".presentation.activity.editprofile.mvp.EditProfileActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".presentation.activity.make.income.mvp.MakeIncomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
-
 </manifest>

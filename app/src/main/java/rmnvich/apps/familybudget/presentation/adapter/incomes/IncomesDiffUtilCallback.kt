@@ -28,6 +28,6 @@ class IncomesDiffUtilCallback(private val oldList: List<Income>,
                 oldIncome.userName == newIncome.userName &&
                 oldIncome.timestamp == newIncome.timestamp &&
                 oldIncome.comment == newIncome.comment &&
-                oldIncome.incomeTypeId == newIncome.incomeTypeId
+                oldIncome.incomeType == newIncome.incomeType
     }
 }

@@ -36,6 +36,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
     override fun getUserByNameAndLastName(name: String, lastname: String): Single<User> {
         return userDao.getUserByName(name, lastname)
                 .subscribeOn(Schedulers.io())
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 

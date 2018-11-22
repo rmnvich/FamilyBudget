@@ -34,14 +34,7 @@ class IncomesAdapter : RecyclerView.Adapter<IncomesAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val income = mIncomesList[position]
-        holder.bind(income)
-
-        val incomeTypes = holder.binding.root.context
-                .resources.getStringArray(R.array.income_types)
-        holder.binding.tvIncomeType.text =
-                incomeTypes[income.incomeTypeId]
-
+        holder.bind(mIncomesList[position])
         setFadeAnimation(holder.itemView)
     }
 

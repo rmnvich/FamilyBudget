@@ -16,6 +16,7 @@ class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
 
     override fun viewIsReady() {
         if (mExpenseId != -1) {
+            view?.showProgress()
             val disposable = model.getExpenseById(mExpenseId)
                     .subscribe({
                         view?.hideProgress()

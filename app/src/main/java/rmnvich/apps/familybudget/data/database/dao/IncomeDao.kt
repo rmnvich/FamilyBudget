@@ -8,7 +8,7 @@ import rmnvich.apps.familybudget.data.entity.Income
 @Dao
 interface IncomeDao {
 
-    @Query("SELECT * FROM income ORDER BY timestamp")
+    @Query("SELECT * FROM income ORDER BY timestamp DESC")
     fun getAllIncomes(): Flowable<List<Income>>
 
     @Query("SELECT * FROM income WHERE incomeId = :id")

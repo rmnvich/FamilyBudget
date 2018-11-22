@@ -25,6 +25,8 @@ import rmnvich.apps.familybudget.presentation.activity.make.category.dagger.Make
 import rmnvich.apps.familybudget.presentation.activity.make.category.mvp.MakeCategoryActivity;
 import rmnvich.apps.familybudget.presentation.activity.make.expense.dagger.MakeExpenseActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.make.expense.mvp.MakeExpenseActivity;
+import rmnvich.apps.familybudget.presentation.activity.make.income.dagger.MakeIncomeActivityComponent;
+import rmnvich.apps.familybudget.presentation.activity.make.income.mvp.MakeIncomeActivity;
 import rmnvich.apps.familybudget.presentation.activity.register.dagger.RegisterActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity;
 import rmnvich.apps.familybudget.presentation.fragment.actualexpenses.dagger.FragmentActualExpensesComponent;
@@ -46,7 +48,7 @@ import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
         MakeCategoryActivityComponent.class, FragmentCategoriesComponent.class,
         FragmentActualExpensesComponent.class, MakeExpenseActivityComponent.class,
         FragmentPlannedExpensesComponent.class, EditProfileActivityComponent.class,
-        FragmentIncomesComponent.class
+        FragmentIncomesComponent.class, MakeIncomeActivityComponent.class
 })
 public class AppModule {
 
@@ -158,6 +160,13 @@ public class AppModule {
     @IntoMap
     @ClassKey(MakeExpenseActivity.class)
     BaseComponentBuilder provideMakeExpenseActivity(MakeExpenseActivityComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(MakeIncomeActivity.class)
+    BaseComponentBuilder provideMakeIncomeActivity(MakeIncomeActivityComponent.Builder builder) {
         return builder;
     }
 
