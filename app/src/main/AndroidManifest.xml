@@ -41,7 +41,9 @@
             android:name=".presentation.activity.make.expense.mvp.MakeExpenseActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".presentation.activity.editprofile.mvp.EditProfileActivity"></activity>
+        <activity
+            android:name=".presentation.activity.editprofile.mvp.EditProfileActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

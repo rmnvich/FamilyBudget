@@ -93,6 +93,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:onClick="@{(view) -> handler.onClickApply()}"
+            app:layout_behavior="rmnvich.apps.familybudget.presentation.custom.FabBehaviour"
             app:srcCompat="@drawable/ic_apply_inverted" />
 
     </android.support.design.widget.CoordinatorLayout>

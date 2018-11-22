@@ -77,5 +77,6 @@
         <item>Translation</item>
         <item>Debt</item>
         <item>Gift</item>
+        <item>Additional income</item>
     </string-array>
 </resources>

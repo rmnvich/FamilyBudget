@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.Glide
 import rmnvich.apps.familybudget.R
@@ -11,6 +12,8 @@ import rmnvich.apps.familybudget.app.App
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
 import rmnvich.apps.familybudget.data.entity.User
 import rmnvich.apps.familybudget.databinding.ActivityEditProfileBinding
+import rmnvich.apps.familybudget.presentation.activity.editprofile.dagger.EditProfileActivityModule
+import rmnvich.apps.familybudget.presentation.adapter.incometypes.IncomeTypesAdapter
 import java.io.File
 import javax.inject.Inject
 
@@ -21,18 +24,26 @@ class EditProfileActivity : AppCompatActivity(), EditProfileActivityContract.Vie
     @Inject
     lateinit var mPresenter: EditProfileActivityPresenter
 
+    @Inject
+    lateinit var mAdapter: IncomeTypesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_edit_profile)
         binding.handler = this
 
-        App.getApp(this).componentsHolder
-                .getComponent(javaClass).inject(this)
+        App.getApp(this).componentsHolder.getComponent(javaClass,
+                EditProfileActivityModule(this)).inject(this)
     }
 
     @Inject
     fun init() {
+        binding.recyclerIncomeTypes.layoutManager = LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false)
+        binding.recyclerIncomeTypes.adapter = mAdapter
+        mAdapter.setOnClickListener {}
+
         mPresenter.attachView(this)
         mPresenter.setUserId(intent.getIntExtra(
                 EXTRA_USER_ID, -1))
@@ -42,6 +53,11 @@ class EditProfileActivity : AppCompatActivity(), EditProfileActivityContract.Vie
     override fun setUser(user: User) {
         binding.user = user
 
+        if (!user.incomeTypeIds.isEmpty()) {
+            mAdapter.checkedPosition = user.incomeTypeIds as MutableList<Int>
+            mAdapter.notifyDataSetChanged()
+        }
+
         Glide.with(this)
                 .load(File(user.photoPath))
                 .into(binding.ivPhoto)
@@ -49,6 +65,7 @@ class EditProfileActivity : AppCompatActivity(), EditProfileActivityContract.Vie
     }
 
     override fun onClickApply() {
+        binding.user?.incomeTypeIds = mAdapter.checkedPosition
         mPresenter.onApplyClicked(binding.user!!)
     }
 

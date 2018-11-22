@@ -21,7 +21,6 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/switch_enabled"
             android:alpha="0.8"
-            android:text="Salary"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
