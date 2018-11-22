@@ -44,6 +44,7 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
         return Completable.fromAction {
             userDao.insertUser(user)
         }.subscribeOn(Schedulers.io())
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
     }
 

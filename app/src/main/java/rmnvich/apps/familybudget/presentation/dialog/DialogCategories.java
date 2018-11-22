@@ -2,6 +2,7 @@ package rmnvich.apps.familybudget.presentation.dialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import rmnvich.apps.familybudget.R;
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl;
 import rmnvich.apps.familybudget.presentation.adapter.categories.CategoriesAdapter;
 import rmnvich.apps.familybudget.presentation.custom.ExpandableBottomSheetDialog;
+
+import static rmnvich.apps.familybudget.data.common.Constants.LOAD_DATA_DELAY;
 
 public class DialogCategories extends ExpandableBottomSheetDialog {
 
@@ -72,7 +75,9 @@ public class DialogCategories extends ExpandableBottomSheetDialog {
             mCallback = callback;
         this.show();
 
-        mCompositeDisposable.add(getAllCategories());
+        new Handler().postDelayed(
+                () -> mCompositeDisposable.add(getAllCategories()),
+                LOAD_DATA_DELAY);
     }
 
     public interface DialogCategoriesCallback {

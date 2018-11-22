@@ -14,7 +14,6 @@ import rmnvich.apps.familybudget.app.App
 import rmnvich.apps.familybudget.data.common.Constants
 import rmnvich.apps.familybudget.data.entity.Income
 import rmnvich.apps.familybudget.databinding.ActivityMakeIncomeBinding
-import rmnvich.apps.familybudget.presentation.activity.make.expense.dagger.MakeExpenseActivityModule
 import javax.inject.Inject
 
 class MakeIncomeActivity : AppCompatActivity(), MakeIncomeActivityContract.View {
@@ -49,8 +48,6 @@ class MakeIncomeActivity : AppCompatActivity(), MakeIncomeActivityContract.View 
     override fun setIncome(income: Income) {
         binding.income = income
         binding.invalidateAll()
-
-        mPresenter.getUserById()
     }
 
     override fun setSpinnerAdapter(incomeTypes: List<String>, selectedItemPosition: Int) {
@@ -58,7 +55,12 @@ class MakeIncomeActivity : AppCompatActivity(), MakeIncomeActivityContract.View 
                 android.R.layout.simple_spinner_item, incomeTypes)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerIncomeType.adapter = adapter
-        binding.spinnerIncomeType.setSelection(selectedItemPosition, true)
+
+        try {
+            binding.spinnerIncomeType.setSelection(selectedItemPosition, true)
+        } catch (e: IndexOutOfBoundsException) {
+            binding.spinnerIncomeType.setSelection(0)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -89,7 +91,11 @@ class MakeIncomeActivity : AppCompatActivity(), MakeIncomeActivityContract.View 
     }
 
     override fun onClickApply() {
-        binding.income?.incomeType = binding.spinnerIncomeType.selectedItem.toString()
+        try {
+            binding.income?.incomeType = binding.spinnerIncomeType.selectedItem.toString()
+        } catch (ignored: NullPointerException) {
+            binding.income?.incomeType = ""
+        }
         mPresenter.onFabClicked(binding.income!!)
     }
 

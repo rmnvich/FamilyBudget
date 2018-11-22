@@ -12,7 +12,7 @@ class MakeIncomeActivityPresenter(private val model: MakeIncomeActivityModel,
 
     private var mIncomeId = -1
     private var mIncomeValue = "0"
-    private var mIncomeType = "";
+    private var mIncomeType = ""
 
     override fun viewIsReady() {
         getIncomeById()
@@ -49,7 +49,7 @@ class MakeIncomeActivityPresenter(private val model: MakeIncomeActivityModel,
                     }
 
                     var selectedIncomeType = 0
-                    for ((index, value) in allIncomeTypes.withIndex()) {
+                    for ((index, value) in userIncomeTypes.withIndex()) {
                         if (value == mIncomeType) {
                             selectedIncomeType = index
                             break
@@ -108,6 +108,7 @@ class MakeIncomeActivityPresenter(private val model: MakeIncomeActivityModel,
 
     override fun isDataCorrect(income: Income): Boolean {
         return !(income.value.isEmpty() ||
-                income.comment.isEmpty())
+                income.comment.isEmpty() ||
+                income.incomeType.isEmpty())
     }
 }
