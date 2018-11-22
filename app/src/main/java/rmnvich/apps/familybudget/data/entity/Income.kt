@@ -9,5 +9,6 @@ data class Income(@PrimaryKey(autoGenerate = true)
                   var value: String,
                   var userName: String,
                   var userRelationshipType: String,
-                  var incomeType: Int,
+                  var incomeTypeId: Int,
+                  var comment: String,
                   var timestamp: Long)
