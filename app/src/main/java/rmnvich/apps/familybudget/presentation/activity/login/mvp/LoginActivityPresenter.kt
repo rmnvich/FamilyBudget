@@ -7,7 +7,7 @@ import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity
 import rmnvich.apps.familybudget.presentation.activity.register.mvp.RegisterActivity
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 
 class LoginActivityPresenter(private val model: LoginActivityModel,
                              private val compositeDisposable: CompositeDisposable) :

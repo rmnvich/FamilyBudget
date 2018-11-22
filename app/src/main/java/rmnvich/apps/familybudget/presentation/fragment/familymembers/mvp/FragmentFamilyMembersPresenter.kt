@@ -2,7 +2,7 @@ package rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp
 
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 
 class FragmentFamilyMembersPresenter(private val model: FragmentFamilyMembersModel,
                                      private val compositeDisposable: CompositeDisposable) :

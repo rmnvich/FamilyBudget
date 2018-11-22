@@ -4,7 +4,7 @@
 
     <data>
 
-        <import type="rmnvich.apps.familybudget.domain.helper.DateHelper" />
+        <import type="rmnvich.apps.familybudget.data.common.helper.DateHelper" />
 
         <variable
             name="user"

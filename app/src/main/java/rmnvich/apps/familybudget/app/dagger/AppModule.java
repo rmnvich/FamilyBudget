@@ -17,6 +17,8 @@ import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.preferences.PreferencesRepositoryImpl;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity;
+import rmnvich.apps.familybudget.presentation.activity.editprofile.dagger.EditProfileActivityComponent;
+import rmnvich.apps.familybudget.presentation.activity.editprofile.mvp.EditProfileActivity;
 import rmnvich.apps.familybudget.presentation.activity.login.dagger.LoginActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity;
 import rmnvich.apps.familybudget.presentation.activity.make.category.dagger.MakeCategoryActivityComponent;
@@ -36,11 +38,13 @@ import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp.Fragm
 
 import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
 
-@Module(subcomponents = {DashboardActivityComponent.class, LoginActivityComponent.class,
+@Module(subcomponents = {
+        DashboardActivityComponent.class, LoginActivityComponent.class,
         RegisterActivityComponent.class, FragmentFamilyMembersComponent.class,
         MakeCategoryActivityComponent.class, FragmentCategoriesComponent.class,
         FragmentActualExpensesComponent.class, MakeExpenseActivityComponent.class,
-        FragmentPlannedExpensesComponent.class})
+        FragmentPlannedExpensesComponent.class, EditProfileActivityComponent.class
+})
 public class AppModule {
 
     private final Context mContext;
@@ -144,6 +148,13 @@ public class AppModule {
     @IntoMap
     @ClassKey(MakeExpenseActivity.class)
     BaseComponentBuilder provideMakeExpenseActivity(MakeExpenseActivityComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(EditProfileActivity.class)
+    BaseComponentBuilder provideEditProfileActivity(EditProfileActivityComponent.Builder builder) {
         return builder;
     }
 }

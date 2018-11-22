@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants.REQUEST_CODE_PHOTO
 import rmnvich.apps.familybudget.data.entity.User
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 import java.io.IOException
 
 class RegisterActivityPresenter(private val model: RegisterActivityModel,

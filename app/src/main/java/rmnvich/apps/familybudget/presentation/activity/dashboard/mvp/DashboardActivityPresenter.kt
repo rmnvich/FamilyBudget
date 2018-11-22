@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Handler
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
+import rmnvich.apps.familybudget.data.common.Constants.EXTRA_USER_ID
 import rmnvich.apps.familybudget.data.entity.Balance
 import rmnvich.apps.familybudget.presentation.activity.login.mvp.LoginActivity
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
+import rmnvich.apps.familybudget.presentation.activity.editprofile.mvp.EditProfileActivity
 
 
 class DashboardActivityPresenter(private val model: DashboardActivityModel,
@@ -67,7 +69,11 @@ class DashboardActivityPresenter(private val model: DashboardActivityModel,
     }
 
     override fun onEditProfileClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Handler().postDelayed({
+            (view as DashboardActivity).startActivity(Intent((view as DashboardActivity),
+                    EditProfileActivity::class.java)
+                    .putExtra(EXTRA_USER_ID, userId))
+        }, 250)
     }
 
     override fun onLogoutClicked() {

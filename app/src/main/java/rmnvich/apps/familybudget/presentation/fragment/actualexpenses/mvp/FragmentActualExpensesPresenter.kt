@@ -4,7 +4,7 @@ import android.content.Intent
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 import rmnvich.apps.familybudget.presentation.activity.make.expense.mvp.MakeExpenseActivity
 import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp.FragmentPlannedExpenses
 

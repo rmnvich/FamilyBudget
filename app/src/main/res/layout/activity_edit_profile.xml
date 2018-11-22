@@ -1,71 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:fitsSystemWindows="true"
-    android:focusableInTouchMode="true">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <data>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="enterAlwaysCollapsed"
-            app:navigationIcon="@drawable/ic_action_back_inverted"
-            app:title="@string/title_edit_profile"
-            app:titleTextColor="@android:color/white" />
+        <import type="android.view.View" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/activity_edit_profile_photo_size"
-            android:layout_height="@dimen/activity_edit_profile_photo_size"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/mother"
-            android:layout_marginTop="@dimen/activity_edit_profile_appbar_margin_bottom"
-            app:civ_border_color="@android:color/white"
-            app:civ_border_width="@dimen/activity_edit_profile_photo_border_width" />
+        <import type="android.text.TextUtils" />
 
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Marry Joe"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+        <variable
+            name="handler"
+            type="rmnvich.apps.familybudget.presentation.activity.editprofile.mvp.EditProfileActivity" />
 
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_edit_profile_appbar_margin_bottom"
-            android:text="mother"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="italic" />
-    </android.support.design.widget.AppBarLayout>
+        <variable
+            name="user"
+            type="rmnvich.apps.familybudget.data.entity.User" />
+    </data>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_income_types"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_income_type" />
+        android:background="@color/colorBackground"
+        android:fitsSystemWindows="true"
+        android:focusableInTouchMode="true">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_save_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_apply_inverted" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</android.support.design.widget.CoordinatorLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:layout_scrollFlags="enterAlwaysCollapsed"
+                app:navigationIcon="@drawable/ic_action_back_inverted"
+                app:title="@string/title_edit_profile"
+                app:titleTextColor="@android:color/white" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_photo"
+                android:layout_width="@dimen/activity_edit_profile_photo_size"
+                android:layout_height="@dimen/activity_edit_profile_photo_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_edit_profile_appbar_margin_bottom"
+                android:visibility="@{TextUtils.isEmpty(user.photoPath) ? View.GONE : View.VISIBLE}"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="@dimen/activity_edit_profile_photo_border_width" />
+
+            <TextView
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text='@{user.name + " " + user.lastname}'
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_edit_profile_appbar_margin_bottom"
+                android:text="@{user.relationship}"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_income_types"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_income_type" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorAccent"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_save_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{(view) -> handler.onClickApply()}"
+            app:srcCompat="@drawable/ic_apply_inverted" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

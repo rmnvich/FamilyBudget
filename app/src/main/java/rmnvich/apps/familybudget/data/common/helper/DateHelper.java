@@ -1,4 +1,4 @@
-package rmnvich.apps.familybudget.domain.helper;
+package rmnvich.apps.familybudget.data.common.helper;
 
 import android.annotation.SuppressLint;
 

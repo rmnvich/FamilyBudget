@@ -5,9 +5,9 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import rmnvich.apps.familybudget.data.entity.User
-import rmnvich.apps.familybudget.domain.interactor.mvp.MvpModel
-import rmnvich.apps.familybudget.domain.interactor.mvp.MvpPresenter
-import rmnvich.apps.familybudget.domain.interactor.mvp.MvpView
+import rmnvich.apps.familybudget.domain.mvp.MvpModel
+import rmnvich.apps.familybudget.domain.mvp.MvpPresenter
+import rmnvich.apps.familybudget.domain.mvp.MvpView
 
 interface RegisterActivityContract {
 

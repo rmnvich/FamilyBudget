@@ -11,6 +11,7 @@ public class Constants {
     public static String EXTRA_EXPENSE_ID = "expense_id";
 
     public static long LOAD_DATA_DELAY = 250;
+
     public static int DEFAULT_COLOR = -13538911;
 
     public static int REQUEST_CODE_PHOTO = 0;

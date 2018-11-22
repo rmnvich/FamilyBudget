@@ -5,7 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants.DEFAULT_COLOR
 import rmnvich.apps.familybudget.data.entity.Category
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 
 class MakeCategoryActivityPresenter(private val model: MakeCategoryActivityModel,
                                     private val compositeDisposable: CompositeDisposable) :

@@ -4,10 +4,8 @@ import android.os.Handler
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.entity.Expense
-import rmnvich.apps.familybudget.domain.helper.DateHelper
-import rmnvich.apps.familybudget.domain.interactor.mvp.PresenterBase
-import rmnvich.apps.familybudget.presentation.activity.make.category.mvp.MakeCategoryActivity
-import rmnvich.apps.familybudget.presentation.fragment.actualexpenses.mvp.FragmentActualExpenses
+import rmnvich.apps.familybudget.data.common.helper.DateHelper
+import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 
 class MakeExpenseActivityPresenter(private val model: MakeExpenseActivityModel,
                                    private val compositeDisposable: CompositeDisposable) :

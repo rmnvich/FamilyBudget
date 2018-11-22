@@ -2,9 +2,9 @@ package rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp
 
 import io.reactivex.Flowable
 import rmnvich.apps.familybudget.data.entity.User
-import rmnvich.apps.familybudget.domain.interactor.mvp.MvpModel
-import rmnvich.apps.familybudget.domain.interactor.mvp.MvpPresenter
-import rmnvich.apps.familybudget.domain.interactor.mvp.MvpView
+import rmnvich.apps.familybudget.domain.mvp.MvpModel
+import rmnvich.apps.familybudget.domain.mvp.MvpPresenter
+import rmnvich.apps.familybudget.domain.mvp.MvpView
 
 interface FragmentFamilyMembersContract {
 
