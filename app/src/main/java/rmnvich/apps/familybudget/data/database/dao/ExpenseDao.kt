@@ -11,6 +11,9 @@ interface ExpenseDao {
     @Query("SELECT * FROM expense WHERE isPlannedExpense = :isPlanned ORDER BY timestamp DESC")
     fun getAllExpenses(isPlanned: Boolean): Flowable<List<Expense>>
 
+    @Query("SELECT * FROM expense WHERE isPlannedExpense = :isPlanned AND timestamp >= :timeRangeStart AND timestamp <= :timeRangeEnd ORDER BY timestamp DESC")
+    fun getSortedExpenses(isPlanned: Boolean, timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>>
+
     @Query("SELECT * FROM expense WHERE expenseId = :id")
     fun getExpenseById(id: Int): Single<Expense>
 

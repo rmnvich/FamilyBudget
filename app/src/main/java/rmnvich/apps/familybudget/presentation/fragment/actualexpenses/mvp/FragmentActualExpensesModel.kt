@@ -13,6 +13,10 @@ class FragmentActualExpensesModel(private val databaseRepository: IDatabaseRepos
         return databaseRepository.getBalance()
     }
 
+    override fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>> {
+        return databaseRepository.getSortedActualExpenses(timeRangeStart, timeRangeEnd)
+    }
+
     override fun getAllActualExpenses(): Flowable<List<Expense>> {
         return databaseRepository.getAllActualExpenses()
     }

@@ -14,6 +14,8 @@ interface FragmentActualExpensesContract {
 
         fun updateAdapter(data: List<Expense>)
 
+        fun showDatePickerDialog()
+
         fun onClickFab()
     }
 
@@ -21,12 +23,18 @@ interface FragmentActualExpensesContract {
 
         fun onFabClicked()
 
+        fun onFilterClicked()
+
+        fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long)
+
         fun onExpenseClicked(id: Int)
     }
 
     interface Model : MvpModel {
 
         fun getBalance(): Single<Balance>
+
+        fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>>
 
         fun getAllActualExpenses(): Flowable<List<Expense>>
     }

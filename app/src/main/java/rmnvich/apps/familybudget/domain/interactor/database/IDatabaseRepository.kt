@@ -34,6 +34,10 @@ interface IDatabaseRepository {
 
     fun getAllPlannedExpenses(): Flowable<List<Expense>>
 
+    fun getSortedActualExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>>
+
+    fun getSortedPlannedExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>>
+
     fun getExpenseById(id: Int): Single<Expense>
 
     fun insertExpense(expense: Expense): Completable
@@ -42,6 +46,8 @@ interface IDatabaseRepository {
 
 
     fun getAllIncomes(): Flowable<List<Income>>
+
+    fun getSortedIncomes(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Income>>
 
     fun getIncomeById(id: Int): Single<Income>
 

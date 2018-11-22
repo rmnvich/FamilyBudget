@@ -67,6 +67,7 @@
     <string name="confirm_dialog_negative">No</string>
 
     <string name="negative_balance">You can not add expense</string>
+    <string name="filter">Filter</string>
 
     <string-array name="income_types">
         <item>Salary</item>

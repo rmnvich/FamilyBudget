@@ -95,8 +95,22 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
+    override fun getSortedActualExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>> {
+        return expenseDao.getSortedExpenses(false, timeRangeStart, timeRangeEnd)
+                .subscribeOn(Schedulers.io())
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun getAllPlannedExpenses(): Flowable<List<Expense>> {
         return expenseDao.getAllExpenses(true)
+                .subscribeOn(Schedulers.io())
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getSortedPlannedExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>> {
+        return expenseDao.getSortedExpenses(true, timeRangeStart, timeRangeEnd)
                 .subscribeOn(Schedulers.io())
                 .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -124,6 +138,13 @@ class DatabaseRepositoryImpl(appDatabase: AppDatabase) :
 
     override fun getAllIncomes(): Flowable<List<Income>> {
         return incomeDao.getAllIncomes()
+                .subscribeOn(Schedulers.io())
+                .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getSortedIncomes(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Income>> {
+        return incomeDao.getSortedIncomes(timeRangeStart, timeRangeEnd)
                 .subscribeOn(Schedulers.io())
                 .delay(LOAD_DATA_DELAY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
