@@ -25,13 +25,11 @@ class FragmentPlannedExpensesPresenter(private val model: FragmentPlannedExpense
     }
 
     override fun getAllExpenses() {
-        if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!) {
+        if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!)
             sortedExpensesDisposable?.dispose()
-        }
 
-        if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!) {
+        if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!)
             allExpensesDisposable?.dispose()
-        }
 
         view?.showProgress()
         allExpensesDisposable = model.getAllPlannedExpenses()
@@ -45,13 +43,11 @@ class FragmentPlannedExpensesPresenter(private val model: FragmentPlannedExpense
     }
 
     override fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long) {
-        if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!) {
+        if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!)
             allExpensesDisposable?.dispose()
-        }
 
-        if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!) {
+        if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!)
             sortedExpensesDisposable?.dispose()
-        }
 
         view?.showProgress()
         sortedExpensesDisposable = model.getSortedExpenses(timeRangeStart, timeRangeEnd)

@@ -67,13 +67,11 @@ class FragmentActualExpensesPresenter(private val model: FragmentActualExpensesM
     }
 
     override fun getAllExpenses() {
-        if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!) {
+        if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!)
             sortedExpensesDisposable?.dispose()
-        }
 
-        if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!) {
+        if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!)
             allExpensesDisposable?.dispose()
-        }
 
         view?.showProgress()
         allExpensesDisposable = model.getAllActualExpenses()
@@ -90,7 +88,6 @@ class FragmentActualExpensesPresenter(private val model: FragmentActualExpensesM
         if (allExpensesDisposable != null && !allExpensesDisposable?.isDisposed!!) {
             allExpensesDisposable?.dispose()
         }
-
         if (sortedExpensesDisposable != null && !sortedExpensesDisposable?.isDisposed!!) {
             sortedExpensesDisposable?.dispose()
         }
