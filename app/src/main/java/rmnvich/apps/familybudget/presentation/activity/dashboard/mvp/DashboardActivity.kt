@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -30,6 +31,7 @@ import rmnvich.apps.familybudget.presentation.fragment.categories.mvp.FragmentCa
 import rmnvich.apps.familybudget.presentation.fragment.familymembers.mvp.FragmentFamilyMembers
 import rmnvich.apps.familybudget.presentation.fragment.incomes.mvp.FragmentIncomes
 import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp.FragmentPlannedExpenses
+import rmnvich.apps.familybudget.presentation.fragment.totalbalance.mvp.FragmentTransactions
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Provider
@@ -130,8 +132,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.nav_planned_expenses -> mActiveFragment = FragmentPlannedExpenses.newInstance()
             R.id.nav_actual_expenses -> mActiveFragment = FragmentActualExpenses.newInstance()
             R.id.nav_incomes -> mActiveFragment = FragmentIncomes.newInstance()
-            R.id.nav_total_balance -> {
-            }
+            R.id.nav_total_balance -> mActiveFragment = FragmentTransactions.newInstance()
             R.id.nav_categories -> mActiveFragment = FragmentCategories.newInstance()
             R.id.nav_edit_profile -> mPresenter.onEditProfileClicked()
             R.id.nav_logout -> mPresenter.onLogoutClicked()

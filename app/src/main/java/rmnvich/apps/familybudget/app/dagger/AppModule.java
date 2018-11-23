@@ -1,6 +1,5 @@
 package rmnvich.apps.familybudget.app.dagger;
 
-
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,10 +10,10 @@ import dagger.multibindings.ClassKey;
 import dagger.multibindings.IntoMap;
 import rmnvich.apps.familybudget.data.common.Constants;
 import rmnvich.apps.familybudget.data.database.AppDatabase;
-import rmnvich.apps.familybudget.domain.di.base.BaseComponentBuilder;
 import rmnvich.apps.familybudget.data.repository.database.DatabaseRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.local.FileRepositoryImpl;
 import rmnvich.apps.familybudget.data.repository.preferences.PreferencesRepositoryImpl;
+import rmnvich.apps.familybudget.domain.di.base.BaseComponentBuilder;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.dagger.DashboardActivityComponent;
 import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardActivity;
 import rmnvich.apps.familybudget.presentation.activity.editprofile.dagger.EditProfileActivityComponent;
@@ -39,6 +38,8 @@ import rmnvich.apps.familybudget.presentation.fragment.incomes.dagger.FragmentIn
 import rmnvich.apps.familybudget.presentation.fragment.incomes.mvp.FragmentIncomes;
 import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.dagger.FragmentPlannedExpensesComponent;
 import rmnvich.apps.familybudget.presentation.fragment.plannedexpenses.mvp.FragmentPlannedExpenses;
+import rmnvich.apps.familybudget.presentation.fragment.totalbalance.dagger.FragmentTransactionsComponent;
+import rmnvich.apps.familybudget.presentation.fragment.totalbalance.mvp.FragmentTransactions;
 
 import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
 
@@ -48,7 +49,8 @@ import static rmnvich.apps.familybudget.data.common.Constants.DATABASE_NAME;
         MakeCategoryActivityComponent.class, FragmentCategoriesComponent.class,
         FragmentActualExpensesComponent.class, MakeExpenseActivityComponent.class,
         FragmentPlannedExpensesComponent.class, EditProfileActivityComponent.class,
-        FragmentIncomesComponent.class, MakeIncomeActivityComponent.class
+        FragmentIncomesComponent.class, MakeIncomeActivityComponent.class,
+        FragmentTransactionsComponent.class
 })
 public class AppModule {
 
@@ -146,6 +148,13 @@ public class AppModule {
     @IntoMap
     @ClassKey(FragmentIncomes.class)
     BaseComponentBuilder provideFragmentIncomes(FragmentIncomesComponent.Builder builder) {
+        return builder;
+    }
+
+    @Provides
+    @IntoMap
+    @ClassKey(FragmentTransactions.class)
+    BaseComponentBuilder provideFragmentTransactions(FragmentTransactionsComponent.Builder builder) {
         return builder;
     }
 
