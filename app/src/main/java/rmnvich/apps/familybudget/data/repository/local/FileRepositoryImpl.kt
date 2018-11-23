@@ -11,9 +11,8 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.ss.usermodel.Cell
-import org.apache.poi.ss.usermodel.HorizontalAlignment
-import org.apache.poi.ss.usermodel.Sheet
+import org.apache.poi.ss.usermodel.*
+import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.helper.DateHelper
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.data.entity.Income
@@ -114,7 +113,7 @@ class FileRepositoryImpl(private val context: Context) :
         }
     }
 
-    fun saveDataToExcelFile(data: List<Any>) {
+    override fun saveDataToExcelFile(data: List<Any>): File? {
         val incomes = LinkedList<Income>()
         val expenses = LinkedList<Expense>()
         var totalIncomes = "0"
@@ -126,14 +125,14 @@ class FileRepositoryImpl(private val context: Context) :
             else expenses.add(obj as Expense)
         }
 
-        val wb = HSSFWorkbook()
-        val defaultFont = wb.createFont()
+        val workbook = HSSFWorkbook()
+        val defaultFont = workbook.createFont()
         defaultFont.bold = true
 
-        val cellStyleBoldLeft = wb.createCellStyle()
-        val cellStyleLeft = wb.createCellStyle()
-        val cellStyleBoldRight = wb.createCellStyle()
-        val cellStyleRight = wb.createCellStyle()
+        val cellStyleBoldLeft = workbook.createCellStyle()
+        val cellStyleLeft = workbook.createCellStyle()
+        val cellStyleBoldRight = workbook.createCellStyle()
+        val cellStyleRight = workbook.createCellStyle()
 
         cellStyleBoldLeft.setFont(defaultFont)
         cellStyleBoldLeft.setAlignment(HorizontalAlignment.LEFT)
@@ -145,43 +144,32 @@ class FileRepositoryImpl(private val context: Context) :
 
         var cell: Cell
         val sheet: Sheet
-        sheet = wb.createSheet("Family budget")
-        val row = sheet.createRow(0)
-        cell = row.createCell(0)
-        cell.setCellValue("Статья")
-        cell.setCellStyle(cellStyleBoldLeft)
-        cell = row.createCell(1)
-        cell.setCellValue("Кто")
-        cell.setCellStyle(cellStyleBoldLeft)
-        cell = row.createCell(2)
-        cell.setCellValue("Сумма")
-        cell.setCellStyle(cellStyleBoldLeft)
-        cell = row.createCell(3)
-        cell.setCellValue("Дата")
-        cell.setCellStyle(cellStyleBoldLeft)
+        sheet = workbook.createSheet(context.getString(R.string.excel_table_name))
 
-        val incomeTitleRow = sheet.createRow(1)
-        val incomeTitleCell = incomeTitleRow.createCell(0)
-        incomeTitleCell.setCellValue("Доход")
-        incomeTitleCell.setCellStyle(cellStyleBoldLeft)
+        val titleRow = sheet.createRow(0)
+        createCustomCell(titleRow, 3, context.getString(R.string.excel_fourth_column_title), cellStyleBoldLeft)
+        createCustomCell(titleRow, 2, context.getString(R.string.excel_third_column_title), cellStyleBoldLeft)
+        createCustomCell(titleRow, 1, context.getString(R.string.excel_second_column_title), cellStyleBoldLeft)
+        createCustomCell(titleRow, 0, context.getString(R.string.excel_first_column_title), cellStyleBoldLeft)
+
+        createCustomCell(sheet, 0, context.getString(R.string.excel_income_column_title), 1, cellStyleBoldLeft)
 
         var indexRow = 2
-        var incomeCell: Cell
         for (income in incomes) {
-            val incomeRow = sheet.createRow(indexRow)
+            val row = sheet.createRow(indexRow)
             for (j in 0 until 4) {
-                incomeCell = incomeRow.createCell(j)
+                cell = row.createCell(j)
                 when (j) {
                     0 -> {
-                        incomeCell.setCellValue(income.incomeType)
-                        incomeCell.setCellStyle(cellStyleRight)
+                        cell.setCellValue(income.incomeType)
+                        cell.setCellStyle(cellStyleRight)
                     }
-                    1 -> incomeCell.setCellValue("${income.userName} (${income.userRelationshipType})")
+                    1 -> cell.setCellValue("${income.userName} (${income.userRelationshipType})")
                     2 -> {
-                        incomeCell.setCellValue("${income.value} BYN")
-                        incomeCell.setCellStyle(cellStyleRight)
+                        cell.setCellValue("${income.value} BYN")
+                        cell.setCellStyle(cellStyleRight)
                     }
-                    3 -> incomeCell.setCellValue(DateHelper.getTimeFroExcel(income.timestamp))
+                    3 -> cell.setCellValue(DateHelper.getTimeFroExcel(income.timestamp))
                 }
             }
             totalIncomes = BigDecimal(totalIncomes).add(BigDecimal(income.value))
@@ -189,84 +177,85 @@ class FileRepositoryImpl(private val context: Context) :
             indexRow++
         }
 
-        val expenseTitleRow = sheet.createRow(indexRow)
-        val expenseTitleCell = expenseTitleRow.createCell(0)
-        expenseTitleCell.setCellValue("Расход")
-        expenseTitleCell.setCellStyle(cellStyleBoldLeft)
-
+        createCustomCell(sheet, 0, context.getString(R.string.excel_expense_column_title), indexRow, cellStyleBoldLeft)
         indexRow += 1
-        var expenseCell: Cell
+
         for (expense in expenses) {
-            val expenseRow = sheet.createRow(indexRow)
+            val row = sheet.createRow(indexRow)
             for (j in 0 until 4) {
-                expenseCell = expenseRow.createCell(j)
+                cell = row.createCell(j)
                 when (j) {
                     0 -> {
-                        expenseCell.setCellValue(expense.category?.name)
-                        expenseCell.setCellStyle(cellStyleRight)
+                        cell.setCellValue(expense.category?.name)
+                        cell.setCellStyle(cellStyleRight)
                     }
-                    1 -> expenseCell.setCellValue("${expense.userName} (${expense.userRelationship})")
+                    1 -> cell.setCellValue("${expense.userName} (${expense.userRelationship})")
                     2 -> {
-                        expenseCell.setCellValue("${expense.value} BYN")
-                        expenseCell.setCellStyle(cellStyleRight)
+                        cell.setCellValue("${expense.value} BYN")
+                        cell.setCellStyle(cellStyleRight)
                     }
-                    3 -> expenseCell.setCellValue(DateHelper.getTimeFroExcel(expense.timestamp))
+                    3 -> cell.setCellValue(DateHelper.getTimeFroExcel(expense.timestamp))
                 }
             }
             totalExpenses = BigDecimal(totalExpenses).add(BigDecimal(expense.value))
                     .setScale(2, ROUND_DOWN).toString()
             indexRow++
         }
-
-        val totalRow = sheet.createRow(indexRow)
-        val totalCell = totalRow.createCell(0)
-        totalCell.setCellStyle(cellStyleBoldLeft)
-        totalCell.setCellValue("Итого")
-        indexRow += 1
-
-        val totalIncomesRow = sheet.createRow(indexRow)
-        val totalIncomesTitleCell = totalIncomesRow.createCell(0)
-        val totalIncomesCell = totalIncomesRow.createCell(2)
-        totalIncomesTitleCell.setCellStyle(cellStyleBoldRight)
-        totalIncomesTitleCell.setCellValue("Доход")
-        totalIncomesCell.setCellValue("$totalIncomes BYN")
-        totalIncomesCell.setCellStyle(cellStyleBoldRight)
-        indexRow += 1
-
-        val totalExpensesRow = sheet.createRow(indexRow)
-        val totalExpensesTitleCell = totalExpensesRow.createCell(0)
-        val totalExpensesCell = totalExpensesRow.createCell(2)
-        totalExpensesTitleCell.setCellStyle(cellStyleBoldRight)
-        totalExpensesTitleCell.setCellValue("Расход")
-        totalExpensesCell.setCellValue("$totalExpenses BYN")
-        totalExpensesCell.setCellStyle(cellStyleBoldRight)
-        indexRow += 1
-
-        val totalBalanceRow = sheet.createRow(indexRow)
-        val totalBalanceTitleCell = totalBalanceRow.createCell(0)
-        val totalBalanceCell = totalBalanceRow.createCell(2)
-        totalBalanceTitleCell.setCellStyle(cellStyleBoldRight)
-        totalBalanceTitleCell.setCellValue("Баланс")
-
         totalBalance = BigDecimal(totalIncomes).subtract(BigDecimal(totalExpenses))
                 .setScale(2, ROUND_DOWN).toString()
-        totalBalanceCell.setCellValue("$totalBalance BYN")
-        totalBalanceCell.setCellStyle(cellStyleBoldRight)
+
+        createCustomCell(sheet, 0, context.getString(R.string.excel_total_column_title), indexRow, cellStyleBoldLeft)
+        indexRow += 1
+
+        createTotalCells(sheet, context.getString(R.string.excel_income_column_title), "$totalIncomes BYN", indexRow, cellStyleBoldRight)
+        indexRow += 1
+        createTotalCells(sheet, context.getString(R.string.excel_expense_column_title), "$totalExpenses BYN", indexRow, cellStyleBoldRight)
+        indexRow += 1
+        createTotalCells(sheet, context.getString(R.string.excel_balance_column_title), "$totalBalance BYN", indexRow, cellStyleBoldRight)
 
         sheet.setColumnWidth(0, 8 * 500)
         sheet.setColumnWidth(1, 12 * 500)
         sheet.setColumnWidth(2, 7 * 500)
         sheet.setColumnWidth(3, 6 * 500)
 
-        val file = File(Environment.getExternalStorageDirectory().toString() + File.separator + "testfile.xls")
+        val filePath = Environment.getExternalStorageDirectory().toString() +
+                File.separator + "family_budget.xls"
+        val file = File(filePath)
         val os: FileOutputStream
-        try {
+        return try {
             os = FileOutputStream(file)
-            wb.write(os)
+            workbook.write(os)
             os.close()
+            file
         } catch (e: IOException) {
             Log.w("qwe", "Failed to save file", e)
+            null
         }
+    }
+
+    private fun createCustomCell(sheet: Sheet, column: Int, text: String, indexRow: Int,
+                                 cellStyle: CellStyle) {
+        val row = sheet.createRow(indexRow)
+        val cell = row.createCell(column)
+        cell.cellStyle = cellStyle
+        cell.setCellValue(text)
+    }
+
+    private fun createCustomCell(row: Row, column: Int, text: String, cellStyle: CellStyle) {
+        val cell = row.createCell(column)
+        cell.cellStyle = cellStyle
+        cell.setCellValue(text)
+    }
+
+    private fun createTotalCells(sheet: Sheet, title: String, message: String, indexRow: Int,
+                                 cellStyleBoldRight: CellStyle) {
+        val row = sheet.createRow(indexRow)
+        var cell = row.createCell(0)
+        cell.cellStyle = cellStyleBoldRight
+        cell.setCellValue(title)
+        cell = row.createCell(2)
+        cell.setCellValue(message)
+        cell.cellStyle = cellStyleBoldRight
     }
 
 }

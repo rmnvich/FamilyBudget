@@ -15,6 +15,12 @@ import rmnvich.apps.familybudget.domain.mvp.PresenterBase
 import rmnvich.apps.familybudget.presentation.activity.make.expense.mvp.MakeExpenseActivity
 import rmnvich.apps.familybudget.presentation.activity.make.income.mvp.MakeIncomeActivity
 import java.util.*
+import android.R.attr.path
+import android.app.Activity
+import android.net.Uri
+import android.support.v4.content.FileProvider
+import android.view.View
+
 
 class FragmentTransactionsPresenter(private val model: FragmentTransactionsModel,
                                     private val compositeDisposable: CompositeDisposable) :
@@ -49,11 +55,22 @@ class FragmentTransactionsPresenter(private val model: FragmentTransactionsModel
         view?.showProgress()
         val disposable = model.saveTransactionsToExcel(timeRangeStart, timeRangeEnd)
                 .subscribe({
+                    val uri = FileProvider.getUriForFile((view as Fragment).context!!,
+                            "rmnvich.apps.familybudget.fileprovider", it)
+
                     view?.hideProgress()
-                    view?.showMessage("File has been saved")
+                    view?.showMessageWithAction(getString(R.string.file_saved), getString(R.string.open),
+                            View.OnClickListener {
+                                val intent = Intent(Intent.ACTION_VIEW)
+                                intent.setDataAndType(uri, "application/vnd.ms-excel")
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                                (view as Fragment).startActivity(intent)
+                            })
                 }, {
                     view?.hideProgress()
                     view?.showMessage(getString(R.string.error))
+                }, {
+                    view?.hideProgress()
                 })
         compositeDisposable.add(disposable)
     }

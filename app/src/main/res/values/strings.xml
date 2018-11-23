@@ -68,10 +68,25 @@
 
     <string name="negative_balance">You can not add expense</string>
     <string name="filter">Filter</string>
+
     <string name="date_picker_title_start">From</string>
     <string name="date_picker_title_end">To</string>
     <string name="time_range_error">End time cannot be less than start time</string>
     <string name="export">Export</string>
+
+    <string name="excel_table_name">Family budget</string>
+
+    <string name="excel_first_column_title">Статья</string>
+    <string name="excel_second_column_title">Кто</string>
+    <string name="excel_third_column_title">Сумма</string>
+    <string name="excel_fourth_column_title">Дата</string>
+
+    <string name="excel_income_column_title">Доход</string>
+    <string name="excel_expense_column_title">Расход</string>
+    <string name="excel_balance_column_title">Баланс</string>
+    <string name="excel_total_column_title">Итого</string>
+    <string name="file_saved">File has been saved</string>
+    <string name="open">Open</string>
 
     <string-array name="income_types">
         <item>Salary</item>

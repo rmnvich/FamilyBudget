@@ -124,6 +124,12 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View, Date
         Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG).show()
     }
 
+    override fun showMessageWithAction(text: String, actionText: String,
+                                       listener: View.OnClickListener) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_LONG)
+                .setAction(actionText, listener).show()
+    }
+
     override fun onDetach() {
         super.onDetach()
         App.getApp(activity?.applicationContext)
