@@ -46,7 +46,16 @@ class FragmentTransactionsPresenter(private val model: FragmentTransactionsModel
     }
 
     override fun onExportClicked(timeRangeStart: Long, timeRangeEnd: Long) {
-
+        view?.showProgress()
+        val disposable = model.saveTransactionsToExcel(timeRangeStart, timeRangeEnd)
+                .subscribe({
+                    view?.hideProgress()
+                    view?.showMessage("File has been saved")
+                }, {
+                    view?.hideProgress()
+                    view?.showMessage(getString(R.string.error))
+                })
+        compositeDisposable.add(disposable)
     }
 
     override fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,

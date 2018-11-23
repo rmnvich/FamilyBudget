@@ -20,6 +20,12 @@ public class DateHelper {
     }
 
     @SuppressLint("SimpleDateFormat")
+    public static String getTimeFroExcel(long time) {
+        DateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
+        return dateFormat.format(time);
+    }
+
+    @SuppressLint("SimpleDateFormat")
     public static String getFullTimeInStringFromLong(long time) {
         DateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy, HH:mm");
         return dateFormat.format(time);

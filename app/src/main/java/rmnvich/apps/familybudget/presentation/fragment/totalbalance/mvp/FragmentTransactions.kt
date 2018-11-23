@@ -17,6 +17,7 @@ import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardAc
 import rmnvich.apps.familybudget.presentation.adapter.totalbalance.TotalBalanceAdapter
 import javax.inject.Inject
 
+
 class FragmentTransactions : Fragment(), FragmentTransactionsContract.View, DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: FragmentTransactionsBinding
