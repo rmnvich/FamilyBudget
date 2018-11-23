@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.borax12.materialdaterangepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.app_bar_main.*
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.app.App
@@ -18,7 +17,7 @@ import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardAc
 import rmnvich.apps.familybudget.presentation.adapter.expenses.PlannedExpensesAdapter
 import javax.inject.Inject
 
-class FragmentPlannedExpenses : Fragment(), FragmentPlannedExpensesContract.View {
+class FragmentPlannedExpenses : Fragment(), FragmentPlannedExpensesContract.View, DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: FragmentPlannedExpensesBinding
 
@@ -39,8 +38,8 @@ class FragmentPlannedExpenses : Fragment(), FragmentPlannedExpensesContract.View
                 container, false)
         binding.handler = this
 
-        (activity as DashboardActivity).toolbar.title =
-                getString(R.string.title_planned_expenses)
+        (activity as DashboardActivity).toolbar.title = getString(R.string.title_planned_expenses)
+        setHasOptionsMenu(true)
 
         binding.recyclerPlannedExpenses.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
@@ -53,6 +52,16 @@ class FragmentPlannedExpenses : Fragment(), FragmentPlannedExpensesContract.View
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.filter_menu, menu)
+        val filterMenu = menu?.findItem(R.id.filter)
+        filterMenu?.setOnMenuItemClickListener {
+            mPresenter.onFilterClicked()
+            true
+        }
+    }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         App.getApp(activity?.applicationContext).componentsHolder
@@ -63,6 +72,19 @@ class FragmentPlannedExpenses : Fragment(), FragmentPlannedExpensesContract.View
         super.onViewCreated(view, savedInstanceState)
         mPresenter.attachView(this)
         mPresenter.viewIsReady()
+    }
+
+    override fun showDatePickerDialog(year: Int, month: Int, day: Int) {
+        val pickerDialog = DatePickerDialog.newInstance(
+                this, year, month, day)
+        pickerDialog.setStartTitle(getString(R.string.date_picker_title_start))
+        pickerDialog.setEndTitle(getString(R.string.date_picker_title_end))
+        pickerDialog.show(activity!!.fragmentManager, "")
+    }
+
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int,
+                           yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int) {
+        mPresenter.onDateSet(year, monthOfYear, dayOfMonth, yearEnd, monthOfYearEnd, dayOfMonthEnd)
     }
 
     override fun onClickFab() {

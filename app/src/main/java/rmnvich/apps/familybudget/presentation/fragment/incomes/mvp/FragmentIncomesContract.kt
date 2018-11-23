@@ -15,6 +15,8 @@ interface FragmentIncomesContract {
 
         fun updateAdapter(data: List<Income>)
 
+        fun showDatePickerDialog(year: Int, month: Int, day: Int)
+
         fun onClickFab()
     }
 
@@ -22,10 +24,21 @@ interface FragmentIncomesContract {
 
         fun onFabClicked()
 
+        fun onFilterClicked()
+
+        fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,
+                      yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int)
+
+        fun getAllIncomes()
+
+        fun getSortedIncomes(timeRangeStart: Long, timeRangeEnd: Long)
+
         fun onIncomeClicked(id: Int)
     }
 
     interface Model : MvpModel {
+
+        fun getSortedIncomes(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Income>>
 
         fun getAllIncomes(): Flowable<List<Income>>
     }

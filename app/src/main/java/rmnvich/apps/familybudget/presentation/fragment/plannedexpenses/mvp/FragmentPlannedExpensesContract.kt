@@ -15,12 +15,23 @@ interface FragmentPlannedExpensesContract {
 
         fun updateAdapter(data: List<Expense>)
 
+        fun showDatePickerDialog(year: Int, month: Int, day: Int)
+
         fun onClickFab()
     }
 
     interface Presenter : MvpPresenter<View> {
 
         fun onFabClicked()
+
+        fun onFilterClicked()
+
+        fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,
+                      yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int)
+
+        fun getAllExpenses()
+
+        fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long)
 
         fun onExpenseClicked(id: Int)
 
@@ -30,6 +41,8 @@ interface FragmentPlannedExpensesContract {
     interface Model : MvpModel {
 
         fun updateExpense(expense: Expense): Completable
+
+        fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>>
 
         fun getAllPlannedExpenses(): Flowable<List<Expense>>
     }

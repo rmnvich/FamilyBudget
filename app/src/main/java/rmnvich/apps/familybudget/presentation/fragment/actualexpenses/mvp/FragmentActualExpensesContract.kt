@@ -14,7 +14,7 @@ interface FragmentActualExpensesContract {
 
         fun updateAdapter(data: List<Expense>)
 
-        fun showDatePickerDialog()
+        fun showDatePickerDialog(year: Int, month: Int, day: Int)
 
         fun onClickFab()
     }
@@ -24,6 +24,11 @@ interface FragmentActualExpensesContract {
         fun onFabClicked()
 
         fun onFilterClicked()
+
+        fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,
+                      yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int)
+
+        fun getAllExpenses()
 
         fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long)
 

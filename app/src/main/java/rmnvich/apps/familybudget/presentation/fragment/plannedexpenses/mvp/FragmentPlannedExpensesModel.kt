@@ -15,6 +15,10 @@ class FragmentPlannedExpensesModel(private val databaseRepository: IDatabaseRepo
         return databaseRepository.getAllPlannedExpenses()
     }
 
+    override fun getSortedExpenses(timeRangeStart: Long, timeRangeEnd: Long): Flowable<List<Expense>> {
+        return databaseRepository.getSortedPlannedExpenses(timeRangeStart, timeRangeEnd)
+    }
+
     override fun updateExpense(expense: Expense): Completable {
         expense.isPlannedExpense = false
         expense.timestamp = DateHelper.getCurrentTimeInMills()

@@ -1,6 +1,7 @@
 package rmnvich.apps.familybudget.presentation.fragment.categories.mvp
 
 import android.content.Intent
+import android.support.v4.app.Fragment
 import io.reactivex.disposables.CompositeDisposable
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.data.common.Constants.EXTRA_CATEGORY_ID
@@ -25,12 +26,12 @@ class FragmentCategoriesPresenter(private val model: FragmentCategoriesModel,
     }
 
     override fun onFabClicked() {
-        (view as FragmentCategories).startActivity(Intent((view as FragmentCategories).activity,
+        (view as Fragment).startActivity(Intent((view as Fragment).activity,
                 MakeCategoryActivity::class.java))
     }
 
     override fun onCategoryClicked(id: Int) {
-        (view as FragmentCategories).startActivity(Intent((view as FragmentCategories).activity,
+        (view as Fragment).startActivity(Intent((view as Fragment).activity,
                 MakeCategoryActivity::class.java)
                 .putExtra(EXTRA_CATEGORY_ID, id))
     }

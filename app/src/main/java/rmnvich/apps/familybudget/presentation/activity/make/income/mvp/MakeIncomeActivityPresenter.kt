@@ -108,7 +108,6 @@ class MakeIncomeActivityPresenter(private val model: MakeIncomeActivityModel,
 
     override fun isDataCorrect(income: Income): Boolean {
         return !(income.value.isEmpty() ||
-                income.comment.isEmpty() ||
                 income.incomeType.isEmpty())
     }
 }
