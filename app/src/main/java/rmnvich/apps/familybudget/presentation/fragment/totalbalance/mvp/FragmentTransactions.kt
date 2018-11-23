@@ -1,14 +1,14 @@
 package rmnvich.apps.familybudget.presentation.fragment.totalbalance.mvp
 
 import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.borax12.materialdaterangepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.app_bar_main.*
 import rmnvich.apps.familybudget.R
 import rmnvich.apps.familybudget.app.App
@@ -17,7 +17,7 @@ import rmnvich.apps.familybudget.presentation.activity.dashboard.mvp.DashboardAc
 import rmnvich.apps.familybudget.presentation.adapter.totalbalance.TotalBalanceAdapter
 import javax.inject.Inject
 
-class FragmentTransactions : Fragment(), FragmentTransactionsContract.View {
+class FragmentTransactions : Fragment(), FragmentTransactionsContract.View, DatePickerDialog.OnDateSetListener {
 
     private lateinit var binding: FragmentTransactionsBinding
 
@@ -26,6 +26,9 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View {
 
     @Inject
     lateinit var mAdapter: TotalBalanceAdapter
+
+    private var timeRangeStart: Long = 0L
+    private var timeRangeEnd: Long = 0L
 
     companion object {
         fun newInstance(): FragmentTransactions {
@@ -38,8 +41,6 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View {
                 container, false)
         binding.handler = this
 
-        //TODO: added clickListener to adapter
-        //TODO: added sort by timeRange
         //TODO: export data to Word/Excel
 
         (activity as DashboardActivity).toolbar.title = getString(R.string.title_total_balance)
@@ -47,9 +48,22 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View {
 
         binding.recyclerTransactions.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
+        mAdapter.setOnClickListener { transactionId, transactionType ->
+            mPresenter.onItemClicked(transactionId, transactionType)
+        }
         binding.recyclerTransactions.adapter = mAdapter
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.total_balance_menu, menu)
+        val filterMenu = menu?.findItem(R.id.filter)
+        filterMenu?.setOnMenuItemClickListener {
+            mPresenter.onFilterClicked()
+            true
+        }
     }
 
     override fun onAttach(context: Context?) {
@@ -62,6 +76,31 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View {
         super.onViewCreated(view, savedInstanceState)
         mPresenter.attachView(this)
         mPresenter.viewIsReady()
+    }
+
+    override fun showDatePickerDialog(year: Int, month: Int, day: Int) {
+        val pickerDialog = DatePickerDialog.newInstance(
+                this, year, month, day)
+        pickerDialog.setStartTitle(getString(R.string.date_picker_title_start))
+        pickerDialog.setEndTitle(getString(R.string.date_picker_title_end))
+        pickerDialog.show(activity!!.fragmentManager, "")
+    }
+
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int,
+                           yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int) {
+        mPresenter.onDateSet(year, monthOfYear, dayOfMonth, yearEnd, monthOfYearEnd, dayOfMonthEnd)
+    }
+
+    override fun saveTimeRange(timeRangeStart: Long, timeRangeEnd: Long) {
+        this.timeRangeStart = timeRangeStart
+        this.timeRangeEnd = timeRangeEnd
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (timeRangeStart == 0L && timeRangeEnd == 0L)
+            mPresenter.getAllTransactions()
+        else mPresenter.getSortedTransactions(timeRangeStart, timeRangeEnd)
     }
 
     override fun updateAdapter(data: List<Any>) {

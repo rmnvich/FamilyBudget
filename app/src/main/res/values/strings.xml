@@ -71,6 +71,7 @@
     <string name="date_picker_title_start">From</string>
     <string name="date_picker_title_end">To</string>
     <string name="time_range_error">End time cannot be less than start time</string>
+    <string name="export">Export</string>
 
     <string-array name="income_types">
         <item>Salary</item>

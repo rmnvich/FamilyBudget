@@ -58,17 +58,18 @@ class FragmentIncomesPresenter(private val model: FragmentIncomesModel,
                 })
     }
 
-    override fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int, yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int) {
+    override fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,
+                           yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int) {
         val calendar = Calendar.getInstance()
 
-        calendar.set(year, monthOfYear, dayOfMonth)
+        calendar.set(year, monthOfYear, dayOfMonth, 0, 0, 0)
         val timeRangeStart = calendar.timeInMillis
-        calendar.set(yearEnd, monthOfYearEnd, dayOfMonthEnd)
+        calendar.set(yearEnd, monthOfYearEnd, dayOfMonthEnd, 23, 59, 59)
         val timeRangeEnd = calendar.timeInMillis
 
         when {
+            year == yearEnd && monthOfYear == monthOfYearEnd && dayOfMonth == dayOfMonthEnd -> getAllIncomes()
             timeRangeStart < timeRangeEnd -> getSortedIncomes(timeRangeStart, timeRangeEnd)
-            timeRangeStart == timeRangeEnd -> getAllIncomes()
             else -> view?.showMessage(getString(R.string.time_range_error))
         }
     }

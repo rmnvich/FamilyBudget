@@ -11,6 +11,9 @@ public class Constants {
     public static String EXTRA_EXPENSE_ID = "expense_id";
     public static String EXTRA_INCOME_ID = "income_id";
 
+    public static int TYPE_INCOME = 1;
+    public static int TYPE_EXPENSE = 2;
+
     public static long LOAD_DATA_DELAY = 250;
 
     public static int DEFAULT_COLOR = -13538911;

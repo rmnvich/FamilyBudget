@@ -1,32 +1,38 @@
 package rmnvich.apps.familybudget.presentation.adapter.totalbalance
 
 import android.databinding.DataBindingUtil
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import rmnvich.apps.familybudget.R
+import rmnvich.apps.familybudget.data.common.Constants
+import rmnvich.apps.familybudget.data.common.Constants.TYPE_EXPENSE
+import rmnvich.apps.familybudget.data.common.Constants.TYPE_INCOME
 import rmnvich.apps.familybudget.data.entity.Expense
 import rmnvich.apps.familybudget.data.entity.Income
 import rmnvich.apps.familybudget.databinding.ItemActualExpenseBinding
 import rmnvich.apps.familybudget.databinding.ItemIncomeBinding
+import rmnvich.apps.familybudget.presentation.adapter.expenses.ExpensesDiffUtilCallback
 import java.util.*
 
 class TotalBalanceAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val TYPE_INCOME = 1
-    private val TYPE_EXPENSE = 2
+    private lateinit var mClickListener: (Int, Int) -> Unit
+    private var mTransactions: List<Any> = LinkedList()
 
-    private var transactions: List<Any> = LinkedList()
+    fun setData(data: List<Any>) {
+        val diffUtilCallback = TotalBalanceDiffUtilCallback(mTransactions, data)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtilCallback, true)
 
-    fun setData(transactions: List<Any>) {
-        this.transactions = transactions
-        notifyDataSetChanged()
+        mTransactions = data
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (transactions[position] is Income) {
+        return if (mTransactions[position] is Income) {
             TYPE_INCOME
         } else TYPE_EXPENSE
     }
@@ -48,18 +54,18 @@ class TotalBalanceAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return transactions.size
+        return mTransactions.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             TYPE_INCOME -> (holder as IncomesViewHolder)
-                    .bind(transactions[position] as Income)
+                    .bind(mTransactions[position] as Income)
             TYPE_EXPENSE -> {
                 (holder as ExpensesViewHolder)
-                        .bind(transactions[position] as Expense)
+                        .bind(mTransactions[position] as Expense)
                 holder.binding.ivCategoryColor.circleColor =
-                        (transactions[position] as Expense).category?.color!!
+                        (mTransactions[position] as Expense).category?.color!!
             }
         }
         setFadeAnimation(holder.itemView)
@@ -69,6 +75,10 @@ class TotalBalanceAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val anim = AlphaAnimation(0.0f, 1.0f)
         anim.duration = 450
         view.startAnimation(anim)
+    }
+
+    fun setOnClickListener(onClickListener: (Int, Int) -> Unit) {
+        mClickListener = onClickListener
     }
 
     inner class IncomesViewHolder(val binding: ItemIncomeBinding) :
@@ -84,7 +94,7 @@ class TotalBalanceAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
         override fun onClick(view: View?) {
-//            mListener.onClick(mIncomesList[adapterPosition].incomeId)
+            mClickListener((mTransactions[adapterPosition] as Income).incomeId, TYPE_INCOME)
         }
     }
 
@@ -101,7 +111,7 @@ class TotalBalanceAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
         override fun onClick(p0: View?) {
-//            mListener.onClick(mExpenseList[adapterPosition].expenseId)
+            mClickListener((mTransactions[adapterPosition] as Expense).expenseId, TYPE_EXPENSE)
         }
     }
 
