@@ -45,6 +45,10 @@ class FragmentTransactionsPresenter(private val model: FragmentTransactionsModel
         }, 100)
     }
 
+    override fun onExportClicked(timeRangeStart: Long, timeRangeEnd: Long) {
+
+    }
+
     override fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,
                            yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int) {
         val calendar = Calendar.getInstance()

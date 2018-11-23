@@ -41,8 +41,6 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View, Date
                 container, false)
         binding.handler = this
 
-        //TODO: export data to Word/Excel
-
         (activity as DashboardActivity).toolbar.title = getString(R.string.title_total_balance)
         setHasOptionsMenu(true)
 
@@ -60,8 +58,14 @@ class FragmentTransactions : Fragment(), FragmentTransactionsContract.View, Date
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.total_balance_menu, menu)
         val filterMenu = menu?.findItem(R.id.filter)
+        val exportMenu = menu?.findItem(R.id.export)
+
         filterMenu?.setOnMenuItemClickListener {
             mPresenter.onFilterClicked()
+            true
+        }
+        exportMenu?.setOnMenuItemClickListener {
+            mPresenter.onExportClicked(timeRangeStart, timeRangeEnd)
             true
         }
     }

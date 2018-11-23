@@ -20,6 +20,8 @@ interface FragmentTransactionsContract {
 
         fun onFilterClicked()
 
+        fun onExportClicked(timeRangeStart: Long, timeRangeEnd: Long)
+
         fun onDateSet(year: Int, monthOfYear: Int, dayOfMonth: Int,
                       yearEnd: Int, monthOfYearEnd: Int, dayOfMonthEnd: Int)
 
